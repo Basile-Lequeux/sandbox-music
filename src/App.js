@@ -8,8 +8,15 @@ const initialState = {
 const App = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [cursor, setCursor] = useState(-1);
+  const [instrument, setInstrument] = useState("triangle");
   const [bpmValue, setBpmValue] = useState(60);
   const [intervalId, setIntervalId] = useState(() => {});
+  const [trackArray, setTrackArray] = useState([
+    { instrument: instrument, frequency: 293.7 },
+    initialState,
+    initialState,
+    initialState,
+  ]);
 
   // document.addEventListener("keydown", function (event) {
   //     var audioId = document.getElementById("" + event.keyCode);
@@ -31,12 +38,10 @@ const App = () => {
     if (cursor > length) {
       setCursor(0);
     }
-    if (trackArray[cursor]) {
-      playNote(293.7, "triangle");
+    if (trackArray[cursor] && trackArray[cursor].instrument !== "") {
+      playNote(trackArray[cursor].frequency, trackArray[cursor].instrument);
     }
   }, [cursor]);
-
-  const trackArray = [false, false, false, false];
 
   const start = () => {
     setCursor(0);
@@ -57,17 +62,24 @@ const App = () => {
   };
 
   const setTrack = (i) => {
-    const actualGrid = document.getElementById("grid" + i);
-    actualGrid.textContent = trackArray[i] ? "" : "♩";
-
-    trackArray[i] = !trackArray[i];
+    let tempArray = trackArray;
+    if (trackArray[i].instrument !== instrument) {
+      let tempInitialState = { instrument: instrument, frequency: 293.7 };
+      tempArray[i] = tempInitialState;
+      setTrackArray(tempArray);
+    } else {
+      tempArray[i] = initialState;
+      setTrackArray(tempArray);
+    }
   };
-
+  
   const context = new AudioContext();
-  let oscillator = null;
-  let gain = null;
 
   const playNote = (frequency, type) => {
+    let oscillator = null;
+    let gain = null;
+    console.log(frequency);
+    console.log(type);
     oscillator = context.createOscillator();
     gain = context.createGain();
     oscillator.type = type;
@@ -113,21 +125,36 @@ const App = () => {
         <div
           style={cursor === 0 ? styles.gridItemColored : styles.gridItem}
           onClick={() => setTrack(0)}
-        ></div>
+        >
+          {trackArray[0] && trackArray[0].instrument ? "♩" : ""}
+        </div>
         <div
           style={cursor === 1 ? styles.gridItemColored : styles.gridItem}
           onClick={() => setTrack(1)}
-        ></div>
+        >
+          {trackArray[1] && trackArray[1].instrument ? "♩" : ""}
+        </div>
         <div
           style={cursor === 2 ? styles.gridItemColored : styles.gridItem}
           onClick={() => setTrack(2)}
-        ></div>
+        >
+          {trackArray[2] && trackArray[2].instrument ? "♩" : ""}
+        </div>
         <div
           style={cursor === 3 ? styles.gridItemColored : styles.gridItem}
           onClick={() => setTrack(3)}
-        ></div>
+        >
+          {trackArray[3] && trackArray[3].instrument ? "♩" : ""}
+        </div>
       </div>
-
+      <div value={instrument} onChange={(e) => setInstrument(e.target.value)}>
+        <select>
+          <option value={"triangle"}>Triangle</option>
+          <option value={"square"}>Square</option>
+          <option value={"sawtooth"}>Sawtooth</option>
+          <option value={"sine"}>Sine</option>
+        </select>
+      </div>
       {/* <h1>C major</h1>
 
             <button onClick={() => {
