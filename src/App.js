@@ -1,142 +1,134 @@
-import Grid from "./Grid";
-import {useState} from "react";
+import { useState, useEffect } from "react";
 
-function App() {
-    const [isPlaying, setIsPlaying] = useState(false);
+const initialState = {
+  instrument: "",
+  frequency: 0,
+};
 
-    const [cursor, setCursor] = useState(0);
-    const [bpmValue, setBpmValue] = useState(60);
-    const [intervalId, setIntervalId] = useState(() => {});
+const App = () => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [cursor, setCursor] = useState(-1);
+  const [bpmValue, setBpmValue] = useState(60);
+  const [intervalId, setIntervalId] = useState(() => {});
 
-    document.addEventListener("keydown", function (event) {
-        var audioId = document.getElementById("" + event.keyCode);
-        if (audioId == null) {
-            return;
-        }
-        var keypressed = document.getElementById("k" + event.keyCode).classList;
+  // document.addEventListener("keydown", function (event) {
+  //     var audioId = document.getElementById("" + event.keyCode);
+  //     if (audioId == null) {
+  //         return;
+  //     }
+  //     var keypressed = document.getElementById("k" + event.keyCode).classList;
 
-        keypressed.add("play");
-        audioId.currentTime = 0;
-        audioId.play();
-        setTimeout(function () {
-            keypressed.remove("play");
-        }, 150);
-    });
+  //     keypressed.add("play");
+  //     audioId.currentTime = 0;
+  //     audioId.play();
+  //     setTimeout(function () {
+  //         keypressed.remove("play");
+  //     }, 150);
+  // });
 
+  useEffect(() => {
+    let length = trackArray.length - 1;
+    if (cursor > length) {
+      setCursor(0);
+    }
+    if (trackArray[cursor]) {
+      playNote(293.7, "triangle");
+    }
+  }, [cursor]);
 
-    let counter = 0;
+  const trackArray = [false, false, false, false];
 
-    const trackArray = [false, false, false, false];
+  const start = () => {
+    setCursor(0);
+    const delay = 60000 / bpmValue;
+    setIntervalId(setInterval(incrementCursor, delay));
+  };
 
-    function clickButtonPlay() {
-        const buttonPlay = document.getElementById("button_play");
-        if (buttonPlay.textContent === "PLAY") {
-            buttonPlay.textContent = "STOP";
-            setIsPlaying(true)
-            start(true);
-            return;
-        }
-        if (buttonPlay.textContent === "STOP") {
-            buttonPlay.textContent = "PLAY";
-            setIsPlaying(false)
+  const stop = () => {
+    if (intervalId !== (() => {})) {
+      clearInterval(intervalId);
+    }
+    setIntervalId(() => {});
+    setCursor(-1);
+  };
+
+  const incrementCursor = () => {
+    setCursor((cursor) => cursor + 1);
+  };
+
+  const setTrack = (i) => {
+    const actualGrid = document.getElementById("grid" + i);
+    actualGrid.textContent = trackArray[i] ? "" : "♩";
+
+    trackArray[i] = !trackArray[i];
+  };
+
+  const context = new AudioContext();
+  let oscillator = null;
+  let gain = null;
+
+  const playNote = (frequency, type) => {
+    oscillator = context.createOscillator();
+    gain = context.createGain();
+    oscillator.type = type;
+    oscillator.connect(gain);
+    oscillator.frequency.value = frequency;
+    gain.connect(context.destination);
+    oscillator.start(0);
+    gain.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + 1);
+  };
+
+  return (
+    <div className="App">
+      {!isPlaying ? (
+        <button
+          onClick={() => {
+            setIsPlaying(true);
+            start();
+          }}
+        >
+          PLAY
+        </button>
+      ) : (
+        <button
+          onClick={() => {
+            setIsPlaying(false);
             stop();
-        }
-    }
+          }}
+        >
+          STOP
+        </button>
+      )}
 
-    const start = () => {
-        clearInterval(intervalId);
-        const delay = 60000 / bpmValue;
-        setIntervalId(setInterval(playMusic, delay))
-    };
+      <input
+        id="bpm"
+        type="number"
+        min="40"
+        max="220"
+        value={bpmValue}
+        onChange={(e) => setBpmValue(parseInt(e.target.value))}
+      />
 
-    const stop = () => {
-        console.log("fff")
-        if(intervalId !== (() => {})){
-            clearInterval(intervalId);
-        }
-        setIntervalId(() => {});
-        colorize(counter, false)
-        counter = 0;
-    };
+      <div style={styles.gridContainer}>
+        <div
+          style={cursor === 0 ? styles.gridItemColored : styles.gridItem}
+          onClick={() => setTrack(0)}
+        ></div>
+        <div
+          style={cursor === 1 ? styles.gridItemColored : styles.gridItem}
+          onClick={() => setTrack(1)}
+        ></div>
+        <div
+          style={cursor === 2 ? styles.gridItemColored : styles.gridItem}
+          onClick={() => setTrack(2)}
+        ></div>
+        <div
+          style={cursor === 3 ? styles.gridItemColored : styles.gridItem}
+          onClick={() => setTrack(3)}
+        ></div>
+      </div>
 
-    function playMusic() {
-        if (counter > 3) {
-            colorize(3, false);
-            counter = 0;
-        }
-
-        colorize(counter, true);
-        if (counter > 0) {
-            colorize(counter - 1, false);
-        }
-        counter++;
-    }
-
-    const colorize = (i, color) => {
-        const actualGrid = document.getElementById("grid" + i);
-        if (!color) {
-            actualGrid.className = "grid-item";
-        } else {
-            if (trackArray[i]) {
-                playNote(293.7, "triangle");
-            }
-            actualGrid.className = "cursor_on";
-        }
-    };
-
-    const setTrack = (i) => {
-        const actualGrid = document.getElementById("grid" + i);
-        actualGrid.textContent = trackArray[i] ? "" : "♩";
-
-        trackArray[i] = !trackArray[i];
-    };
-
-    const context = new AudioContext();
-    let oscillator = null;
-    let gain = null;
-
-    function playNote(frequency, type) {
-        oscillator = context.createOscillator();
-        gain = context.createGain();
-        oscillator.type = type;
-        oscillator.connect(gain);
-        oscillator.frequency.value = frequency;
-        gain.connect(context.destination);
-        oscillator.start(0);
-        gain.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + 1);
-    }
-
-    return (
-        <div className="App">
-            {/* <Grid cursor={cursor} isPlaying={isPlaying} /> */}
-            {!isPlaying ? <button onClick={() => {
-                    setIsPlaying(true);
-                    start()
-                }}>
-                    PLAY
-                </button>
-                :
-                <button onClick={() => {
-                    setIsPlaying(false);
-                    stop()
-                }}>
-                    STOP
-                </button>}
-
-
-            <input id="bpm" type="number" min="40" max="220" value={bpmValue}
-                   onChange={(e) => setBpmValue(parseInt(e.target.value))}/>
-
-
-            <div class="grid-container">
-                <div class="grid-item" id="grid0" onClick={() => setTrack(0)}></div>
-                <div class="grid-item" id="grid1" onClick={() => setTrack(1)}></div>
-                <div class="grid-item" id="grid2" onClick={() => setTrack(2)}></div>
-                <div class="grid-item" id="grid3" onClick={() => setTrack(3)}></div>
-            </div>
-
-
-            {/* <h1>C major</h1>
+      {/* <h1>C major</h1>
 
             <button onClick={() => {
                 playNote(261.6, 'triangle')
@@ -243,18 +235,31 @@ function App() {
                 <source src="https://raw.githubusercontent.com/jayjariwala/JSDrumKit/master/assets/sounds/tom.wav"/>
             </audio>
         */}
-        </div>
-    );
-}
+    </div>
+  );
+};
 
 const styles = {
-    gridItem: {
-        backgroundColor: "rgba(255, 255, 255, 0.8)",
-        border: "1px solid rgba(0, 0, 0, 0.8)",
-        padding: "30px",
-        fontSize: "30px",
-        textAlign: "center",
-    },
+  gridContainer: {
+    display: "grid",
+    gridTemplateColumns: "auto auto auto auto",
+    backgroundColor: "#2196F3",
+    width: "50%",
+  },
+  gridItem: {
+    backgroundColor: "rgba(255, 255, 255, 0.8)",
+    border: "1px solid rgba(0, 0, 0, 0.8)",
+    padding: "30px",
+    fontSize: "30px",
+    textAlign: "center",
+  },
+  gridItemColored: {
+    backgroundColor: "rgba(255, 69, 145, 0.8)",
+    border: "1px solid rgba(0, 0, 0, 0.8)",
+    padding: "30px",
+    fontSize: "30px",
+    textAlign: "center",
+  },
 };
 
 export default App;
