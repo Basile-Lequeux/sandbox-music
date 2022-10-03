@@ -61,8 +61,8 @@ const App = () => {
     setCursor((cursor) => cursor + 1);
   };
 
-  const setTrack = (i) => {
-    let tempArray = trackArray;
+  const handleSetTrack = (i) => {
+    let tempArray = [...trackArray];
     if (trackArray[i].instrument !== instrument) {
       let tempInitialState = { instrument: instrument, frequency: 293.7 };
       tempArray[i] = tempInitialState;
@@ -130,7 +130,7 @@ const App = () => {
               style={
                 cursor === index ? styles.gridItemColored : styles.gridItem
               }
-              onClick={() => setTrack(index)}
+              onClick={() => handleSetTrack(index)}
             >
               {note && note.instrument ? "♩" : ""}
             </div>
