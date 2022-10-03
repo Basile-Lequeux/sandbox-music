@@ -72,7 +72,7 @@ const App = () => {
       setTrackArray(tempArray);
     }
   };
-  
+
   const context = new AudioContext();
 
   const playNote = (frequency, type) => {
@@ -122,30 +122,19 @@ const App = () => {
       />
 
       <div style={styles.gridContainer}>
-        <div
-          style={cursor === 0 ? styles.gridItemColored : styles.gridItem}
-          onClick={() => setTrack(0)}
-        >
-          {trackArray[0] && trackArray[0].instrument ? "♩" : ""}
-        </div>
-        <div
-          style={cursor === 1 ? styles.gridItemColored : styles.gridItem}
-          onClick={() => setTrack(1)}
-        >
-          {trackArray[1] && trackArray[1].instrument ? "♩" : ""}
-        </div>
-        <div
-          style={cursor === 2 ? styles.gridItemColored : styles.gridItem}
-          onClick={() => setTrack(2)}
-        >
-          {trackArray[2] && trackArray[2].instrument ? "♩" : ""}
-        </div>
-        <div
-          style={cursor === 3 ? styles.gridItemColored : styles.gridItem}
-          onClick={() => setTrack(3)}
-        >
-          {trackArray[3] && trackArray[3].instrument ? "♩" : ""}
-        </div>
+        {trackArray &&
+          trackArray.length !== 0 &&
+          trackArray.map((note, index) => (
+            <div
+              key={index}
+              style={
+                cursor === index ? styles.gridItemColored : styles.gridItem
+              }
+              onClick={() => setTrack(index)}
+            >
+              {note && note.instrument ? "♩" : ""}
+            </div>
+          ))}
       </div>
       <div value={instrument} onChange={(e) => setInstrument(e.target.value)}>
         <select>
