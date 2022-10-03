@@ -7,16 +7,13 @@ const initialState = {
 
 const App = () => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [countCell, setCountCell] = useState(4);
   const [cursor, setCursor] = useState(-1);
   const [instrument, setInstrument] = useState("triangle");
   const [bpmValue, setBpmValue] = useState(60);
   const [intervalId, setIntervalId] = useState(() => {});
-  const [trackArray, setTrackArray] = useState([
-    { instrument: instrument, frequency: 293.7 },
-    initialState,
-    initialState,
-    initialState,
-  ]);
+  const [context, setContext] = useState(() => {});
+  const [trackArray, setTrackArray] = useState([]);
 
   // document.addEventListener("keydown", function (event) {
   //     var audioId = document.getElementById("" + event.keyCode);
@@ -43,7 +40,17 @@ const App = () => {
     }
   }, [cursor]);
 
+  useEffect(() => {
+    setTrackArray([]);
+    for (let i = 0; i < countCell; i++) {
+      setTrackArray((trackArray) => [...trackArray, initialState]);
+    }
+  }, [countCell]);
+
   const start = () => {
+    if (!context) {
+      setContext(new AudioContext());
+    }
     setCursor(0);
     const delay = 60000 / bpmValue;
     setIntervalId(setInterval(incrementCursor, delay));
@@ -72,8 +79,6 @@ const App = () => {
       setTrackArray(tempArray);
     }
   };
-
-  const context = new AudioContext();
 
   const playNote = (frequency, type) => {
     let oscillator = null;
@@ -120,6 +125,15 @@ const App = () => {
         value={bpmValue}
         onChange={(e) => setBpmValue(parseInt(e.target.value))}
       />
+      
+      <input
+        id="countCell"
+        type="number"
+        min="4"
+        max="20"
+        value={countCell}
+        onChange={(e) => setCountCell(parseInt(e.target.value))}
+      />
 
       <div style={styles.gridContainer}>
         {trackArray &&
@@ -132,7 +146,7 @@ const App = () => {
               }
               onClick={() => handleSetTrack(index)}
             >
-              {note && note.instrument ? "♩" : ""}
+              {note && note.instrument ? "♩" : "X"}
             </div>
           ))}
       </div>
@@ -150,10 +164,9 @@ const App = () => {
 
 const styles = {
   gridContainer: {
-    display: "grid",
-    gridTemplateColumns: "auto auto auto auto",
+    display: "flex",
+    flexDirection: "row",
     backgroundColor: "#2196F3",
-    width: "50%",
   },
   gridItem: {
     backgroundColor: "rgba(255, 255, 255, 0.8)",
