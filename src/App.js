@@ -19,7 +19,9 @@ const App = () => {
         trackArray,
         cursor,
         handleSetTrack,
-        setInstrument
+        setInstrument,
+        nbrOfTrack,
+        handleSetNbrOfTrack
     } = usePlayerContext()
 
 
@@ -61,6 +63,15 @@ const App = () => {
                 max="20"
                 value={nbrOfBeat}
                 onChange={(e) => handleChangeNbrOfBeat(parseInt(e.target.value))}
+            />
+
+            <input
+                id="nbrOfTrack"
+                type="number"
+                min="1"
+                max="4"
+                value={nbrOfTrack}
+                onChange={(e) => handleSetNbrOfTrack(parseInt(e.target.value))}
             />
 
             {trackArray.length > 0 && trackArray.map(track => (

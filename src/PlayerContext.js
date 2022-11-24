@@ -41,17 +41,16 @@ const CreatePlayerContextProvider = (props) => {
     }, [cursor]);
 
     useEffect(() => {
-        setTrackArray([])
-        let prevStateTrackArray = [...trackArray]
+        const array = []
         for (let h = 0; h < nbrOfTrack; h++) {
             const notes = []
             for (let i = 0; i < nbrOfBeat; i++) {
                 notes.push(initialState)
             }
             const track = {id: uuidv4(), notes: notes}
-            prevStateTrackArray.push(track)
+            array.push(track)
         }
-        setTrackArray(prevStateTrackArray)
+        setTrackArray(array)
     }, [nbrOfTrack, nbrOfBeat]);
 
     const start = () => {
@@ -118,6 +117,10 @@ const CreatePlayerContextProvider = (props) => {
         setNbrOfBeat(value)
     }
 
+    const handleSetNbrOfTrack = (value) => {
+        setNbrOfTrack(value)
+    }
+
     return (
         <PlayerContext.Provider
             value={{
@@ -127,6 +130,7 @@ const CreatePlayerContextProvider = (props) => {
                 trackArray,
                 cursor,
                 nbrOfBeat,
+                nbrOfTrack,
 
                 start,
                 stop,
@@ -134,7 +138,8 @@ const CreatePlayerContextProvider = (props) => {
                 handleChangeBpmValue,
                 handleChangeNbrOfBeat,
                 handleSetTrack,
-                setInstrument
+                setInstrument,
+                handleSetNbrOfTrack
 
             }}
         >
