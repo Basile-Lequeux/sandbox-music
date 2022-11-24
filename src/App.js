@@ -6,7 +6,6 @@ import {usePlayerContext} from "./PlayerContext";
 const App = () => {
 
 
-
     const {
         isPlaying,
         bpmValue,
@@ -64,12 +63,17 @@ const App = () => {
                 onChange={(e) => handleChangeNbrOfBeat(parseInt(e.target.value))}
             />
 
-           <Track
-               styles={styles}
-               trackArray={trackArray}
-               cursor={cursor}
-               handleSetTrack={handleSetTrack}
-           />
+            {trackArray.length > 0 && trackArray.map(track => (
+                    <Track
+                        key={track.id}
+                        styles={styles}
+                        trackArray={trackArray}
+                        cursor={cursor}
+                        handleSetTrack={handleSetTrack}
+                        track={track}
+                    />
+                ))
+            }
 
             <div value={instrument} onChange={(e) => setInstrument(e.target.value)}>
                 <select>

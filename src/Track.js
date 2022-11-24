@@ -1,23 +1,20 @@
 import React from 'react';
 
 export default function Track({
+    track,
     styles,
-    trackArray,
     cursor,
     handleSetTrack
 }) {
 
     return (
         <div style={styles.gridContainer}>
-            {trackArray &&
-                trackArray.length !== 0 &&
-                trackArray.map((note, index) => (
+            {track && track.notes.length !== 0 &&
+                track.notes.map((note, index) => (
                     <div
                         key={index}
-                        style={
-                            cursor === index ? styles.gridItemColored : styles.gridItem
-                        }
-                        onClick={() => handleSetTrack(index)}
+                        style={cursor === index ? styles.gridItemColored : styles.gridItem}
+                        onClick={() => handleSetTrack(track.id, index)}
                     >
                         {note && note.instrument ? "♩" : "X"}
                     </div>
