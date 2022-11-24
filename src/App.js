@@ -8,31 +8,16 @@ const initialState = {
 
 const App = () => {
 
+
     const [isPlaying, setIsPlaying] = useState(false);
     const [countCell, setCountCell] = useState(4);
     const [cursor, setCursor] = useState(-1);
     const [instrument, setInstrument] = useState("triangle");
     const [bpmValue, setBpmValue] = useState(60);
-    const [intervalId, setIntervalId] = useState(() => {
-    });
-    const [context, setContext] = useState(() => {
-    });
+    const [intervalId, setIntervalId] = useState(() => {});
+    const [audioContext, setAudioContext] = useState(() => {});
     const [trackArray, setTrackArray] = useState([]);
 
-    // document.addEventListener("keydown", function (event) {
-    //     var audioId = document.getElementById("" + event.keyCode);
-    //     if (audioId == null) {
-    //         return;
-    //     }
-    //     var keypressed = document.getElementById("k" + event.keyCode).classList;
-
-    //     keypressed.add("play");
-    //     audioId.currentTime = 0;
-    //     audioId.play();
-    //     setTimeout(function () {
-    //         keypressed.remove("play");
-    //     }, 150);
-    // });
 
     useEffect(() => {
         let length = trackArray.length - 1;
@@ -52,8 +37,8 @@ const App = () => {
     }, [countCell]);
 
     const start = () => {
-        if (!context) {
-            setContext(new AudioContext());
+        if (!audioContext) {
+            setAudioContext(new AudioContext());
         }
         setCursor(0);
         const delay = 60000 / bpmValue;
@@ -91,14 +76,14 @@ const App = () => {
         let gain = null;
         console.log(frequency);
         console.log(type);
-        oscillator = context.createOscillator();
-        gain = context.createGain();
+        oscillator = audioContext.createOscillator();
+        gain = audioContext.createGain();
         oscillator.type = type;
         oscillator.connect(gain);
         oscillator.frequency.value = frequency;
-        gain.connect(context.destination);
+        gain.connect(audioContext.destination);
         oscillator.start(0);
-        gain.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + 1);
+        gain.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + 1);
     };
 
     return (
