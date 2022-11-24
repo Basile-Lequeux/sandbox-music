@@ -21,7 +21,8 @@ const App = () => {
         handleSetTrack,
         setInstrument,
         nbrOfTrack,
-        handleSetNbrOfTrack
+        handleSetNbrOfTrack,
+        handleChangeInstrument
     } = usePlayerContext()
 
 
@@ -82,18 +83,10 @@ const App = () => {
                         cursor={cursor}
                         handleSetTrack={handleSetTrack}
                         track={track}
+                        handleChangeInstrument={handleChangeInstrument}
                     />
                 ))
             }
-
-            <div value={instrument} onChange={(e) => setInstrument(e.target.value)}>
-                <select>
-                    <option value={"triangle"}>Triangle</option>
-                    <option value={"square"}>Square</option>
-                    <option value={"sawtooth"}>Sawtooth</option>
-                    <option value={"sine"}>Sine</option>
-                </select>
-            </div>
         </div>
     );
 };

@@ -10,6 +10,7 @@ function usePlayerContext(props) {
 const initialState = {
     instrument: "",
     frequency: 0,
+    isActive: false
 };
 
 const CreatePlayerContextProvider = (props) => {
@@ -17,14 +18,16 @@ const CreatePlayerContextProvider = (props) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [cursor, setCursor] = useState(-1);
     const [bpmValue, setBpmValue] = useState(60);
+    const [nbrOfBeat, setNbrOfBeat] = useState(4);
     const [nbrOfTrack, setNbrOfTrack] = useState(1);
     const [trackArray, setTrackArray] = useState([]);
-    const [nbrOfBeat, setNbrOfBeat] = useState(4);
 
 
     const [instrument, setInstrument] = useState("triangle");
-    const [intervalId, setIntervalId] = useState(() => {});
-    const [audioContext, setAudioContext] = useState(() => {});
+    const [intervalId, setIntervalId] = useState(() => {
+    });
+    const [audioContext, setAudioContext] = useState(() => {
+    });
 
 
     useEffect(() => {
@@ -33,8 +36,8 @@ const CreatePlayerContextProvider = (props) => {
             setCursor(0);
         }
         trackArray.map(track => {
-            if (track.notes[cursor] && track.notes[cursor].instrument !== "") {
-                playNote(track.notes[cursor].frequency, track.notes[cursor].instrument);
+            if (track.notes[cursor] && track.notes[cursor].isActive) {
+                playNote(track.notes[cursor].frequency, track.instrument);
             }
         })
 
@@ -47,7 +50,7 @@ const CreatePlayerContextProvider = (props) => {
             for (let i = 0; i < nbrOfBeat; i++) {
                 notes.push(initialState)
             }
-            const track = {id: uuidv4(), notes: notes}
+            const track = {id: uuidv4(), notes: notes, instrument: "triangle"}
             array.push(track)
         }
         setTrackArray(array)
@@ -78,22 +81,17 @@ const CreatePlayerContextProvider = (props) => {
 
     const handleSetTrack = (trackId, i) => {
         let prevStateTrackArray = [...trackArray];
-        const index = prevStateTrackArray.findIndex(elem => elem.id === trackId);
         const track = prevStateTrackArray.find(elem => elem.id === trackId);
+        const isActive = track.notes[i].isActive;
 
-        if (track.notes[i].instrument !== instrument) {
-            track.notes[i] = {instrument: instrument, frequency: 293.7};
-        } else {
-            track.notes[i] = initialState;
-        }
+        track.notes[i] = {instrument: instrument, frequency: 368.7, isActive: !isActive};
+
         setTrackArray(prevStateTrackArray);
     };
 
     const playNote = (frequency, type) => {
         let oscillator = null;
         let gain = null;
-        console.log(frequency);
-        console.log(type);
         oscillator = audioContext.createOscillator();
         gain = audioContext.createGain();
         oscillator.type = type;
@@ -121,6 +119,18 @@ const CreatePlayerContextProvider = (props) => {
         setNbrOfTrack(value)
     }
 
+    const handleChangeInstrument = (trackId, value) => {
+        let prevState = [...trackArray];
+        const index = prevState.findIndex(t => t.id === trackId);
+
+        if (value !== prevState[index].instrument) {
+            prevState[index].instrument = value
+            setTrackArray(prevState)
+        }
+
+
+    }
+
     return (
         <PlayerContext.Provider
             value={{
@@ -139,7 +149,8 @@ const CreatePlayerContextProvider = (props) => {
                 handleChangeNbrOfBeat,
                 handleSetTrack,
                 setInstrument,
-                handleSetNbrOfTrack
+                handleSetNbrOfTrack,
+                handleChangeInstrument
 
             }}
         >
