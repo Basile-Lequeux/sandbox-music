@@ -14,12 +14,10 @@ const App = () => {
         handleChangePlaying,
         handleChangeBpmValue,
         nbrOfBeat,
-        instrument,
         handleChangeNbrOfBeat,
         trackArray,
         cursor,
         handleSetTrack,
-        setInstrument,
         nbrOfTrack,
         handleSetNbrOfTrack,
         handleChangeInstrument

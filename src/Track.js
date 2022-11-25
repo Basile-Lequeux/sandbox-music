@@ -1,4 +1,5 @@
 import React from 'react';
+import {drumKitList} from "./PlaySound";
 
 export default function Track({
     track,
@@ -13,10 +14,9 @@ export default function Track({
             <div>
                 <div value={track.instrument} onChange={(e) => handleChangeInstrument(track.id, e.target.value)}>
                     <select>
-                        <option value={"triangle"}>Triangle</option>
-                        <option value={"square"}>Square</option>
-                        <option value={"sawtooth"}>Sawtooth</option>
-                        <option value={"sine"}>Sine</option>
+                        {drumKitList.map((elem, i) => (
+                            <option key={i} value={elem.label}>{elem.label}</option>
+                        ))}
                     </select>
                 </div>
             </div>
