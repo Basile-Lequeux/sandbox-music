@@ -109,6 +109,13 @@ const styles = {
         fontSize: "30px",
         textAlign: "center",
     },
+    gridItemColoredNote: {
+      backgroundColor: "rgba(125, 69, 145, 0.8)",
+      border: "1px solid rgba(0, 0, 0, 0.8)",
+      padding: "30px",
+      fontSize: "30px",
+      textAlign: "center",
+  },
 };
 
 export default App;
