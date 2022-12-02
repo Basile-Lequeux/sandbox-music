@@ -25,8 +25,6 @@ const CreatePlayerContextProvider = (props) => {
 
 
     const [intervalId, setIntervalId] = useState(() => {});
-    const [audioContext, setAudioContext] = useState(() => {});
-
 
     useEffect(() => {
         let length = nbrOfBeat - 1;
@@ -55,9 +53,6 @@ const CreatePlayerContextProvider = (props) => {
     }, [nbrOfTrack, nbrOfBeat]);
 
     const start = () => {
-        if (!audioContext) {
-            setAudioContext(new AudioContext());
-        }
         setCursor(0);
         const delay = 60000 / bpmValue;
         setIntervalId(setInterval(incrementCursor, delay));
@@ -77,12 +72,16 @@ const CreatePlayerContextProvider = (props) => {
         setCursor((cursor) => cursor + 1);
     };
 
-    const handleSetTrack = (trackId, i) => {
+    const handleSetTrack = (track, i) => {
         let prevStateTrackArray = [...trackArray];
-        const track = prevStateTrackArray.find(elem => elem.id === trackId);
-        const isActive = track.notes[i].isActive;
+        const currentTrack = prevStateTrackArray.find(elem => elem.id === track.id);
+        const isActive = currentTrack.notes[i].isActive;
 
-        track.notes[i] = {frequency: 368.7, isActive: !isActive};
+        currentTrack.notes[i] = {frequency: 368.7, isActive: !isActive};
+
+        if (!isActive){
+            PlaySound(currentTrack.instrument)
+        }
 
         setTrackArray(prevStateTrackArray);
     };

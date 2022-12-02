@@ -36,7 +36,7 @@ export default function Track({
                   ? styles.gridItemColoredNoteSpacer
                   : styles.gridItemSpacer
               }
-              onClick={() => handleSetTrack(track.id, index)}
+              onClick={() => handleSetTrack(track, index)}
             />
           ) : (
             <div
@@ -48,7 +48,7 @@ export default function Track({
                   ? styles.gridItemColoredNote
                   : styles.gridItem
               }
-              onClick={() => handleSetTrack(track.id, index)}
+              onClick={() => handleSetTrack(track, index)}
             />
           )
         )}
