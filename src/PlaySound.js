@@ -11,7 +11,14 @@ export const drumKitList = [
     {label: "kick", value: kick},
 ]
 
-export default function PlaySound(sound) {
+export default function PlaySound(type, sound) {
+    if (type === "rhythm"){
+        playRhythmSound(sound)
+    }
+
+}
+
+const playRhythmSound = (sound) => {
     const beat = drumKitList.find(e => e.label === sound).value
     const player = new Tone.Player(beat).toDestination()
     Tone.loaded().then(() => {

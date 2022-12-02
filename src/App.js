@@ -1,4 +1,4 @@
-import Track from "./components/Track";
+import RhythmTrack from "./components/RhythmTrack";
 import { usePlayerContext } from "./PlayerContext";
 
 const App = () => {
@@ -11,7 +11,7 @@ const App = () => {
     handleChangeBpmValue,
     nbrOfBeat,
     handleChangeNbrOfBeat,
-    trackArray,
+    rhythmTrackArray,
     cursor,
     handleSetTrack,
     nbrOfTrack,
@@ -61,17 +61,14 @@ const App = () => {
       />
 
       <input
-        id="countCell"
+        id="nbrOfMeasure"
         type="number"
         min={4}
-        max={100}
+        step={4}
+        max={20}
         value={nbrOfBeat}
         onChange={(e) => {
-          console.log("beat ", e.target.value);
-          if (
-            parseInt(e.target.min) > parseInt(e.target.value) ||
-            !e.target.value
-          ) {
+          if (parseInt(e.target.min) > parseInt(e.target.value) || !e.target.value) {
             handleChangeNbrOfBeat(parseInt(e.target.min));
           } else if (parseInt(e.target.max) < parseInt(e.target.value)) {
             handleChangeNbrOfBeat(parseInt(e.target.max));
@@ -101,18 +98,17 @@ const App = () => {
         }}
       />
 
-      {trackArray.length > 0 &&
-        trackArray.map((track) => (
-          <Track
+      {rhythmTrackArray.length > 0 &&
+          rhythmTrackArray.map((track) =>
+          <RhythmTrack
             key={track.id}
             styles={styles}
-            trackArray={trackArray}
             cursor={cursor}
             handleSetTrack={handleSetTrack}
             track={track}
             handleChangeInstrument={handleChangeInstrument}
           />
-        ))}
+        )}
     </div>
   );
 };

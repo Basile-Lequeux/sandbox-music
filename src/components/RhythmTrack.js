@@ -1,6 +1,6 @@
 import { drumKitList } from "../PlaySound";
 
-export default function Track({
+export default function RhythmTrack({
   track,
   styles,
   cursor,
