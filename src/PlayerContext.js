@@ -19,8 +19,8 @@ const CreatePlayerContextProvider = (props) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [cursor, setCursor] = useState(-1);
     const [bpmValue, setBpmValue] = useState(120);
-    const [nbrOfBeat, setNbrOfBeat] = useState(4);
-    const [nbrOfTrack, setNbrOfTrack] = useState(1);
+    const [nbrOfBeat, setNbrOfBeat] = useState(12);
+    const [nbrOfTrack, setNbrOfTrack] = useState(4);
     const [rhythmTrackArray, setRhythmTrackArray] = useState([]);
 
 

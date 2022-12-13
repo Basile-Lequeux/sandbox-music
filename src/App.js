@@ -3,25 +3,14 @@ import { usePlayerContext } from "./PlayerContext";
 import { Header } from "./Header";
 import { Sidebar } from "./Sidebar";
 import { Box, Flex } from "@chakra-ui/react";
-import { StyleFunctionProps } from "@chakra-ui/theme-tools";
 import SideBarSelect from "./components/SideBarSelect";
 
 const App = () => {
   const {
-    isPlaying,
-    bpmValue,
-    start,
-    stop,
-    handleChangePlaying,
-    handleChangeBpmValue,
-    nbrOfBeat,
-    handleChangeNbrOfBeat,
-    rhythmTrackArray,
     cursor,
     handleSetTrack,
-    nbrOfTrack,
-    handleSetNbrOfTrack,
     handleChangeInstrument,
+    rhythmTrackArray
   } = usePlayerContext();
 
   return (
@@ -30,7 +19,7 @@ const App = () => {
         <Header />
         <Flex>
           <Sidebar>
-            {trackArray.map((track) => (
+            {rhythmTrackArray.map((track) => (
               <SideBarSelect  
               handleChangeInstrument={handleChangeInstrument}
               trackId={track.id}
@@ -39,12 +28,12 @@ const App = () => {
             ))}
           </Sidebar>
           <Box borderRight={"1px"} flex={1} bg={"#3D3D3D"}>
-            {trackArray.length > 0 &&
-              trackArray.map((track) => (
-                <Track
+            {rhythmTrackArray.length > 0 &&
+                rhythmTrackArray.map((track) => (
+                <RhythmTrack
                   key={track.id}
                   styles={styles}
-                  trackArray={trackArray}
+                  trackArray={rhythmTrackArray}
                   cursor={cursor}
                   handleSetTrack={handleSetTrack}
                   track={track}

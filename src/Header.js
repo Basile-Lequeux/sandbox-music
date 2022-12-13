@@ -11,12 +11,8 @@ import {
   Input,
   Text,
 } from "@chakra-ui/react";
-import { Track } from "./components/Track";
 import { usePlayerContext } from "./PlayerContext";
-import * as React from "react";
-import { FiMenu } from "react-icons/fi";
 import { FaPlay, FaPause } from "react-icons/fa";
-import { useState } from "react";
 
 export const Header = () => {
   const incrementCount = () => {
@@ -28,8 +24,6 @@ export const Header = () => {
     const incr = bpmValue - 1;
     handleChangeBpmValue(incr);
   };
-
-  let [count, setCount] = useState(0);
 
   const {
     handleChangeBpmValue,
