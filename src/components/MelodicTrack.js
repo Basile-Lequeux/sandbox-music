@@ -7,24 +7,27 @@ export default function MelodicTrack({
     track,
     styles,
     cursor,
-    handleSetTrack
+    handleSetMelodicTrack
 }) {
 
     return (
-            <div className="keyboard">
-                <NoteKey note='C'/>
-                <NoteKey note='C#'/>
-                <NoteKey note='D'/>
-                <NoteKey note='D#'/>
-                <NoteKey note='E'/>
-                <NoteKey note='F'/>
-                <NoteKey note='F#'/>
-                <NoteKey note='G'/>
-                <NoteKey note='G#'/>
-                <NoteKey note='A'/>
-                <NoteKey note='A#'/>
-                <NoteKey note='B'/>
-                <NoteKey note='C'/>
-            </div>
+        <div style={styles.gridContainer}>
+            {track && track.notes.length !== 0 &&
+                track.notes.map((beat, index) =>
+                    <div
+                        key={index}
+                        style={
+                            cursor === index
+                                ? styles.gridItemColoredSpacer
+                                : beat && beat.isActive
+                                    ? styles.gridItemColoredNoteSpacer
+                                    : styles.gridItemSpacer
+                        }
+                        onClick={() => handleSetMelodicTrack(track, index)}
+                    >
+                    </div>
+                )
+            }
+        </div>
     );
 }

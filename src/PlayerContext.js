@@ -14,6 +14,11 @@ const initialState = {
     isActive: false
 };
 
+const initStateMelodicArray = {
+    frequency: 0,
+    isActive: false
+}
+
 const CreatePlayerContextProvider = (props) => {
 
     const [isPlaying, setIsPlaying] = useState(false);
@@ -22,7 +27,7 @@ const CreatePlayerContextProvider = (props) => {
     const [nbrOfBeat, setNbrOfBeat] = useState(12);
     const [nbrOfTrack, setNbrOfTrack] = useState(4);
     const [rhythmTrackArray, setRhythmTrackArray] = useState([]);
-    const [melodicTrackArray, setMelodicTrackArray] = useState([{id: uuidv4(), notes: [], instrument:'synth'}]);
+    const [melodicTrackArray, setMelodicTrackArray] = useState([]);
 
     const [intervalId, setIntervalId] = useState(() => {});
 
@@ -36,20 +41,35 @@ const CreatePlayerContextProvider = (props) => {
                 PlaySound('rhythm', track.instrument)
             }
         })
-
+        melodicTrackArray.map(track => {
+            if (track.notes[cursor] && track.notes[cursor].isActive){
+                PlaySound('melodic', track.notes[cursor].frequency)
+            }
+        })
     }, [cursor]);
 
     useEffect(() => {
-        const array = []
+        const rhythmArray = []
+        const melodicArray = []
+
         for (let h = 0; h < nbrOfTrack; h++) {
             const notes = []
             for (let i = 0; i < nbrOfBeat; i++) {
                 notes.push(initialState)
             }
             const track = {id: uuidv4(), notes: notes, instrument: drumKitList[0].label}
-            array.push(track)
+            rhythmArray.push(track)
         }
-        setRhythmTrackArray(array)
+
+        const initBeatArray = []
+        for (let i = 0; i < nbrOfBeat; i++) {
+            initBeatArray.push(initStateMelodicArray)
+        }
+        const initMelodicTrack = {id: uuidv4(), notes: initBeatArray, instrument: 'synth'}
+        melodicArray.push(initMelodicTrack)
+
+        setRhythmTrackArray(rhythmArray)
+        setMelodicTrackArray(melodicArray)
     }, [nbrOfTrack, nbrOfBeat]);
 
     const start = () => {
@@ -79,14 +99,28 @@ const CreatePlayerContextProvider = (props) => {
 
         currentTrack.notes[i] = {frequency: 368.7, isActive: !isActive};
 
-        if (!isActive){
+        if (!isActive) {
             PlaySound('rhythm', currentTrack.instrument)
         }
 
         setRhythmTrackArray(prevStateTrackArray);
     };
 
+    const handleSetMelodicTrack = (track, index, note="C4") => {
+        let prevStateMelodicTrackArray = [...melodicTrackArray]
+        const currentTrack = prevStateMelodicTrackArray.find(elem => elem.id === track.id);
+        const isActive = currentTrack.notes[index].isActive;
 
+        if (isActive){
+            currentTrack.notes[index] = {frequency: "", isActive: false};
+        }
+        else {
+            currentTrack.notes[index] = {frequency: note, isActive: true};
+            PlaySound('melodic', note)
+        }
+
+        setMelodicTrackArray(prevStateMelodicTrackArray);
+    }
     const handleChangePlaying = () => {
         setIsPlaying(!isPlaying)
     }
@@ -111,8 +145,6 @@ const CreatePlayerContextProvider = (props) => {
             prevState[index].instrument = value
             setRhythmTrackArray(prevState)
         }
-
-
     }
 
     return (
@@ -132,6 +164,7 @@ const CreatePlayerContextProvider = (props) => {
                 handleChangeBpmValue,
                 handleChangeNbrOfBeat,
                 handleSetTrack,
+                handleSetMelodicTrack,
                 handleSetNbrOfTrack,
                 handleChangeInstrument
 

@@ -33,5 +33,5 @@ const playMelodicSound = (note) => {
     const synth = new Tone.Synth().toDestination();
     const now = Tone.now()
     synth.triggerAttack(note, now)
-    synth.triggerRelease(now + 1)
+    synth.triggerRelease(now + 0.1)
 }
