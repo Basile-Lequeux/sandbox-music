@@ -9,20 +9,6 @@ export default function Track({
 }) {
   return (
     <div style={styles.gridContainer}>
-      <div>
-        <div
-          value={track.instrument}
-          onChange={(e) => handleChangeInstrument(track.id, e.target.value)}
-        >
-          <select>
-            {drumKitList.map((elem, i) => (
-              <option key={i} value={elem.label}>
-                {elem.label}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
       {track &&
         track.notes.length !== 0 &&
         track.notes.map((note, index) =>

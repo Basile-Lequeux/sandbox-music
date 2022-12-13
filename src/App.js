@@ -1,5 +1,10 @@
 import Track from "./components/Track";
 import { usePlayerContext } from "./PlayerContext";
+import { Header } from "./Header";
+import { Sidebar } from "./Sidebar";
+import { Box, Flex } from "@chakra-ui/react";
+import { StyleFunctionProps } from "@chakra-ui/theme-tools";
+import SideBarSelect from "./components/SideBarSelect";
 
 const App = () => {
   const {
@@ -21,107 +26,50 @@ const App = () => {
 
   return (
     <div className="App">
-      {!isPlaying ? (
-        <button
-          onClick={() => {
-            handleChangePlaying(true);
-            start();
-          }}
-        >
-          PLAY
-        </button>
-      ) : (
-        <button
-          onClick={() => {
-            handleChangePlaying(false);
-            stop();
-          }}
-        >
-          STOP
-        </button>
-      )}
-      <input
-        id="bpm"
-        type="number"
-        min={40}
-        max={400}
-        value={bpmValue}
-        onChange={(e) => {
-          if (
-            parseInt(e.target.min) > parseInt(e.target.value) ||
-            !e.target.value
-          ) {
-            handleChangeBpmValue(parseInt(e.target.min));
-          } else if (parseInt(e.target.max) < parseInt(e.target.value)) {
-            handleChangeBpmValue(parseInt(e.target.max));
-          } else {
-            handleChangeBpmValue(parseInt(e.target.value));
-          }
-        }}
-      />
-
-      <input
-        id="countCell"
-        type="number"
-        min={4}
-        max={100}
-        value={nbrOfBeat}
-        onChange={(e) => {
-          console.log("beat ", e.target.value);
-          if (
-            parseInt(e.target.min) > parseInt(e.target.value) ||
-            !e.target.value
-          ) {
-            handleChangeNbrOfBeat(parseInt(e.target.min));
-          } else if (parseInt(e.target.max) < parseInt(e.target.value)) {
-            handleChangeNbrOfBeat(parseInt(e.target.max));
-          } else {
-            handleChangeNbrOfBeat(parseInt(e.target.value));
-          }
-        }}
-      />
-
-      <input
-        id="nbrOfTrack"
-        type="number"
-        min={1}
-        max={20}
-        value={nbrOfTrack}
-        onChange={(e) => {
-          if (
-            parseInt(e.target.min) > parseInt(e.target.value) ||
-            !e.target.value
-          ) {
-            handleSetNbrOfTrack(parseInt(e.target.min));
-          } else if (parseInt(e.target.max) < parseInt(e.target.value)) {
-            handleSetNbrOfTrack(parseInt(e.target.max));
-          } else {
-            handleSetNbrOfTrack(parseInt(e.target.value));
-          }
-        }}
-      />
-
-      {trackArray.length > 0 &&
-        trackArray.map((track) => (
-          <Track
-            key={track.id}
-            styles={styles}
-            trackArray={trackArray}
-            cursor={cursor}
-            handleSetTrack={handleSetTrack}
-            track={track}
-            handleChangeInstrument={handleChangeInstrument}
-          />
-        ))}
+      <Flex flexDir="column">
+        <Header />
+        <Flex>
+          <Sidebar>
+            {trackArray.map((track) => (
+              <SideBarSelect  
+              handleChangeInstrument={handleChangeInstrument}
+              trackId={track.id}
+              instrument = {track.instrument}
+              />
+            ))}
+          </Sidebar>
+          <Box borderRight={"1px"} flex={1} bg={"#3D3D3D"}>
+            {trackArray.length > 0 &&
+              trackArray.map((track) => (
+                <Track
+                  key={track.id}
+                  styles={styles}
+                  trackArray={trackArray}
+                  cursor={cursor}
+                  handleSetTrack={handleSetTrack}
+                  track={track}
+                  handleChangeInstrument={handleChangeInstrument}
+                />
+              ))}
+          </Box>
+        </Flex>
+      </Flex>
     </div>
   );
 };
 
 const styles = {
+  // global: (props: StyleFunctionProps) => ({
+  body: {
+    color: "black",
+    bg: "#242424",
+  },
+  // }),
+
   gridContainer: {
     display: "flex",
     flexDirection: "row",
-    backgroundColor: "#2196F3",
+    // backgroundColor: "#2196F3",
   },
   gridItem: {
     backgroundColor: "rgba(255, 255, 255, 0.8)",
@@ -129,6 +77,7 @@ const styles = {
     padding: "30px",
     fontSize: "30px",
     textAlign: "center",
+    
   },
   gridItemSpacer: {
     backgroundColor: "rgba(255, 255, 255, 0.8)",
@@ -167,6 +116,9 @@ const styles = {
     marginRight: "5px",
     fontSize: "30px",
     textAlign: "center",
+  },
+  App: {
+    backgroundColor: "2196F3",
   },
 };
 
