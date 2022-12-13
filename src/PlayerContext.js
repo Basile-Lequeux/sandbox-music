@@ -22,7 +22,7 @@ const CreatePlayerContextProvider = (props) => {
     const [nbrOfBeat, setNbrOfBeat] = useState(12);
     const [nbrOfTrack, setNbrOfTrack] = useState(4);
     const [rhythmTrackArray, setRhythmTrackArray] = useState([]);
-
+    const [melodicTrackArray, setMelodicTrackArray] = useState([{id: uuidv4(), notes: [], instrument:'synth'}]);
 
     const [intervalId, setIntervalId] = useState(() => {});
 
@@ -124,6 +124,7 @@ const CreatePlayerContextProvider = (props) => {
                 cursor,
                 nbrOfBeat,
                 nbrOfTrack,
+                melodicTrackArray,
 
                 start,
                 stop,

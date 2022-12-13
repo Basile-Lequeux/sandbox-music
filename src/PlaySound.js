@@ -15,6 +15,9 @@ export default function PlaySound(type, sound) {
     if (type === "rhythm"){
         playRhythmSound(sound)
     }
+    if (type === "melodic"){
+        playMelodicSound(sound)
+    }
 
 }
 
@@ -24,4 +27,11 @@ const playRhythmSound = (sound) => {
     Tone.loaded().then(() => {
         player.start();
     });
+}
+
+const playMelodicSound = (note) => {
+    const synth = new Tone.Synth().toDestination();
+    const now = Tone.now()
+    synth.triggerAttack(note, now)
+    synth.triggerRelease(now + 1)
 }

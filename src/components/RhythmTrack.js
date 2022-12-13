@@ -1,11 +1,8 @@
-import { drumKitList } from "../PlaySound";
-
 export default function RhythmTrack({
   track,
   styles,
   cursor,
   handleSetTrack,
-  handleChangeInstrument,
 }) {
   return (
     <div style={styles.gridContainer}>
