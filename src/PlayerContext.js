@@ -8,12 +8,6 @@ function usePlayerContext(props) {
     return useContext(PlayerContext)
 }
 
-
-const initStateMelodicArray = {
-    frequency: 0,
-    isActive: false
-}
-
 const CreatePlayerContextProvider = (props) => {
 
     const [isPlaying, setIsPlaying] = useState(false);
@@ -104,6 +98,29 @@ const CreatePlayerContextProvider = (props) => {
         setNbrOfTrack(value)
     }
 
+    const addMeasure = () => {
+        let prevStateTrackArray = [...rhythmTrackArray]
+        prevStateTrackArray.map(track => {
+            for (let i = 0; i < 4; i++) {
+                track.beats.push({isActive: false})
+            }
+        })
+        setNbrOfBeat(nbrOfBeat + 4)
+        setRhythmTrackArray(prevStateTrackArray)
+    }
+
+    const deleteMeasure = () => {
+        let prevStateTrackArray = [...rhythmTrackArray]
+        if (nbrOfBeat > 4) {
+            const offset = nbrOfBeat - 4
+            prevStateTrackArray.map(track => {
+                track.beats.splice(offset, 4)
+            })
+            setNbrOfBeat(offset)
+            setRhythmTrackArray(prevStateTrackArray)
+        }
+    }
+
     const addRhythmTrack = () => {
         let prevStateTrackArray = [...rhythmTrackArray];
         const beats = []
@@ -144,8 +161,9 @@ const CreatePlayerContextProvider = (props) => {
                 handleSetTrack,
                 handleSetNbrOfTrack,
                 handleChangeInstrument,
-                addRhythmTrack
-
+                addRhythmTrack,
+                addMeasure,
+                deleteMeasure
             }}
         >
             {props.children}

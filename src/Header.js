@@ -25,11 +25,12 @@ export const Header = () => {
         bpmValue,
         start,
         stop,
-        handleChangePlaying,
         nbrOfBeat,
         handleChangeNbrOfBeat,
         nbrOfTrack,
         handleSetNbrOfTrack,
+        addMeasure,
+        deleteMeasure
     } = usePlayerContext();
 
     return (
@@ -94,29 +95,40 @@ export const Header = () => {
             </Box>
             <Box
                 padding="8px 0 8px 0"
+                display={"flex"}
             >
-                <Input
-                    id="countCell"
-                    type="number"
-                    bg={"white"}
-                    w={"50px"}
-                    min={4}
-                    max={100}
-                    value={nbrOfBeat}
-                    onChange={(e) => {
-                        if (
-                            parseInt(e.target.min) > parseInt(e.target.value) ||
-                            !e.target.value
-                        ) {
-                            handleChangeNbrOfBeat(parseInt(e.target.min));
-                        } else if (parseInt(e.target.max) < parseInt(e.target.value)) {
-                            handleChangeNbrOfBeat(parseInt(e.target.max));
-                        } else {
-                            handleChangeNbrOfBeat(parseInt(e.target.value));
-                        }
-                    }}
-                />
-
+                <Box
+                    m={"0 11px 0 0"}
+                >
+                    <Button bgColor={"white"} onClick={deleteMeasure} margin='0 2px 5px 2px'>
+                        -
+                    </Button>
+                    <Input
+                        id="countCell"
+                        type="number"
+                        bg={"white"}
+                        w={"50px"}
+                        min={4}
+                        max={100}
+                        value={nbrOfBeat}
+                        disabled={true}
+                        onChange={(e) => {
+                            if (
+                                parseInt(e.target.min) > parseInt(e.target.value) ||
+                                !e.target.value
+                            ) {
+                                handleChangeNbrOfBeat(parseInt(e.target.min));
+                            } else if (parseInt(e.target.max) < parseInt(e.target.value)) {
+                                handleChangeNbrOfBeat(parseInt(e.target.max));
+                            } else {
+                                handleChangeNbrOfBeat(parseInt(e.target.value));
+                            }
+                        }}
+                    />
+                    <Button bgColor="white" onClick={addMeasure} margin='0 2px 5px 2px'>
+                        +
+                    </Button>
+                </Box>
                 <Input
                     id="nbrOfTrack"
                     type="number"
