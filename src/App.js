@@ -45,19 +45,19 @@ const App = () => {
                             ))}
                     </Box>
                 </Flex>
-                <Box borderRight={"1px"} flex={1} bg={"#3D3D3D"}>
-                    {melodicTrackArray &&
-                        melodicTrackArray.map((track) =>
-                            <MelodicTrack
-                                key={track.id}
-                                styles={styles}
-                                cursor={cursor}
-                                handleSetMelodicTrack={handleSetMelodicTrack}
-                                track={track}
-                            />
-                        )
-                    }
-                </Box>
+                {/*<Box borderRight={"1px"} flex={1} bg={"#3D3D3D"}>*/}
+                {/*    {melodicTrackArray &&*/}
+                {/*        melodicTrackArray.map((track) =>*/}
+                {/*            <MelodicTrack*/}
+                {/*                key={track.id}*/}
+                {/*                styles={styles}*/}
+                {/*                cursor={cursor}*/}
+                {/*                handleSetMelodicTrack={handleSetMelodicTrack}*/}
+                {/*                track={track}*/}
+                {/*            />*/}
+                {/*        )*/}
+                {/*    }*/}
+                {/*</Box>*/}
             </Flex>
         </div>
     );
