@@ -45,17 +45,16 @@ export const Header = () => {
                 {!isPlaying ? (
                     <button
                         onClick={() => {
-                            handleChangePlaying(true);
+                            // handleChangePlaying(true);
                             start();
                         }}
                     >
-                        <FaPlay
-                            color="tomato"/>
+                        <FaPlay color="tomato"/>
                     </button>
                 ) : (
                     <button
                         onClick={() => {
-                            handleChangePlaying(false);
+                            // handleChangePlaying(false);
                             stop();
                         }}
                     >

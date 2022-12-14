@@ -4,17 +4,21 @@ import {Header} from "./Header";
 import {Sidebar} from "./Sidebar";
 import {Box, Flex} from "@chakra-ui/react";
 import SideBarSelect from "./components/SideBarSelect";
-import MelodicTrack from "./components/MelodicTrack";
+import {FaPlus} from "react-icons/fa";
 
 const App = () => {
+
+    const MAX_RHYTHM_TRACK = 8
+
     const {
         cursor,
         handleSetTrack,
         handleChangeInstrument,
         rhythmTrackArray,
-        melodicTrackArray,
-        handleSetMelodicTrack
+        addRhythmTrack,
+        nbrOfTrack
     } = usePlayerContext();
+    console.log("-> rhythmTrackArray", rhythmTrackArray);
 
     return (
         <div className="App">
@@ -29,6 +33,15 @@ const App = () => {
                                 instrument={track.instrument}
                             />
                         ))}
+                        {nbrOfTrack < MAX_RHYTHM_TRACK &&
+                            <Box bg="rgba(255, 255, 255, 0.8)" h="62px">
+                                <Box m="10%" align="center" onClick={() => addRhythmTrack()}>
+                                    <FaPlus
+                                        size="30px"
+                                    />
+                                </Box>
+                            </Box>
+                        }
                     </Sidebar>
                     <Box borderRight={"1px"} flex={1} bg={"#3D3D3D"}>
                         {rhythmTrackArray.length > 0 &&

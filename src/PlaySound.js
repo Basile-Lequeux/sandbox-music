@@ -13,17 +13,7 @@ export const drumKitList = [
     {label: "snare", value: snare},
 ]
 
-export default function PlaySound(type, sound) {
-    if (type === "rhythm"){
-        playRhythmSound(sound)
-    }
-    if (type === "melodic"){
-        playMelodicSound(sound)
-    }
-
-}
-
-const playRhythmSound = (sound) => {
+export const playRhythmSound = (sound) => {
     const beat = drumKitList.find(e => e.label === sound).value
     const player = new Tone.Player(beat).toDestination()
     Tone.loaded().then(() => {
@@ -31,7 +21,7 @@ const playRhythmSound = (sound) => {
     });
 }
 
-const playMelodicSound = (note) => {
+export const playMelodicSound = (note) => {
     const synth = new Tone.Synth().toDestination();
     const now = Tone.now()
     synth.triggerAttack(note, now)
