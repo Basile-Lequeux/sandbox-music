@@ -2,6 +2,7 @@ import clap from './sounds/clap.wav'
 import hihat from './sounds/hihat.wav'
 import kick from './sounds/kick.wav'
 import openhat from './sounds/openhat.wav'
+import snare from './sounds/snare.wav'
 import * as Tone from 'tone'
 
 export const drumKitList = [
@@ -9,6 +10,7 @@ export const drumKitList = [
     {label: "hihat", value: hihat},
     {label: "openhat", value: openhat},
     {label: "kick", value: kick},
+    {label: "snare", value: snare},
 ]
 
 export default function PlaySound(type, sound) {
