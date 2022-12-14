@@ -5,6 +5,7 @@ import {Sidebar} from "./Sidebar";
 import {Box, Flex} from "@chakra-ui/react";
 import SideBarSelect from "./components/SideBarSelect";
 import MelodicTrack from "./components/MelodicTrack";
+import Keyboard from "./components/Keyboard";
 
 const App = () => {
     const {
@@ -58,6 +59,8 @@ const App = () => {
                         )
                     }
                 </Box>
+                    <Keyboard />
+
             </Flex>
         </div>
     );
