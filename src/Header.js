@@ -39,7 +39,7 @@ export const Header = () => {
             justifyContent="space-between"
         >
             <Box
-                margin="0 0 0 700px"
+                marginLeft="35%"
                 padding="8px 0 8px 0"
             >
                 {!isPlaying ? (
