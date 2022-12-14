@@ -21,8 +21,8 @@ const CreatePlayerContextProvider = (props) => {
     const [bpmValue, setBpmValue] = useState(120);
     const [nbrOfBeat, setNbrOfBeat] = useState(12);
     const [nbrOfTrack, setNbrOfTrack] = useState(4);
+
     const [rhythmTrackArray, setRhythmTrackArray] = useState([]);
-    const [melodicTrackArray, setMelodicTrackArray] = useState([]);
 
     const [intervalId, setIntervalId] = useState(() => {});
 
@@ -36,16 +36,10 @@ const CreatePlayerContextProvider = (props) => {
                 playRhythmSound(track.instrument)
             }
         })
-        melodicTrackArray.map(track => {
-            if (track.notes[cursor] && track.notes[cursor].isActive){
-                playMelodicSound(track.notes[cursor].frequency)
-            }
-        })
     }, [cursor]);
 
     useEffect(() => {
         const rhythmArray = []
-        const melodicArray = []
 
         for (let h = 0; h < nbrOfTrack; h++) {
             const beats = []
@@ -56,16 +50,6 @@ const CreatePlayerContextProvider = (props) => {
             rhythmArray.push(track)
         }
         setRhythmTrackArray(rhythmArray)
-
-
-        const initBeatArray = []
-        for (let i = 0; i < nbrOfBeat; i++) {
-            initBeatArray.push(initStateMelodicArray)
-        }
-        const initMelodicTrack = {id: uuidv4(), notes: initBeatArray, instrument: 'synth'}
-        melodicArray.push(initMelodicTrack)
-
-        setMelodicTrackArray(melodicArray)
     }, []);
 
     const start = () => {
@@ -78,8 +62,9 @@ const CreatePlayerContextProvider = (props) => {
     const stop = () => {
         if (intervalId !== (() => {})) {
             clearInterval(intervalId);
+        } else {
+            setIntervalId(() => {});
         }
-        setIntervalId(() => {});
         setCursor(-1);
         setIsPlaying(false)
     };
@@ -102,21 +87,7 @@ const CreatePlayerContextProvider = (props) => {
         setRhythmTrackArray(prevStateTrackArray);
     };
 
-    const handleSetMelodicTrack = (track, index, note="C4") => {
-        let prevStateMelodicTrackArray = [...melodicTrackArray]
-        const currentTrack = prevStateMelodicTrackArray.find(elem => elem.id === track.id);
-        const isActive = currentTrack.notes[index].isActive;
 
-        if (isActive){
-            currentTrack.notes[index] = {frequency: "", isActive: false};
-        }
-        else {
-            currentTrack.notes[index] = {frequency: note, isActive: true};
-            playMelodicSound('melodic', note)
-        }
-
-        setMelodicTrackArray(prevStateMelodicTrackArray);
-    }
     const handleChangePlaying = () => {
         setIsPlaying(!isPlaying)
     }
@@ -164,7 +135,6 @@ const CreatePlayerContextProvider = (props) => {
                 cursor,
                 nbrOfBeat,
                 nbrOfTrack,
-                melodicTrackArray,
 
                 start,
                 stop,
@@ -172,7 +142,6 @@ const CreatePlayerContextProvider = (props) => {
                 handleChangeBpmValue,
                 handleChangeNbrOfBeat,
                 handleSetTrack,
-                handleSetMelodicTrack,
                 handleSetNbrOfTrack,
                 handleChangeInstrument,
                 addRhythmTrack
