@@ -5,7 +5,7 @@ import {
     Select
 } from "@chakra-ui/react";
 
-const SideBarSelect = ({trackId, instrument, handleChangeInstrument}) => {
+const SideBarSelect = ({trackId, instrument, handleChangeInstrument, type = 'rhythm'}) => {
     return (
         <Flex justify={'center'} alignItems={'center'} h={'62px'}>
             <Select
@@ -17,11 +17,17 @@ const SideBarSelect = ({trackId, instrument, handleChangeInstrument}) => {
                 placeholder="Select instrument">
                 <div
                 ></div>
-                {drumKitList.map((elem, i) => (
+                {type === 'rhythm' && drumKitList.map((elem, i) => (
                     <option key={i} value={elem.label}>
                         {elem.label}
                     </option>
                 ))}
+                {type === 'melodic' &&
+                    <option value="piano">
+                        piano
+                    </option>
+                }
+
             </Select>
         </Flex>
     );

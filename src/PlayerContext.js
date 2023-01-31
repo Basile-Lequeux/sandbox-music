@@ -17,6 +17,7 @@ const CreatePlayerContextProvider = (props) => {
     const [nbrOfTrack, setNbrOfTrack] = useState(4);
 
     const [rhythmTrackArray, setRhythmTrackArray] = useState([]);
+    const [melodicTrackArray, setMelodicTrackArray] = useState([]);
 
     const [intervalId, setIntervalId] = useState(() => {});
 
@@ -34,16 +35,20 @@ const CreatePlayerContextProvider = (props) => {
 
     useEffect(() => {
         const rhythmArray = []
-
+        const melodicArray = []
+        let beats = []
         for (let h = 0; h < nbrOfTrack; h++) {
-            const beats = []
+            beats = []
             for (let i = 0; i < nbrOfBeat; i++) {
                 beats.push({isActive: false})
             }
-            const track = {id: uuidv4(), beats: beats, instrument: drumKitList[h].label}
-            rhythmArray.push(track)
+            const rhythmTrack = {id: uuidv4(), beats: beats, instrument: drumKitList[h].label}
+            rhythmArray.push(rhythmTrack)
         }
+        const melodicTrack = {id: uuidv4(), beats: beats, instrument: ''}
+        melodicArray.push(melodicTrack)
         setRhythmTrackArray(rhythmArray)
+        setMelodicTrackArray(melodicArray)
     }, []);
 
     const start = () => {
@@ -143,6 +148,10 @@ const CreatePlayerContextProvider = (props) => {
         }
     }
 
+    const handleSetMelodicTrack = () => {
+        return
+    }
+
     return (
         <PlayerContext.Provider
             value={{
@@ -152,6 +161,7 @@ const CreatePlayerContextProvider = (props) => {
                 cursor,
                 nbrOfBeat,
                 nbrOfTrack,
+                melodicTrackArray,
 
                 start,
                 stop,
@@ -163,7 +173,8 @@ const CreatePlayerContextProvider = (props) => {
                 handleChangeInstrument,
                 addRhythmTrack,
                 addMeasure,
-                deleteMeasure
+                deleteMeasure,
+                handleSetMelodicTrack
             }}
         >
             {props.children}

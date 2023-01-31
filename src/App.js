@@ -5,6 +5,7 @@ import {Sidebar} from "./Sidebar";
 import {Box, Flex} from "@chakra-ui/react";
 import SideBarSelect from "./components/SideBarSelect";
 import {FaPlus} from "react-icons/fa";
+import MelodicTrack from "./components/MelodicTrack";
 
 const App = () => {
 
@@ -16,14 +17,16 @@ const App = () => {
         handleChangeInstrument,
         rhythmTrackArray,
         addRhythmTrack,
-        nbrOfTrack
+        nbrOfTrack,
+        melodicTrackArray,
+        handleSetMelodicTrack
     } = usePlayerContext();
 
     return (
         <div className="App">
             <Flex flexDir="column">
                 <Header/>
-                <Flex>
+                <Flex bg={"#3D3D3D"}>
                     <Sidebar>
                         {rhythmTrackArray.map((track) => (
                             <SideBarSelect
@@ -46,35 +49,46 @@ const App = () => {
                                 </Box>
                             </Box>
                         }
+                        {melodicTrackArray.map((track) => (
+                            <SideBarSelect
+                                handleChangeInstrument={handleChangeInstrument}
+                                trackId={track.id}
+                                instrument={'piano'}
+                                type={'melodic'}
+                            />
+                        ))
+                        }
                     </Sidebar>
-                    <Box borderRight={"1px"} flex={1} bg={"#3D3D3D"}>
-                        {rhythmTrackArray.length > 0 &&
-                            rhythmTrackArray.map((track) => (
-                                <RhythmTrack
-                                    key={track.id}
-                                    styles={styles}
-                                    trackArray={rhythmTrackArray}
-                                    cursor={cursor}
-                                    handleSetTrack={handleSetTrack}
-                                    track={track}
-                                    handleChangeInstrument={handleChangeInstrument}
-                                />
-                            ))}
-                    </Box>
+                    <Flex flexDir='column'>
+                        <Box borderRight={"1px"} flex={1} bg={"#3D3D3D"}>
+                            {rhythmTrackArray.length > 0 &&
+                                rhythmTrackArray.map((track) => (
+                                    <RhythmTrack
+                                        key={track.id}
+                                        styles={styles}
+                                        trackArray={rhythmTrackArray}
+                                        cursor={cursor}
+                                        handleSetTrack={handleSetTrack}
+                                        track={track}
+                                        handleChangeInstrument={handleChangeInstrument}
+                                    />
+                                ))}
+                        </Box>
+                        <Box borderRight={"1px"} flex={1} bg={"#3D3D3D"} marginTop={'62px'}>
+                            {melodicTrackArray &&
+                                melodicTrackArray.map((track) =>
+                                    <MelodicTrack
+                                        key={track.id}
+                                        styles={styles}
+                                        cursor={cursor}
+                                        handleSetMelodicTrack={handleSetMelodicTrack}
+                                        track={track}
+                                    />
+                                )
+                            }
+                        </Box>
+                    </Flex>
                 </Flex>
-                {/*<Box borderRight={"1px"} flex={1} bg={"#3D3D3D"}>*/}
-                {/*    {melodicTrackArray &&*/}
-                {/*        melodicTrackArray.map((track) =>*/}
-                {/*            <MelodicTrack*/}
-                {/*                key={track.id}*/}
-                {/*                styles={styles}*/}
-                {/*                cursor={cursor}*/}
-                {/*                handleSetMelodicTrack={handleSetMelodicTrack}*/}
-                {/*                track={track}*/}
-                {/*            />*/}
-                {/*        )*/}
-                {/*    }*/}
-                {/*</Box>*/}
             </Flex>
         </div>
     );
@@ -92,6 +106,15 @@ const styles = {
         display: "flex",
         flexDirection: "row",
         // backgroundColor: "#2196F3",
+    },
+
+    previewMelodicTrack: {
+        display: "flex",
+        backgroundColor: "rgba(255, 255, 255, 0.8)",
+        border: "1px solid rgba(0, 0, 0, 0.8)",
+        padding: "30px",
+        textAlign: "center",
+
     },
     gridItem: {
         backgroundColor: "rgba(255, 255, 255, 0.8)",
