@@ -18,7 +18,6 @@ const App = () => {
         addRhythmTrack,
         nbrOfTrack
     } = usePlayerContext();
-    console.log("-> rhythmTrackArray", rhythmTrackArray);
 
     return (
         <div className="App">
@@ -34,8 +33,13 @@ const App = () => {
                             />
                         ))}
                         {nbrOfTrack < MAX_RHYTHM_TRACK &&
-                            <Box bg="rgba(255, 255, 255, 0.8)" h="62px">
-                                <Box m="10%" align="center" onClick={() => addRhythmTrack()}>
+                            <Box
+                                bg="rgba(255, 255, 255, 0.8)"
+                                h="62px"
+                                cursor={'pointer'}
+                                onClick={() => addRhythmTrack()}
+                            >
+                                <Box m="10%" align="center">
                                     <FaPlus
                                         size="30px"
                                     />
