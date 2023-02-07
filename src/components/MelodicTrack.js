@@ -7,12 +7,17 @@ export default function MelodicTrack({
     track,
     styles,
     cursor,
-    handleSetMelodicTrack
+    handleSetMelodicTrack,
+    showPanelKeyboard,
+    setShowPanelKeyboard
 }) {
 
     return (
         <>
-            <div style={styles.previewMelodicTrack}>
+            <div
+                style={styles.previewMelodicTrack}
+                onClick={() => setShowPanelKeyboard(!showPanelKeyboard)}
+            >
                 <FaItunesNote
                     size="50px"
                 />

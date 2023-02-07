@@ -28,3 +28,41 @@ body {
     background-color: #c9c8c8;
 
 }
+
+.piano-keyboard {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.white-key,
+.black-key {
+    border: 1px solid lightgray;
+}
+
+.white-key:hover {
+    border: 1px solid lightgray;
+    cursor: pointer;
+    background-color: #c9c8c8;
+}
+.black-key:hover {
+    border: 1px solid lightgray;
+    cursor: pointer;
+    background-color: #c9c8c8;
+}
+
+
+.white-key {
+    width: 120px;
+    height: 30px;
+    background-color: white;
+}
+
+.black-key {
+    width: 80px;
+    height: 20px;
+    background-color: black;
+    margin-top: -10px;
+    margin-left: 40px;
+    z-index: 1;
+}

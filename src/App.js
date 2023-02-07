@@ -1,3 +1,4 @@
+import React, {useState} from 'react';
 import RhythmTrack from "./components/RhythmTrack";
 import {usePlayerContext} from "./PlayerContext";
 import {Header} from "./Header";
@@ -6,6 +7,7 @@ import {Box, Flex} from "@chakra-ui/react";
 import SideBarSelect from "./components/SideBarSelect";
 import {FaPlus} from "react-icons/fa";
 import MelodicTrack from "./components/MelodicTrack";
+import PanelKeyboard from "./components/PanelKeyboard";
 
 const App = () => {
 
@@ -21,6 +23,8 @@ const App = () => {
         melodicTrackArray,
         handleSetMelodicTrack
     } = usePlayerContext();
+
+    const [showPanelKeyboard, setShowPanelKeyboard] = useState(false);
 
     return (
         <div className="App">
@@ -83,12 +87,18 @@ const App = () => {
                                         cursor={cursor}
                                         handleSetMelodicTrack={handleSetMelodicTrack}
                                         track={track}
+                                        showPanelKeyboard={showPanelKeyboard}
+                                        setShowPanelKeyboard={setShowPanelKeyboard}
                                     />
                                 )
                             }
                         </Box>
                     </Flex>
                 </Flex>
+                <PanelKeyboard
+                    showPanelKeyboard={showPanelKeyboard}
+                    setShowPanelKeyboard={setShowPanelKeyboard}
+                />
             </Flex>
         </div>
     );
