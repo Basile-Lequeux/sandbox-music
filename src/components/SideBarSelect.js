@@ -15,8 +15,6 @@ const SideBarSelect = ({trackId, instrument, handleChangeInstrument, type = 'rhy
                 onChange={(e) => handleChangeInstrument(trackId, e.target.value)}
                 value={instrument}
                 placeholder="Select instrument">
-                <div
-                ></div>
                 {type === 'rhythm' && drumKitList.map((elem, i) => (
                     <option key={i} value={elem.label}>
                         {elem.label}

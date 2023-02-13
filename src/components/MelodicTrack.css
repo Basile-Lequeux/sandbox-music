@@ -29,40 +29,100 @@ body {
 
 }
 
-.piano-keyboard {
+.bottom-sidebar {
+    contain: strict;
+    box-sizing: border-box;
+    border-bottom: 1px solid #2c2b2f;
+    box-shadow: 0 -2px 11px rgb(0 0 0 / 8%);
+    background-color: #262529;
+    position: absolute;
+    will-change: transform;
+    width: 100%;
+    height: 150px;
+    left: 0;
+    bottom: 140px;
+    z-index: 1;
+    transition: transform 0.3s, opacity 0.3s;
+    transform: translateY(0);
+    transform-origin: 50% 100%;
+    opacity: 1;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
 }
 
-.white-key,
-.black-key {
-    border: 1px solid lightgray;
+.piano-keyboard {
+    top: 62px;
+    left: 0;
+    width: 70px;
+    height: 100%;
+    border-left: 1px solid black;
+    border-right: 1px solid transparent;
+    /*background-color: var(--essential-subdued);*/
+    cursor: default;
+    z-index: 2;
 }
+
 
 .white-key:hover {
-    border: 1px solid lightgray;
     cursor: pointer;
     background-color: #c9c8c8;
 }
 .black-key:hover {
-    border: 1px solid lightgray;
     cursor: pointer;
     background-color: #c9c8c8;
 }
 
 
 .white-key {
-    width: 120px;
-    height: 30px;
+    z-index: 3;
+    height: 18px;
     background-color: white;
+    /*color: var(--white-key-text);*/
+    border-top: 1px solid lightgray;
+     border-radius: 0 4px 4px 0;
+    line-height: 17px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: right;
+    padding-right: 5px;
 }
 
 .black-key {
-    width: 80px;
-    height: 20px;
+    float: left;
+    margin-top: -5.5px;
+    height: 11px;
+    width: 50%;
+    z-index: 4;
     background-color: black;
-    margin-top: -10px;
-    margin-left: 40px;
-    z-index: 1;
+    border-radius: 0 4px 4px 0;
+}
+
+.row_note_even {
+    width: 1000px;
+    height: 9px;
+    display: flex;
+    background-color: rgba(65, 57, 57, 0.35);
+}
+
+.row_note_odd {
+    width: 1000px;
+    height: 9px;
+    display: flex;
+    background-color: rgba(65, 57, 57, 0.46);
+}
+
+.row_note_ghost {
+    width: 1000px;
+    height: 9px;
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.14);
+}
+
+.row_note_beat {
+    width: 11px;
+    border-right: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.scrollable {
+    display: flex;
 }

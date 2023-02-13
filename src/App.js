@@ -34,6 +34,7 @@ const App = () => {
                     <Sidebar>
                         {rhythmTrackArray.map((track) => (
                             <SideBarSelect
+                                key={track.id}
                                 handleChangeInstrument={handleChangeInstrument}
                                 trackId={track.id}
                                 instrument={track.instrument}
@@ -55,6 +56,7 @@ const App = () => {
                         }
                         {melodicTrackArray.map((track) => (
                             <SideBarSelect
+                                key={track.id}
                                 handleChangeInstrument={handleChangeInstrument}
                                 trackId={track.id}
                                 instrument={'piano'}
