@@ -14,6 +14,7 @@ import {
 } from '@chakra-ui/react'
 import {usePlayerContext} from "../PlayerContext";
 import NoteBeat from "./noteBeat";
+import {playMelodicSound} from "../PlaySound";
 
 const PanelKeyboard = ({
     showPanelKeyboard,
@@ -26,10 +27,10 @@ const PanelKeyboard = ({
     } = usePlayerContext();
 
 
-    const octave = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
+    const octave = ['C4', 'C#4', 'D4', 'D#4', 'E4', 'F4', 'F#4', 'G4', 'G#4', 'A4', 'A#4', 'B4', 'C5']
 
     const isBlackKey = (tone) => {
-        return tone.length > 1
+        return tone.length > 2
     }
 
     return (
@@ -50,6 +51,7 @@ const PanelKeyboard = ({
                                 <div
                                     className={isBlackKey(tone) ? "black-key" : "white-key"}
                                     key={i}
+                                    onClick={() => playMelodicSound(tone)}
                                 >
                                 </div>
                             )}

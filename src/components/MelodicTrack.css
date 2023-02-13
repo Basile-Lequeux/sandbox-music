@@ -60,6 +60,8 @@ body {
     /*background-color: var(--essential-subdued);*/
     cursor: default;
     z-index: 2;
+    display: flex;
+    flex-direction: column-reverse;
 }
 
 
@@ -90,6 +92,7 @@ body {
 .black-key {
     float: left;
     margin-top: -5.5px;
+    margin-bottom: -5.5px;
     height: 11px;
     width: 50%;
     z-index: 4;
