@@ -32,7 +32,7 @@ const CreatePlayerContextProvider = (props) => {
       }
     });
     melodicTrackArray.map((track) => {
-      if (track.beats[cursor] && track.beats[cursor].isActive) {
+      if (track.beats[cursor] && track.beats[cursor].tone.length > 0) {
         track.beats[cursor].tone.map((t) => playMelodicSound(t));
       }
     });

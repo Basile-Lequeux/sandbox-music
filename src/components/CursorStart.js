@@ -5,7 +5,6 @@ export default function CursorStart({ styles }) {
   const { nbrOfBeat, cursorStartingPoint, setCursorStartingPoint } =
     usePlayerContext();
 
-  console.log("cursorStartingPoint", cursorStartingPoint);
   return (
     <Flex flexDir="row" bg={"#3D3D3D"}>
       <Flex bg="#242424" justify={"center"} alignItems={"center"} h={"62px"}>
