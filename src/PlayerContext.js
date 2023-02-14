@@ -21,33 +21,14 @@ const CreatePlayerContextProvider = (props) => {
     const [melodicTrackArray, setMelodicTrackArray] = useState([]);
 
     const [intervalId, setIntervalId] = useState(() => {});
-
-
     const play = (start) => {
         const mainPlayer = MainPlayer.getInstance()
         if (start) {
-            mainPlayer.toggle();
+            mainPlayer.toggle(rhythmTrackArray);
         } else {
             mainPlayer.toggle();
         }
     }
-
-    useEffect(() => {
-        let length = nbrOfBeat - 1;
-        if (cursor > length) {
-            setCursor(0);
-        }
-        rhythmTrackArray.map((track) => {
-            if (track.beats[cursor] && track.beats[cursor].isActive) {
-                playRhythmSound(track.instrument);
-            }
-        });
-        melodicTrackArray.map((track) => {
-            if (track.beats[cursor] && track.beats[cursor].tone.length > 0) {
-                track.beats[cursor].tone.map((t) => playMelodicSound(t));
-            }
-        });
-    }, [cursor]);
 
     useEffect(() => {
         const rhythmArray = [];
@@ -82,7 +63,6 @@ const CreatePlayerContextProvider = (props) => {
         setMelodicTrackArray(melodicArray);
     }, []);
     const start = () => {
-        setCursor(0);
         const delay = 60000 / bpmValue;
         setIntervalId(setInterval(incrementCursor, delay));
         setIsPlaying(true);
@@ -97,7 +77,6 @@ const CreatePlayerContextProvider = (props) => {
             setIntervalId(() => {
             });
         }
-        setCursor(-1);
         setIsPlaying(false);
         play(false)
     };
@@ -134,6 +113,8 @@ const CreatePlayerContextProvider = (props) => {
 
     const handleChangeNbrOfBeat = (value) => {
         setNbrOfBeat(value);
+        const mainPlayer = MainPlayer.getInstance()
+        mainPlayer.setNumberOfBeat(value)
     };
 
     const handleSetNbrOfTrack = (value) => {
@@ -210,6 +191,7 @@ const CreatePlayerContextProvider = (props) => {
 
         setMelodicTrackArray(prevStateMelodicArray);
     };
+
 
     return (
         <PlayerContext.Provider
