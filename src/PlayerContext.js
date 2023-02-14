@@ -17,7 +17,9 @@ const CreatePlayerContextProvider = (props) => {
     const [nbrOfTrack, setNbrOfTrack] = useState(4);
 
     const [rhythmTrackArray, setRhythmTrackArray] = useState([]);
+    console.log("-> rhythmTrackArray", rhythmTrackArray);
     const [melodicTrackArray, setMelodicTrackArray] = useState([]);
+    console.log("-> melodicTrackArray", melodicTrackArray);
 
     const [intervalId, setIntervalId] = useState(() => {});
 
@@ -45,7 +47,14 @@ const CreatePlayerContextProvider = (props) => {
             const rhythmTrack = {id: uuidv4(), beats: beats, instrument: drumKitList[h].label}
             rhythmArray.push(rhythmTrack)
         }
-        const melodicTrack = {id: uuidv4(), beats: beats, instrument: ''}
+        const initBeatsArray = () => {
+            const beatArray = []
+            for (let i = 0; i < nbrOfBeat; i++) {
+                beatArray.push({isActive: false, tone: []})
+            }
+            return beatArray
+        }
+        const melodicTrack = {id: uuidv4(), beats: initBeatsArray(), instrument: ''}
         melodicArray.push(melodicTrack)
         setRhythmTrackArray(rhythmArray)
         setMelodicTrackArray(melodicArray)
@@ -86,6 +95,27 @@ const CreatePlayerContextProvider = (props) => {
         setRhythmTrackArray(prevStateTrackArray);
     };
 
+
+    const handleSetMelodicTrack = (track, i, tone) => {
+        let prevStateMelodicArray = [...melodicTrackArray];
+        const currentTrack = prevStateMelodicArray.find(elem => elem.id === track.id);
+        const isActive = currentTrack.beats[i].isActive;
+        const toneArray = currentTrack.beats[i].tone
+        const isActiveTone = toneArray.find(t => t === tone)
+        if (isActiveTone) {
+            const index = toneArray.findIndex(t => t === tone)
+            toneArray.splice(index, 1)
+        } else toneArray.push(tone)
+
+        currentTrack.beats[i] = {isActive: !isActive, tone: toneArray};
+
+        
+        if (!isActiveTone){
+            playMelodicSound(tone)
+        }
+
+        setMelodicTrackArray(prevStateMelodicArray)
+    }
 
     const handleChangePlaying = () => {
         setIsPlaying(!isPlaying)
@@ -146,10 +176,6 @@ const CreatePlayerContextProvider = (props) => {
             prevState[index].instrument = value
             setRhythmTrackArray(prevState)
         }
-    }
-
-    const handleSetMelodicTrack = () => {
-        return
     }
 
     return (

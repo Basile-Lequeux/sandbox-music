@@ -4,18 +4,25 @@ import {usePlayerContext} from "../PlayerContext";
 function NoteBeat({
     tone,
     isEven,
+    track
 }) {
+    console.log("-> track", track);
 
     const {
         cursor,
-        nbrOfBeat
+        nbrOfBeat,
+        handleSetMelodicTrack
     } = usePlayerContext();
-
 
     return (
         <div className={isEven ? "row_note_even" : "row_note_odd"}>
-            {[...Array(nbrOfBeat)].map((x, i) =>
-                <div key={i} className='row_note_beat'></div>
+            {track.beats.map((x, i) =>
+                <div
+                    key={i}
+                    className={track.beats[i].tone.find(t => t === tone) ? 'row_note_beat_active' : 'row_note_beat'}
+                    onClick={() => handleSetMelodicTrack(track, i, tone)}
+                >
+                </div>
             )
             }
         </div>

@@ -25,6 +25,7 @@ const App = () => {
     } = usePlayerContext();
 
     const [showPanelKeyboard, setShowPanelKeyboard] = useState(false);
+    const [melodicTrackSelected, setMelodicTrackSelected] = useState();
 
     return (
         <div className="App">
@@ -91,6 +92,7 @@ const App = () => {
                                         track={track}
                                         showPanelKeyboard={showPanelKeyboard}
                                         setShowPanelKeyboard={setShowPanelKeyboard}
+                                        setMelodicTrackSelected={setMelodicTrackSelected}
                                     />
                                 )
                             }
@@ -100,6 +102,7 @@ const App = () => {
                 <PanelKeyboard
                     showPanelKeyboard={showPanelKeyboard}
                     setShowPanelKeyboard={setShowPanelKeyboard}
+                    melodicTrackSelected={melodicTrackSelected}
                 />
             </Flex>
         </div>

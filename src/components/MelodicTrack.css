@@ -126,6 +126,12 @@ body {
     border-right: 1px solid rgba(255, 255, 255, 0.14);
 }
 
+.row_note_beat_active {
+    width: 11px;
+    border-right: 1px solid rgba(255, 255, 255, 0.14);
+    background-color: yellow;
+}
+
 .scrollable {
     display: flex;
 }

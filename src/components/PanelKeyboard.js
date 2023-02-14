@@ -18,7 +18,8 @@ import {playMelodicSound} from "../PlaySound";
 
 const PanelKeyboard = ({
     showPanelKeyboard,
-    setShowPanelKeyboard
+    setShowPanelKeyboard,
+    melodicTrackSelected
 }) => {
 
     const {
@@ -65,6 +66,7 @@ const PanelKeyboard = ({
                                     key={i}
                                     tone={tone}
                                     isEven={i % 2 === 0}
+                                    track={melodicTrackSelected}
                                 />
                             )}
                         </Flex>

@@ -6,37 +6,25 @@ import {FaItunesNote} from "react-icons/fa";
 export default function MelodicTrack({
     track,
     styles,
-    cursor,
-    handleSetMelodicTrack,
     showPanelKeyboard,
-    setShowPanelKeyboard
+    setShowPanelKeyboard,
+    setMelodicTrackSelected
 }) {
+
+    const selectMelodicTrack = () => {
+        setShowPanelKeyboard(!showPanelKeyboard)
+        setMelodicTrackSelected(track)
+    }
 
     return (
         <>
             <div
                 style={styles.previewMelodicTrack}
-                onClick={() => setShowPanelKeyboard(!showPanelKeyboard)}
+                onClick={() => selectMelodicTrack()}
             >
                 <FaItunesNote
                     size="50px"
                 />
-                {/*{track && track.beats.length !== 0 &&*/}
-                {/*    track.beats.map((beat, index) =>*/}
-                {/*        <div*/}
-                {/*            key={index}*/}
-                {/*            style={*/}
-                {/*                cursor === index*/}
-                {/*                    ? styles.gridItemColoredSpacer*/}
-                {/*                    : beat && beat.isActive*/}
-                {/*                        ? styles.gridItemColoredNoteSpacer*/}
-                {/*                        : styles.gridItemSpacer*/}
-                {/*            }*/}
-                {/*            onClick={() => handleSetMelodicTrack(track, index)}*/}
-                {/*        >*/}
-                {/*        </div>*/}
-                {/*    )*/}
-                {/*}*/}
             </div>
         </>
     );
