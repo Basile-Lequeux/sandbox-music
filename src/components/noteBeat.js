@@ -6,8 +6,6 @@ function NoteBeat({
     isEven,
     track
 }) {
-    console.log("-> track", track);
-
     const {
         cursor,
         nbrOfBeat,

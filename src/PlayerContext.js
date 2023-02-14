@@ -24,11 +24,16 @@ const CreatePlayerContextProvider = (props) => {
   useEffect(() => {
     let length = nbrOfBeat - 1;
     if (cursor > length) {
-      setCursor(cursorStartingPoint);
+      setCursor(0);
     }
     rhythmTrackArray.map((track) => {
       if (track.beats[cursor] && track.beats[cursor].isActive) {
         playRhythmSound(track.instrument);
+      }
+    });
+    melodicTrackArray.map((track) => {
+      if (track.beats[cursor] && track.beats[cursor].isActive) {
+        track.beats[cursor].tone.map((t) => playMelodicSound(t));
       }
     });
   }, [cursor]);
@@ -65,9 +70,8 @@ const CreatePlayerContextProvider = (props) => {
     setRhythmTrackArray(rhythmArray);
     setMelodicTrackArray(melodicArray);
   }, []);
-
   const start = () => {
-    setCursor(cursorStartingPoint);
+    setCursor(0);
     const delay = 60000 / bpmValue;
     setIntervalId(setInterval(incrementCursor, delay));
     setIsPlaying(true);
@@ -184,7 +188,7 @@ const CreatePlayerContextProvider = (props) => {
     currentTrack.beats[i] = { isActive: !isActive, tone: toneArray };
 
     if (!isActiveTone) {
-      playMelodicSound(tone);
+      playMelodicSound(toneArray);
     }
 
     setMelodicTrackArray(prevStateMelodicArray);
