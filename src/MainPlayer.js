@@ -1,6 +1,5 @@
 import * as Tone from "tone";
 import snare from './sounds/snare.wav'
-import kick from './sounds/kick.wav'
 
 export class MainPlayer {
     static instance = null;
@@ -26,6 +25,7 @@ export class MainPlayer {
         this.playing = false;
         this.index = 0;
         this.numberOfBeats = 12
+        this.inc = null
     }
 
     toggle(data) {
@@ -35,10 +35,10 @@ export class MainPlayer {
             this.data = data
         } else Tone.Transport.stop();
     }
-
-    getIndex() {
-        return this.index % this.numberOfBeats
+    setIncrementCursor(func) {
+        this.incr = func
     }
+
     setBpm(newBpm) {
         Tone.Transport.bpm.value = newBpm
     }
@@ -70,6 +70,7 @@ export class MainPlayer {
     repeat(time) {
         let step = this.index % this.numberOfBeats;
         const notes = this.data[0].beats
+        this.incr(step)
 
         for (let i = 0; i < notes.length; i++) {
             if (notes[step].isActive) {

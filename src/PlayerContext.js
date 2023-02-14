@@ -20,7 +20,6 @@ const CreatePlayerContextProvider = (props) => {
     const [rhythmTrackArray, setRhythmTrackArray] = useState([]);
     const [melodicTrackArray, setMelodicTrackArray] = useState([]);
 
-    const [intervalId, setIntervalId] = useState(() => {});
     const play = (start) => {
         const mainPlayer = MainPlayer.getInstance()
         if (start) {
@@ -61,28 +60,18 @@ const CreatePlayerContextProvider = (props) => {
         melodicArray.push(melodicTrack);
         setRhythmTrackArray(rhythmArray);
         setMelodicTrackArray(melodicArray);
+        const mainPlayer = MainPlayer.getInstance()
+        mainPlayer.setIncrementCursor(setCursor)
+
     }, []);
     const start = () => {
-        const delay = 60000 / bpmValue;
-        setIntervalId(setInterval(incrementCursor, delay));
         setIsPlaying(true);
         play(true)
     };
 
     const stop = () => {
-        if (intervalId !== (() => {
-        })) {
-            clearInterval(intervalId);
-        } else {
-            setIntervalId(() => {
-            });
-        }
         setIsPlaying(false);
         play(false)
-    };
-
-    const incrementCursor = () => {
-        setCursor((cursor) => cursor + 1);
     };
 
     const handleSetTrack = (track, i) => {
@@ -93,10 +82,6 @@ const CreatePlayerContextProvider = (props) => {
         const isActive = currentTrack.beats[i].isActive;
 
         currentTrack.beats[i] = {isActive: !isActive};
-
-        if (!isActive) {
-            playRhythmSound(currentTrack.instrument);
-        }
 
         setRhythmTrackArray(prevStateTrackArray);
     };
