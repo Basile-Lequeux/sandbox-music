@@ -21,9 +21,8 @@ export const playRhythmSound = (sound) => {
     });
 }
 
-export const playMelodicSound = (note) => {
-    const synth = new Tone.Synth().toDestination();
+export const playMelodicSound = (notes) => {
+    const synth = new Tone.PolySynth(Tone.Synth).toDestination();
     const now = Tone.now()
-    synth.triggerAttack(note, now)
-    synth.triggerRelease(now + 0.5)
+    synth.triggerAttackRelease(notes, '8n', now)
 }

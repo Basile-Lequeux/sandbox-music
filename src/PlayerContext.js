@@ -17,9 +17,7 @@ const CreatePlayerContextProvider = (props) => {
     const [nbrOfTrack, setNbrOfTrack] = useState(4);
 
     const [rhythmTrackArray, setRhythmTrackArray] = useState([]);
-    console.log("-> rhythmTrackArray", rhythmTrackArray);
     const [melodicTrackArray, setMelodicTrackArray] = useState([]);
-    console.log("-> melodicTrackArray", melodicTrackArray);
 
     const [intervalId, setIntervalId] = useState(() => {});
 
@@ -31,6 +29,11 @@ const CreatePlayerContextProvider = (props) => {
         rhythmTrackArray.map(track => {
             if (track.beats[cursor] && track.beats[cursor].isActive) {
                 playRhythmSound(track.instrument)
+            }
+        })
+        melodicTrackArray.map(track => {
+            if (track.beats[cursor] && track.beats[cursor].isActive){
+                track.beats[cursor].tone.map(t => playMelodicSound(t))
             }
         })
     }, [cursor]);
@@ -111,7 +114,7 @@ const CreatePlayerContextProvider = (props) => {
 
         
         if (!isActiveTone){
-            playMelodicSound(tone)
+            playMelodicSound(toneArray)
         }
 
         setMelodicTrackArray(prevStateMelodicArray)
