@@ -54,26 +54,27 @@ export const Header = () => {
         </Text>
       </Box>
       <Box padding="10px 0 8px 0" display={"flex"}>
-        {!isPlaying ? (
-          <button
-            onClick={() => {
-              // handleChangePlaying(true);
-              start();
-            }}
-          >
-            <FaPlay color="#e74138" size={"20"} />
-          </button>
-        ) : (
-          <button
-            onClick={() => {
-              // handleChangePlaying(false);
-              stop();
-            }}
-          >
-            <FaPause color="#e74138" size={"20"} />
-          </button>
-        )}
-
+        <Box paddingRight="10px" display={"flex"}>
+          {!isPlaying ? (
+            <button
+              onClick={() => {
+                // handleChangePlaying(true);
+                start();
+              }}
+            >
+              <FaPlay color="#e74138" size={"20"} />
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                // handleChangePlaying(false);
+                stop();
+              }}
+            >
+              <FaPause color="#e74138" size={"20"} />
+            </button>
+          )}
+        </Box>
         <InputGroup>
           <InputLeftAddon>BPM</InputLeftAddon>
           <InputLeftElement left={"70"}>
