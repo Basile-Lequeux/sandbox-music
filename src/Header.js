@@ -31,8 +31,6 @@ export const Header = () => {
     stop,
     nbrOfBeat,
     handleChangeNbrOfBeat,
-    nbrOfTrack,
-    handleSetNbrOfTrack,
     addMeasure,
     deleteMeasure,
   } = usePlayerContext();
