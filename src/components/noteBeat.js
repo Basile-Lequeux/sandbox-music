@@ -7,8 +7,6 @@ function NoteBeat({
     track
 }) {
     const {
-        cursor,
-        nbrOfBeat,
         handleSetMelodicTrack
     } = usePlayerContext();
 

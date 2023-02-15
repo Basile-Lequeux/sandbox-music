@@ -24,7 +24,7 @@ const CreatePlayerContextProvider = (props) => {
   useEffect(() => {
     let length = nbrOfBeat - 1;
     if (cursor > length) {
-      setCursor(0);
+      setCursor(cursorStartingPoint);
     }
     rhythmTrackArray.map((track) => {
       if (track.beats[cursor] && track.beats[cursor].isActive) {
@@ -71,7 +71,7 @@ const CreatePlayerContextProvider = (props) => {
     setMelodicTrackArray(melodicArray);
   }, []);
   const start = () => {
-    setCursor(0);
+    setCursor(cursorStartingPoint);
     const delay = 60000 / bpmValue;
     setIntervalId(setInterval(incrementCursor, delay));
     setIsPlaying(true);
