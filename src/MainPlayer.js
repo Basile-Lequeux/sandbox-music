@@ -1,5 +1,10 @@
 import * as Tone from "tone";
 import snare from './sounds/snare.wav'
+import kick from './sounds/kick.wav'
+import hihat from './sounds/hihat.wav'
+import openhat from './sounds/openhat.wav'
+import clap from './sounds/clap.wav'
+import {playRhythmSound} from "./PlaySound";
 
 export class MainPlayer {
     static instance = null;
@@ -13,10 +18,19 @@ export class MainPlayer {
 
     constructor() {
         this.synth = new Tone.PolySynth(Tone.Synth).toDestination();
-        this.sampler = new Tone.Sampler({
+        this.kick = new Tone.Player(kick).toDestination()
+        // this.snare = new Audio(snare)
+        this.snare = new Tone.Sampler({
             urls: {
-                A4: snare
+                C4: snare
             }
+        }).toDestination();
+        this.players = new Tone.Players({
+            snare: snare,
+            clap: clap,
+            kick: kick,
+            hihat: hihat,
+            openhat: openhat
         }).toDestination()
         this.gain = new Tone.Gain(0.7);
         this.tick = 0;
@@ -68,15 +82,18 @@ export class MainPlayer {
     }
 
     repeat(time) {
-        let step = this.index % this.numberOfBeats;
-        const notes = this.data[0].beats
-        this.incr(step)
-
-        for (let i = 0; i < notes.length; i++) {
-            if (notes[step].isActive) {
-                this.sampler.triggerAttackRelease('A4', '8n', time);
-            }
-        }
+        const step = this.index % this.numberOfBeats;
+        // drumArray.map(track => {
+        //     const notes = track.beats
+        //     for (let i = 0; i < this.numberOfBeats; i++) {
+        //         if (notes[step].isActive) {
+        //             // playRhythmSound(track.instrument)
+        //             // this.kick.start(time).stop(time + 0.1)
+        //             // this.snare.triggerAttackRelease('A4', '8n', time);
+        //         }
+        //     }
+        // })
         this.index++;
+        this.incr(step)
     }
 }

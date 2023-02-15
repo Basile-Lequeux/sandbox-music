@@ -30,6 +30,15 @@ const CreatePlayerContextProvider = (props) => {
     }
 
     useEffect(() => {
+        rhythmTrackArray.map((track) => {
+            if (track.beats[cursor] && track.beats[cursor].isActive) {
+                playRhythmSound(track.instrument);
+            }
+        });
+    }, [cursor]);
+
+
+    useEffect(() => {
         const rhythmArray = [];
         const melodicArray = [];
         let beats = [];
