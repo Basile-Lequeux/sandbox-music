@@ -17,20 +17,6 @@ export class MainPlayer {
 
     constructor() {
         this.synth = new Tone.PolySynth(Tone.Synth).toDestination();
-        this.kick = new Tone.Player(kick).toDestination()
-        // this.snare = new Audio(snare)
-        this.snare = new Tone.Sampler({
-            urls: {
-                C4: snare
-            }
-        }).toDestination();
-        this.players = new Tone.Players({
-            snare: snare,
-            clap: clap,
-            kick: kick,
-            hihat: hihat,
-            openhat: openhat
-        }).toDestination()
         this.gain = new Tone.Gain(0.7);
         this.tick = 0;
         this.initializeTransport();
@@ -39,6 +25,7 @@ export class MainPlayer {
         this.index = 0;
         this.numberOfBeats = 12
         this.inc = null
+        this.step = 0
     }
 
     toggle(data) {
@@ -78,14 +65,23 @@ export class MainPlayer {
         }, "4n");
     }
 
-    repeat(time) {
-        const step = this.index % this.numberOfBeats;
-        const beats = this.data[0].beats
+    setStep(value) {
+        this.step = value
+        this.index = value
+    }
+    #incrementStep() {
+        this.step = this.index % this.numberOfBeats;
+    }
 
-        if (beats[step].tone.length > 0) {
-            this.synth.triggerAttackRelease(beats[step].tone, "8n", time);
+    repeat(time) {
+        const beats = this.data[0].beats
+        console.log(this.step)
+        if (beats[this.step].tone.length > 0) {
+            this.synth.triggerAttackRelease(beats[this.step].tone, "8n", time);
         }
         this.index++;
-        this.incr(step)
+        this.incr(this.step)
+        this.#incrementStep()
     }
+
 }

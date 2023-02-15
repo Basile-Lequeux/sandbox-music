@@ -83,6 +83,11 @@ const CreatePlayerContextProvider = (props) => {
         play(false)
     };
 
+    const handleCursorStart = (value) => {
+        setCursorStartingPoint(value)
+        const mainPlayer = MainPlayer.getInstance()
+        mainPlayer.setStep(value)
+    }
     const handleSetTrack = (track, i) => {
         let prevStateTrackArray = [...rhythmTrackArray];
         const currentTrack = prevStateTrackArray.find(
@@ -211,7 +216,7 @@ const CreatePlayerContextProvider = (props) => {
                 addMeasure,
                 deleteMeasure,
                 handleSetMelodicTrack,
-                setCursorStartingPoint,
+                handleCursorStart,
             }}
         >
             {props.children}

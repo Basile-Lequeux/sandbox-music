@@ -2,7 +2,7 @@ import { Flex, Text } from "@chakra-ui/react";
 import { usePlayerContext } from "../PlayerContext";
 
 export default function CursorStart({ styles }) {
-  const { nbrOfBeat, cursorStartingPoint, setCursorStartingPoint } =
+  const { nbrOfBeat, cursorStartingPoint, handleCursorStart } =
     usePlayerContext();
 
   return (
@@ -27,8 +27,7 @@ export default function CursorStart({ styles }) {
                 : styles.gridItemSpacer
             }
             onClick={() => {
-              setCursorStartingPoint(index);
-              console.log("index", index);
+                handleCursorStart(index);
             }}
           />
         ) : (
@@ -40,8 +39,7 @@ export default function CursorStart({ styles }) {
                 : styles.gridItem
             }
             onClick={() => {
-              setCursorStartingPoint(index);
-              console.log("index", index);
+                handleCursorStart(index);
             }}
           />
         )
