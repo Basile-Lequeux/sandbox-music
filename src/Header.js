@@ -44,7 +44,7 @@ export const Header = () => {
       position={"fixed"}
       w={"100%"}
     >
-      <Box padding="10px 0 8px 10px" display={"flex"}>
+      <Box padding="10px 0 8px 30px" display={"flex"}>
         <Text
           bgGradient="linear(to-r, #434445, #e74138)"
           bgClip="text"
@@ -113,12 +113,7 @@ export const Header = () => {
           </InputRightElement>
         </InputGroup>
       </Box>
-      <Box
-        padding="10px 10px 8px 0"
-        justify={"flex-end"}
-        alignItems={"center"}
-        display={"flex"}
-      >
+      <Box padding="10px 30px 8px 0" display={"flex"}>
         <InputGroup>
           <InputLeftAddon>Measures</InputLeftAddon>
           <InputLeftElement left={"100px"}>
@@ -153,5 +148,5 @@ export const Header = () => {
     </Flex>
   );
 };
-const styles = {};
+
 export default Header;
