@@ -41,11 +41,11 @@ export const Header = () => {
     <Flex
       textAlign="center"
       bg="#242424"
-      justifyContent={"space-around"}
+      justifyContent={"space-between"}
       alignItems={"center"}
       position={"relative"}
     >
-      <Box padding="10px 0 8px 0" display={"flex"}>
+      <Box padding="10px 0 8px 10px" display={"flex"}>
         <Text
           bgGradient="linear(to-r, #434445, #e74138)"
           bgClip="text"
@@ -114,7 +114,7 @@ export const Header = () => {
         </InputGroup>
       </Box>
       <Box
-        padding="10px 0 8px 0"
+        padding="10px 10px 8px 0"
         justify={"flex-end"}
         alignItems={"center"}
         display={"flex"}
