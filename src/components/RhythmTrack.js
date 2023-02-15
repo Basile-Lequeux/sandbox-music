@@ -1,3 +1,5 @@
+import {MainPlayer} from "../MainPlayer";
+
 export default function RhythmTrack({ track, styles, cursor, handleSetTrack }) {
   return (
     <div style={styles.gridContainer}>
