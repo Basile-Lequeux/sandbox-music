@@ -41,7 +41,8 @@ export const Header = () => {
       bg="#242424"
       justifyContent={"space-between"}
       alignItems={"center"}
-      position={"relative"}
+      position={"fixed"}
+      w={"100%"}
     >
       <Box padding="10px 0 8px 10px" display={"flex"}>
         <Text

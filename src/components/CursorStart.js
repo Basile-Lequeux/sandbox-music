@@ -6,7 +6,7 @@ export default function CursorStart({ styles }) {
     usePlayerContext();
 
   return (
-    <Flex flexDir="row" bg={"#3D3D3D"}>
+    <Flex flexDir="row" bg={"#3D3D3D"} paddingTop={"70px"}>
       <Flex bg="#242424" justify={"center"} alignItems={"center"} h={"62px"}>
         <Text
           color={"white"}
