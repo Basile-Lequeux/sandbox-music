@@ -110,36 +110,48 @@ const CreatePlayerContextProvider = (props) => {
         mainPlayer.setBpm(value)
     };
 
-    const handleChangeNbrOfBeat = (value) => {
-        setNbrOfBeat(value);
-        const mainPlayer = MainPlayer.getInstance()
-        mainPlayer.setNumberOfBeat(value)
-    };
-
     const handleSetNbrOfTrack = (value) => {
         setNbrOfTrack(value);
     };
 
     const addMeasure = () => {
         let prevStateTrackArray = [...rhythmTrackArray];
+        let prevStateMelodicTrackArray = [...melodicTrackArray]
         prevStateTrackArray.map((track) => {
             for (let i = 0; i < 4; i++) {
                 track.beats.push({isActive: false});
             }
         });
+        prevStateMelodicTrackArray.map((track) => {
+            for (let i = 0; i < 4; i++) {
+                track.beats.push({isActive: false, tone: []});
+            }
+        });
         setNbrOfBeat(nbrOfBeat + 4);
         setRhythmTrackArray(prevStateTrackArray);
+        setMelodicTrackArray(prevStateMelodicTrackArray)
+        const mainPlayer = MainPlayer.getInstance()
+        mainPlayer.setNumberOfBeat(nbrOfBeat + 4)
+        mainPlayer.setData(prevStateMelodicTrackArray)
     };
 
     const deleteMeasure = () => {
         let prevStateTrackArray = [...rhythmTrackArray];
+        let prevStateMelodicTrackArray = [...melodicTrackArray]
         if (nbrOfBeat > 4) {
             const offset = nbrOfBeat - 4;
-            prevStateTrackArray.map((track) => {
+            prevStateTrackArray.map(track => {
                 track.beats.splice(offset, 4);
+            });
+            prevStateMelodicTrackArray.map(track => {
+                track.beats.splice(offset, 4)
             });
             setNbrOfBeat(offset);
             setRhythmTrackArray(prevStateTrackArray);
+            setMelodicTrackArray(prevStateMelodicTrackArray)
+            const mainPlayer = MainPlayer.getInstance()
+            mainPlayer.setNumberOfBeat(nbrOfBeat - 4)
+            mainPlayer.setData(prevStateMelodicTrackArray)
         }
     };
 
@@ -208,7 +220,6 @@ const CreatePlayerContextProvider = (props) => {
                 stop,
                 handleChangePlaying,
                 handleChangeBpmValue,
-                handleChangeNbrOfBeat,
                 handleSetTrack,
                 handleSetNbrOfTrack,
                 handleChangeInstrument,

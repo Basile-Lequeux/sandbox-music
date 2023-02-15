@@ -30,7 +30,6 @@ export const Header = () => {
     start,
     stop,
     nbrOfBeat,
-    handleChangeNbrOfBeat,
     addMeasure,
     deleteMeasure,
   } = usePlayerContext();
@@ -124,21 +123,8 @@ export const Header = () => {
             type="number"
             bg={"white"}
             w={"100px"}
-            min={4}
-            max={100}
             value={nbrOfBeat}
-            onChange={(e) => {
-              if (
-                parseInt(e.target.min) > parseInt(e.target.value) ||
-                !e.target.value
-              ) {
-                handleChangeNbrOfBeat(parseInt(e.target.min));
-              } else if (parseInt(e.target.max) < parseInt(e.target.value)) {
-                handleChangeNbrOfBeat(parseInt(e.target.max));
-              } else {
-                handleChangeNbrOfBeat(parseInt(e.target.value));
-              }
-            }}
+            disabled={true}
           />
           <InputRightElement>
             <FiPlus onClick={addMeasure}></FiPlus>

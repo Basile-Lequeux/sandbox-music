@@ -35,12 +35,18 @@ export class MainPlayer {
         this.incr = func
     }
 
+    setData(data) {
+        this.data = data
+    }
     setBpm(newBpm) {
         Tone.Transport.bpm.value = newBpm
     }
 
     setNumberOfBeat(newNumber) {
         this.numberOfBeats = newNumber
+        this.step = 0
+        this.index = 0
+        this.incr(0)
     }
 
     updateSynth() {
@@ -70,6 +76,7 @@ export class MainPlayer {
 
     repeat(time) {
         const beats = this.data[0].beats
+        
         if (beats[this.step].tone.length > 0) {
             this.synth.triggerAttackRelease(beats[this.step].tone, "8n", time);
         }
