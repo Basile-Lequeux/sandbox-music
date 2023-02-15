@@ -4,7 +4,6 @@ import kick from './sounds/kick.wav'
 import hihat from './sounds/hihat.wav'
 import openhat from './sounds/openhat.wav'
 import clap from './sounds/clap.wav'
-import {playRhythmSound} from "./PlaySound";
 
 export class MainPlayer {
     static instance = null;
@@ -49,6 +48,7 @@ export class MainPlayer {
             this.data = data
         } else Tone.Transport.stop();
     }
+
     setIncrementCursor(func) {
         this.incr = func
     }
@@ -71,28 +71,20 @@ export class MainPlayer {
     }
 
 
-
     initializeTransport() {
         Tone.Transport.bpm.value = 120
         Tone.Transport.scheduleRepeat((time) => {
             this.repeat(time)
-            // this.synth.triggerAttackRelease(['C4', 'D4'], "8n", time);
-            // this.osc.start(time).stop(time + 0.1);
         }, "4n");
     }
 
     repeat(time) {
         const step = this.index % this.numberOfBeats;
-        // drumArray.map(track => {
-        //     const notes = track.beats
-        //     for (let i = 0; i < this.numberOfBeats; i++) {
-        //         if (notes[step].isActive) {
-        //             // playRhythmSound(track.instrument)
-        //             // this.kick.start(time).stop(time + 0.1)
-        //             // this.snare.triggerAttackRelease('A4', '8n', time);
-        //         }
-        //     }
-        // })
+        const beats = this.data[0].beats
+
+        if (beats[step].tone.length > 0) {
+            this.synth.triggerAttackRelease(beats[step].tone, "8n", time);
+        }
         this.index++;
         this.incr(step)
     }

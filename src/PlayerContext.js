@@ -23,7 +23,7 @@ const CreatePlayerContextProvider = (props) => {
     const play = (start) => {
         const mainPlayer = MainPlayer.getInstance()
         if (start) {
-            mainPlayer.toggle(rhythmTrackArray);
+            mainPlayer.toggle(melodicTrackArray);
         } else {
             mainPlayer.toggle();
         }
