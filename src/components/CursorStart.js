@@ -14,7 +14,7 @@ export default function CursorStart({ styles }) {
           w={"100px"}
           style={{ marginLeft: "30px", marginRight: "20px" }}
         >
-          Position départ
+          Timeline
         </Text>
       </Flex>
       {[...Array(nbrOfBeat)].map((x, index) =>
