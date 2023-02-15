@@ -1,9 +1,4 @@
 import * as Tone from "tone";
-import snare from './sounds/snare.wav'
-import kick from './sounds/kick.wav'
-import hihat from './sounds/hihat.wav'
-import openhat from './sounds/openhat.wav'
-import clap from './sounds/clap.wav'
 
 export class MainPlayer {
     static instance = null;
@@ -75,7 +70,6 @@ export class MainPlayer {
 
     repeat(time) {
         const beats = this.data[0].beats
-        console.log(this.step)
         if (beats[this.step].tone.length > 0) {
             this.synth.triggerAttackRelease(beats[this.step].tone, "8n", time);
         }
