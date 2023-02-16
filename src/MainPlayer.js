@@ -63,7 +63,7 @@ export class MainPlayer {
         Tone.Transport.bpm.value = 120
         Tone.Transport.scheduleRepeat((time) => {
             this.repeat(time)
-        }, "4n");
+        }, "8n");
     }
 
     setStep(value) {
@@ -76,9 +76,13 @@ export class MainPlayer {
 
     repeat(time) {
         const beats = this.data[0].beats
-        
-        if (beats[this.step].tone.length > 0) {
-            this.synth.triggerAttackRelease(beats[this.step].tone, "8n", time);
+
+        if (beats[this.step].notes.length > 0) {
+            const eightNote = beats[this.step].notes.filter(note => note.duration === 1).map(note => note.tone)
+            const quarterNote = beats[this.step].notes.filter(note => note.duration === 2).map(note => note.tone)
+            
+            this.synth.triggerAttackRelease(eightNote, "8n", time);
+            this.synth.triggerAttackRelease(quarterNote, "4n", time);
         }
         this.index++;
         this.incr(this.step)

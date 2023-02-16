@@ -57,7 +57,7 @@ const CreatePlayerContextProvider = (props) => {
         const initBeatsArray = () => {
             const beatArray = [];
             for (let i = 0; i < nbrOfBeat; i++) {
-                beatArray.push({isActive: false, tone: []});
+                beatArray.push({isActive: false, notes: []});
             }
             return beatArray;
         };
@@ -187,21 +187,31 @@ const CreatePlayerContextProvider = (props) => {
             (elem) => elem.id === track.id
         );
         const isActive = currentTrack.beats[i].isActive;
-        const toneArray = currentTrack.beats[i].tone;
-        const isActiveTone = toneArray.find((t) => t === tone);
+        const notesArray = currentTrack.beats[i].notes;
+        const isActiveTone = notesArray.find((t) => t.tone === tone);
         if (isActiveTone) {
-            const index = toneArray.findIndex((t) => t === tone);
-            toneArray.splice(index, 1);
-        } else toneArray.push(tone);
+            const index = notesArray.findIndex((t) => t.tone === tone);
+            notesArray.splice(index, 1);
+        } else notesArray.push({tone: tone, duration: 1});
 
-        currentTrack.beats[i] = {isActive: !isActive, tone: toneArray};
+        currentTrack.beats[i] = {isActive: !isActive, notes: notesArray};
 
         if (!isActiveTone) {
-            playMelodicSound(toneArray);
+            playMelodicSound(notesArray);
         }
 
         setMelodicTrackArray(prevStateMelodicArray);
     };
+
+    const changeDurationOfNote = (trackId, indexOfNote, tone) => {
+        let prevStateMelodicArray = [...melodicTrackArray];
+        const track = prevStateMelodicArray.find(t => t.id === trackId)
+        const note = track.beats[indexOfNote].notes.find(note => note.tone === tone)
+        note.duration = 2
+
+        setMelodicTrackArray(prevStateMelodicArray)
+
+    }
 
 
     return (
@@ -228,6 +238,7 @@ const CreatePlayerContextProvider = (props) => {
                 deleteMeasure,
                 handleSetMelodicTrack,
                 handleCursorStart,
+                changeDurationOfNote
             }}
         >
             {props.children}

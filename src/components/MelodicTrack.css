@@ -53,7 +53,7 @@ body {
 .piano-keyboard {
     top: 62px;
     left: 0;
-    width: 70px;
+    width: 153px;
     height: 100%;
     border-left: 1px solid black;
     border-right: 1px solid transparent;
@@ -77,7 +77,7 @@ body {
 
 .white-key {
     z-index: 3;
-    height: 18px;
+    height: 48px;
     background-color: white;
     /*color: var(--white-key-text);*/
     border-top: 1px solid lightgray;
@@ -91,9 +91,9 @@ body {
 
 .black-key {
     float: left;
-    margin-top: -5.5px;
-    margin-bottom: -5.5px;
-    height: 11px;
+    margin-top: -8.9px;
+    margin-bottom: -8.9px;
+    height: 29px;
     width: 50%;
     z-index: 4;
     background-color: black;
@@ -102,33 +102,33 @@ body {
 
 .row_note_even {
     width: 1000px;
-    height: 9px;
+    height: 30px;
     display: flex;
     background-color: rgba(65, 57, 57, 0.35);
 }
 
 .row_note_odd {
     width: 1000px;
-    height: 9px;
+    height: 30px;
     display: flex;
     background-color: rgba(65, 57, 57, 0.46);
 }
 
 .row_note_ghost {
     width: 1000px;
-    height: 9px;
+    height: 30px;
     display: flex;
     background-color: rgba(255, 255, 255, 0.14);
 }
 
 .row_note_beat {
-    width: 11px;
+    width: 30px;
     border-right: 1px solid rgba(255, 255, 255, 0.14);
 }
 
 .row_note_beat_active {
-    width: 11px;
-    border-right: 1px solid rgba(255, 255, 255, 0.14);
+    width: 30px;
+    border: 1px solid rgb(0, 0, 0);
     background-color: yellow;
 }
 
