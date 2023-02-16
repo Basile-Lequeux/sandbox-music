@@ -125,7 +125,7 @@ const CreatePlayerContextProvider = (props) => {
         });
         prevStateMelodicTrackArray.map((track) => {
             for (let i = 0; i < 4; i++) {
-                track.beats.push({isActive: false, tone: []});
+                track.beats.push({isActive: false, notes: []});
             }
         });
         setNbrOfBeat(nbrOfBeat + 4);
