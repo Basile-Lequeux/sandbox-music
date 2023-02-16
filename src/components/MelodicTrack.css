@@ -101,15 +101,13 @@ body {
 }
 
 .row_note_even {
-    width: 1000px;
-    height: 30px;
+    height: 50px;
     display: flex;
     background-color: rgba(65, 57, 57, 0.35);
 }
 
 .row_note_odd {
-    width: 1000px;
-    height: 30px;
+    height: 50px;
     display: flex;
     background-color: rgba(65, 57, 57, 0.46);
 }
@@ -122,16 +120,47 @@ body {
 }
 
 .row_note_beat {
-    width: 30px;
+    width: 63px;
+    height: 17px;
     border-right: 1px solid rgba(255, 255, 255, 0.14);
 }
 
 .row_note_beat_active {
-    width: 30px;
+    width: 63px;
     border: 1px solid rgb(0, 0, 0);
+    height: 17px;
     background-color: yellow;
+}
+
+.row_note_beat_cursor {
+    width: 63px;
+    height: 17px;
+    border-right: 1px solid rgba(255, 255, 255, 0.14);
+    background-color: rgba(217, 65, 57, 0.8);
+}
+
+.row_note_beat_active_cursor {
+    width: 63px;
+    border: 1px solid rgb(0, 0, 0);
+    height: 17px;
+    background-color: rgba(217, 65, 57, 0.8);
 }
 
 .scrollable {
     display: flex;
+}
+
+.melodic_track_frame {
+    display: flex;
+    flex-direction: column;
+    height: 130px;
+}
+
+.melodic_track_container {
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    text-align: center;
+    height: 150px;
+    overflow-y: scroll;
 }

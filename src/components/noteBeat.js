@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {usePlayerContext} from "../PlayerContext";
 
 function NoteBeat({
@@ -8,11 +8,31 @@ function NoteBeat({
 }) {
     const {
         handleSetMelodicTrack,
-        changeDurationOfNote
+        changeDurationOfNote,
+        cursor
     } = usePlayerContext();
 
+    const [rowNoteStyle, setRowNoteStyle] = useState('');
+
+    useEffect(() => {
+
+    }, [cursor]);
+
     const convertDurationIntoWidth = (duration) => {
-        return 28 * duration
+        return 63 * duration
+    }
+
+    const getStyleNote = (i) => {
+        let style = ''
+        if (track.beats[i].notes.find(t => t.tone === tone)) {
+            style += 'row_note_beat_active'
+        } else {
+            style += 'row_note_beat'
+        }
+        if (cursor === i) {
+            style += '_cursor'
+        }
+        return style
     }
 
     return (
@@ -20,10 +40,10 @@ function NoteBeat({
             {track.beats.map((x, i) =>
                 <div
                     key={i}
-                    className={track.beats[i].notes.find(t => t.tone === tone) ? 'row_note_beat_active' : 'row_note_beat'}
+                    // className={track.beats[i].notes.find(t => t.tone === tone) ? 'row_note_beat_active' : 'row_note_beat'}
+                    className={getStyleNote(i)}
                     style={track.beats[i].notes.find(t => t.tone === tone) && {width: convertDurationIntoWidth(track.beats[i].notes.find(t => t.tone === tone).duration)}}
                     onClick={() => handleSetMelodicTrack(track, i, tone)}
-                    onDragStart={() => changeDurationOfNote(track.id, i, tone)}
                 >
                 </div>
             )
