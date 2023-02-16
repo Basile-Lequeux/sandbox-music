@@ -197,7 +197,7 @@ const CreatePlayerContextProvider = (props) => {
         currentTrack.beats[i] = {isActive: !isActive, notes: notesArray};
 
         if (!isActiveTone) {
-            playMelodicSound(notesArray);
+            playMelodicSound(notesArray.map(note => note.tone));
         }
 
         setMelodicTrackArray(prevStateMelodicArray);
