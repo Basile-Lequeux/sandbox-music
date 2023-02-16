@@ -20,6 +20,7 @@ const CreatePlayerContextProvider = (props) => {
 
     const [rhythmTrackArray, setRhythmTrackArray] = useState([]);
     const [melodicTrackArray, setMelodicTrackArray] = useState([]);
+    console.log("-> melodicTrackArray", melodicTrackArray);
 
     const play = (start) => {
         const mainPlayer = MainPlayer.getInstance()
@@ -184,21 +185,35 @@ const CreatePlayerContextProvider = (props) => {
 
     const handleSetMelodicTrack = (track, i, tone) => {
         let prevStateMelodicArray = [...melodicTrackArray];
-        const currentTrack = prevStateMelodicArray.find(
-            (elem) => elem.id === track.id
-        );
+        const currentTrack = prevStateMelodicArray.find((elem) => elem.id === track.id);
         const isActive = currentTrack.beats[i].isActive;
         const notesArray = currentTrack.beats[i].notes;
+        const notesArrayP = currentTrack.beats[i + 1].notes;
         const isActiveTone = notesArray.find((t) => t.tone === tone);
+
         if (isActiveTone) {
-            const index = notesArray.findIndex((t) => t.tone === tone);
-            notesArray.splice(index, 1);
-        } else notesArray.push({tone: tone, duration: parseInt(selectNoteKeyBoard)});
+            //ça fonctionne pour les duration -1 mais faut aussi gerer quand on met une note de duration 2 avant
+            //une autre note de duration 2. De ce fait la note apres la duration 2 se retrouve avec un ton en -1 et un ton en -2
+            // il faut peut être verifier qu'il n'existe pas une note du même ton au moment d'ajouter la note de duration -1
+            if (currentTrack.beats[i].notes.find(t => t.tone === tone).duration > 1) {
+                const indexP = notesArrayP.findIndex((t) => t.tone === tone);
+                notesArrayP.splice(indexP, 1);
+            }
+                const index = notesArray.findIndex((t) => t.tone === tone);
+                notesArray.splice(index, 1);
+
+        } else {
+            notesArray.push({tone: tone, duration: parseInt(selectNoteKeyBoard)});
+            if (parseInt(selectNoteKeyBoard) > 1) {
+                notesArrayP.push({tone: tone, duration: -1});
+                currentTrack.beats[i + 1] = {isActive: !isActive, notes: notesArrayP};
+            }
+        }
 
         currentTrack.beats[i] = {isActive: !isActive, notes: notesArray};
 
         if (!isActiveTone) {
-            playMelodicSound(notesArray.map(note => note.tone));
+            playMelodicSound(tone);
         }
 
         setMelodicTrackArray(prevStateMelodicArray);

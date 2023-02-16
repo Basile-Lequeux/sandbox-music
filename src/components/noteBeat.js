@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {usePlayerContext} from "../PlayerContext";
 
 function NoteBeat({
@@ -8,18 +8,16 @@ function NoteBeat({
 }) {
     const {
         handleSetMelodicTrack,
-        changeDurationOfNote,
         cursor
     } = usePlayerContext();
 
-    const [rowNoteStyle, setRowNoteStyle] = useState('');
-
-    useEffect(() => {
-
-    }, [cursor]);
-
     const convertDurationIntoWidth = (duration) => {
-        return 63 * duration
+        if (duration === -1) {
+            return 0
+        } else {
+
+            return 63 * duration
+        }
     }
 
     const getStyleNote = (i) => {
@@ -35,14 +33,20 @@ function NoteBeat({
         return style
     }
 
+    const getWidthNote = (i) => {
+        const activeCurrentNote = track.beats[i].notes.find(t => t.tone === tone)
+        if (activeCurrentNote) {
+            return {width: convertDurationIntoWidth(activeCurrentNote.duration)}
+        }
+    }
+
     return (
         <div className={isEven ? "row_note_even" : "row_note_odd"}>
             {track.beats.map((x, i) =>
                 <div
                     key={i}
-                    // className={track.beats[i].notes.find(t => t.tone === tone) ? 'row_note_beat_active' : 'row_note_beat'}
                     className={getStyleNote(i)}
-                    style={track.beats[i].notes.find(t => t.tone === tone) && {width: convertDurationIntoWidth(track.beats[i].notes.find(t => t.tone === tone).duration)}}
+                    style={getWidthNote(i)}
                     onClick={() => handleSetMelodicTrack(track, i, tone)}
                 >
                 </div>

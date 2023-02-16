@@ -1,6 +1,8 @@
 import React from 'react';
 import './MelodicTrack.css';
 import NoteBeat from "./noteBeat";
+import {Box, Radio, RadioGroup, Stack} from "@chakra-ui/react";
+import {usePlayerContext} from "../PlayerContext";
 
 export default function MelodicTrack({
     track,
@@ -14,6 +16,11 @@ export default function MelodicTrack({
         setShowPanelKeyboard(!showPanelKeyboard)
         setMelodicTrackSelected(track)
     }
+
+    const {
+        selectNoteKeyBoard,
+        setSelectNoteKeyBoard
+    } = usePlayerContext();
 
     const octave = [
         "C4",
@@ -49,8 +56,18 @@ export default function MelodicTrack({
                 className={'melodic_track_container'}
                 // onClick={() => selectMelodicTrack()}
             >
+                <Box>
+                    Change duration
+                    <RadioGroup onChange={setSelectNoteKeyBoard} value={selectNoteKeyBoard}>
+                        <Stack direction='row'>
+                            <Radio value={'1'}>Eight note</Radio>
+                            <Radio value={'2'}>Quarter note</Radio>
+                        </Stack>
+                    </RadioGroup>
+                </Box>
+                <div className="scrollable">
                     <div className={'melodic_track_frame'}>
-                    {/*<div className={"row_note_ghost"}></div>*/}
+                        {/*<div className={"row_note_ghost"}></div>*/}
                         {octave.map((tone, i) => (
                             <NoteBeat
                                 key={i}
@@ -60,6 +77,7 @@ export default function MelodicTrack({
                             />
                         ))}
                     </div>
+                </div>
             </div>
         </>
     );
