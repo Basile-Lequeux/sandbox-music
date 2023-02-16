@@ -16,6 +16,7 @@ const CreatePlayerContextProvider = (props) => {
     const [bpmValue, setBpmValue] = useState(120);
     const [nbrOfBeat, setNbrOfBeat] = useState(12);
     const [nbrOfTrack, setNbrOfTrack] = useState(4);
+    const [selectNoteKeyBoard, setSelectNoteKeyBoard] = useState('1');
 
     const [rhythmTrackArray, setRhythmTrackArray] = useState([]);
     const [melodicTrackArray, setMelodicTrackArray] = useState([]);
@@ -192,7 +193,7 @@ const CreatePlayerContextProvider = (props) => {
         if (isActiveTone) {
             const index = notesArray.findIndex((t) => t.tone === tone);
             notesArray.splice(index, 1);
-        } else notesArray.push({tone: tone, duration: 1});
+        } else notesArray.push({tone: tone, duration: parseInt(selectNoteKeyBoard)});
 
         currentTrack.beats[i] = {isActive: !isActive, notes: notesArray};
 
@@ -225,6 +226,7 @@ const CreatePlayerContextProvider = (props) => {
                 nbrOfBeat,
                 nbrOfTrack,
                 melodicTrackArray,
+                selectNoteKeyBoard,
 
                 start,
                 stop,
@@ -238,7 +240,8 @@ const CreatePlayerContextProvider = (props) => {
                 deleteMeasure,
                 handleSetMelodicTrack,
                 handleCursorStart,
-                changeDurationOfNote
+                changeDurationOfNote,
+                setSelectNoteKeyBoard
             }}
         >
             {props.children}
