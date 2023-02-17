@@ -65,7 +65,7 @@ const App = () => {
             ))}
           </Sidebar>
           <Flex flexDir="column">
-            <Box borderRight={"1px"} flex={1} bg={"#3D3D3D"} paddingLeft={"150px"}>
+            <Box borderRight={"1px"} flex={1} bg={"#3D3D3D"}>
               {rhythmTrackArray.length > 0 &&
                 rhythmTrackArray.map((track) => (
                   <RhythmTrack
@@ -79,7 +79,7 @@ const App = () => {
                   />
                 ))}
             </Box>
-            <Box borderRight={"1px"} flex={1} bg={"#3D3D3D"} marginTop={"62px"} paddingLeft={"150px"}>
+            <Box borderRight={"1px"} flex={1} bg={"#3D3D3D"} marginTop={"62px"}>
               {melodicTrackArray &&
                 melodicTrackArray.map((track) => (
                   <MelodicTrack

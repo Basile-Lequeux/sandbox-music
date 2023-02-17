@@ -42,6 +42,7 @@ export const Header = () => {
       alignItems={"center"}
       position={"fixed"}
       w={"100%"}
+      zIndex={100}
     >
       <Box padding="10px 0 8px 30px" display={"flex"}>
         <Text

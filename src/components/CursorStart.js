@@ -7,13 +7,7 @@ export default function CursorStart({ styles }) {
 
   return (
     <Flex flexDir="row" bg={"#3D3D3D"} paddingTop={"70px"}>
-      <Flex
-        bg="#242424"
-        justify={"center"}
-        alignItems={"center"}
-        h={"62px"}
-        position={"fixed"}
-      >
+      <Flex bg="#242424" justify={"center"} alignItems={"center"} h={"62px"}>
         <Text
           color={"white"}
           h={"30px"}
@@ -23,7 +17,7 @@ export default function CursorStart({ styles }) {
           Timeline
         </Text>
       </Flex>
-      <Box display={"flex"} paddingLeft={"150px"}>
+      <Box display={"flex"}>
         {[...Array(nbrOfBeat)].map((x, index) =>
           (index + 1) % 4 === 0 ? (
             <div
