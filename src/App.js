@@ -19,6 +19,7 @@ const App = () => {
     handleChangeInstrument,
     rhythmTrackArray,
     addRhythmTrack,
+    deleteOneTrack,
     nbrOfTrack,
     melodicTrackArray,
     handleSetMelodicTrack,
@@ -34,12 +35,15 @@ const App = () => {
         <CursorStart styles={styles} />
         <Flex bg={"#3D3D3D"}>
           <Sidebar>
-            {rhythmTrackArray.map((track) => (
+            {rhythmTrackArray.map((track, index) => (
               <SideBarSelect
                 key={track.id}
                 handleChangeInstrument={handleChangeInstrument}
                 trackId={track.id}
                 instrument={track.instrument}
+                index={index}
+                deleteOneTrack={deleteOneTrack}
+                length={rhythmTrackArray.length}
               />
             ))}
             {nbrOfTrack < MAX_RHYTHM_TRACK && (
@@ -54,13 +58,16 @@ const App = () => {
                 </Box>
               </Box>
             )}
-            {melodicTrackArray.map((track) => (
+            {melodicTrackArray.map((track, index) => (
               <SideBarSelect
                 key={track.id}
                 handleChangeInstrument={handleChangeInstrument}
                 trackId={track.id}
                 instrument={"piano"}
                 type={"melodic"}
+                index={index}
+                deleteOneTrack={deleteOneTrack}
+                length={melodicTrackArray.length}
               />
             ))}
           </Sidebar>
