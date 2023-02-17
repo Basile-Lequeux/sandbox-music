@@ -9,7 +9,7 @@ import {
   InputLeftElement,
 } from "@chakra-ui/react";
 import { usePlayerContext } from "./PlayerContext";
-import { FaPlay, FaPause } from "react-icons/fa";
+import { FaPlay, FaPause, FaFileUpload } from "react-icons/fa";
 import { FiMinus, FiPlus } from "react-icons/fi";
 
 export const Header = () => {
@@ -62,7 +62,7 @@ export const Header = () => {
                 start();
               }}
             >
-              <FaPlay color="#e74138" size={"20"} />
+              <FaPlay color="#e74138" size={"25"} />
             </button>
           ) : (
             <button
@@ -71,7 +71,7 @@ export const Header = () => {
                 stop();
               }}
             >
-              <FaPause color="#e74138" size={"20"} />
+              <FaPause color="#e74138" size={"25"} />
             </button>
           )}
         </Box>
@@ -112,7 +112,7 @@ export const Header = () => {
           </InputRightElement>
         </InputGroup>
       </Box>
-      <Box padding="10px 30px 8px 0" display={"flex"}>
+      <Box padding="10px 0 8px 0" display={"flex"}>
         <InputGroup>
           <InputLeftAddon>Measures</InputLeftAddon>
           <InputLeftElement left={"100px"}>
@@ -130,6 +130,15 @@ export const Header = () => {
             <FiPlus onClick={addMeasure}></FiPlus>
           </InputRightElement>
         </InputGroup>
+      </Box>
+      <Box padding="10px 30px 8px 0" display={"flex"}>
+        <button
+          onClick={() => {
+            // save file
+          }}
+        >
+          <FaFileUpload color="#e74138" size={"25"} />
+        </button>
       </Box>
     </Flex>
   );
