@@ -206,7 +206,6 @@ const CreatePlayerContextProvider = (props) => {
     );
     const isActive = currentTrack.beats[i].isActive;
     const notesArray = currentTrack.beats[i].notes;
-    const notesArrayP = currentTrack.beats[i + 1].notes;
     const isActiveTone = notesArray.find((t) => t.tone === tone);
 
     if (isActiveTone) {
@@ -216,6 +215,7 @@ const CreatePlayerContextProvider = (props) => {
       if (
         currentTrack.beats[i].notes.find((t) => t.tone === tone).duration > 1
       ) {
+        const notesArrayP = currentTrack.beats[i + 1].notes;
         const indexP = notesArrayP.findIndex((t) => t.tone === tone);
         notesArrayP.splice(indexP, 1);
       }
@@ -224,6 +224,7 @@ const CreatePlayerContextProvider = (props) => {
     } else {
       notesArray.push({ tone: tone, duration: parseInt(selectNoteKeyBoard) });
       if (parseInt(selectNoteKeyBoard) > 1) {
+        const notesArrayP = currentTrack.beats[i + 1].notes;
         notesArrayP.push({ tone: tone, duration: -1 });
         currentTrack.beats[i + 1] = { isActive: !isActive, notes: notesArrayP };
       }
