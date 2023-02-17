@@ -188,7 +188,6 @@ const CreatePlayerContextProvider = (props) => {
         const currentTrack = prevStateMelodicArray.find((elem) => elem.id === track.id);
         const isActive = currentTrack.beats[i].isActive;
         const notesArray = currentTrack.beats[i].notes;
-        const notesArrayP = currentTrack.beats[i + 1].notes;
         const isActiveTone = notesArray.find((t) => t.tone === tone);
 
         if (isActiveTone) {
@@ -196,6 +195,7 @@ const CreatePlayerContextProvider = (props) => {
             //une autre note de duration 2. De ce fait la note apres la duration 2 se retrouve avec un ton en -1 et un ton en -2
             // il faut peut être verifier qu'il n'existe pas une note du même ton au moment d'ajouter la note de duration -1
             if (currentTrack.beats[i].notes.find(t => t.tone === tone).duration > 1) {
+                const notesArrayP = currentTrack.beats[i + 1].notes;
                 const indexP = notesArrayP.findIndex((t) => t.tone === tone);
                 notesArrayP.splice(indexP, 1);
             }
@@ -205,6 +205,7 @@ const CreatePlayerContextProvider = (props) => {
         } else {
             notesArray.push({tone: tone, duration: parseInt(selectNoteKeyBoard)});
             if (parseInt(selectNoteKeyBoard) > 1) {
+                const notesArrayP = currentTrack.beats[i + 1].notes;
                 notesArrayP.push({tone: tone, duration: -1});
                 currentTrack.beats[i + 1] = {isActive: !isActive, notes: notesArrayP};
             }
