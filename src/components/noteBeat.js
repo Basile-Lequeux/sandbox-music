@@ -8,11 +8,36 @@ function NoteBeat({
 }) {
     const {
         handleSetMelodicTrack,
-        changeDurationOfNote
+        cursor
     } = usePlayerContext();
 
     const convertDurationIntoWidth = (duration) => {
-        return 28 * duration
+        if (duration === -1) {
+            return 0
+        } else {
+
+            return 63 * duration
+        }
+    }
+
+    const getStyleNote = (i) => {
+        let style = ''
+        if (track.beats[i].notes.find(t => t.tone === tone)) {
+            style += 'row_note_beat_active'
+        } else {
+            style += 'row_note_beat'
+        }
+        if (cursor === i) {
+            style += '_cursor'
+        }
+        return style
+    }
+
+    const getWidthNote = (i) => {
+        const activeCurrentNote = track.beats[i].notes.find(t => t.tone === tone)
+        if (activeCurrentNote) {
+            return {width: convertDurationIntoWidth(activeCurrentNote.duration)}
+        }
     }
 
     return (
@@ -20,10 +45,9 @@ function NoteBeat({
             {track.beats.map((x, i) =>
                 <div
                     key={i}
-                    className={track.beats[i].notes.find(t => t.tone === tone) ? 'row_note_beat_active' : 'row_note_beat'}
-                    style={track.beats[i].notes.find(t => t.tone === tone) && {width: convertDurationIntoWidth(track.beats[i].notes.find(t => t.tone === tone).duration)}}
+                    className={getStyleNote(i)}
+                    style={getWidthNote(i)}
                     onClick={() => handleSetMelodicTrack(track, i, tone)}
-                    onDragStart={() => changeDurationOfNote(track.id, i, tone)}
                 >
                 </div>
             )
