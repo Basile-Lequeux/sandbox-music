@@ -25,7 +25,6 @@ function NoteBeat({
     const getStyleNote = (i) => {
         let style = ''
         if (track.beats[i].notes.find(t => t.tone === tone)) {
-        console.log("-> track.beats[i].notes.find(t => t.tone === tone)", track.beats[i].notes.find(t => t.tone === tone));
             style += 'row_note_beat_active'
         } else {
             style += 'row_note_beat'

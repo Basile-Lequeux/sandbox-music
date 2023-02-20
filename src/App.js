@@ -81,7 +81,6 @@ const App = () => {
                     key={track.id}
                     styles={styles}
                     trackArray={rhythmTrackArray}
-                    cursor={cursor}
                     handleSetTrack={handleSetTrack}
                     track={track}
                     handleChangeInstrument={handleChangeInstrument}
