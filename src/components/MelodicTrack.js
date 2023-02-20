@@ -62,12 +62,13 @@ export default function MelodicTrack({
                         <Stack direction='row'>
                             <Radio value={'1'}>Eight note</Radio>
                             <Radio value={'2'}>Quarter note</Radio>
+                            <Radio value={'3'}>3 note</Radio>
+                            <Radio value={'4'}>4 note</Radio>
                         </Stack>
                     </RadioGroup>
                 </Box>
                 <div className="scrollable">
                     <div className={'melodic_track_frame'}>
-                        {/*<div className={"row_note_ghost"}></div>*/}
                         {octave.map((tone, i) => (
                             <NoteBeat
                                 key={i}
