@@ -74,12 +74,11 @@ const App = () => {
             ))}
           </Sidebar>
           <Flex flexDir="column">
-            <Box borderRight={"1px"} flex={1} bg={"#3D3D3D"}>
+            <Box>
               {rhythmTrackArray.length > 0 &&
                 rhythmTrackArray.map((track) => (
                   <RhythmTrack
                     key={track.id}
-                    styles={styles}
                     trackArray={rhythmTrackArray}
                     handleSetTrack={handleSetTrack}
                     track={track}
@@ -139,7 +138,6 @@ const styles = {
     backgroundColor: "rgba(255, 255, 255, 0.8)",
     border: "1px solid rgba(0, 0, 0, 0.8)",
     padding: "30px",
-    fontSize: "30px",
     textAlign: "center",
   },
   gridItemSpacer: {
@@ -147,14 +145,12 @@ const styles = {
     border: "1px solid rgba(0, 0, 0, 0.8)",
     padding: "30px",
     marginRight: "5px",
-    fontSize: "30px",
     textAlign: "center",
   },
   gridItemColored: {
     backgroundColor: "rgba(217, 65, 57, 0.8)",
     border: "1px solid rgba(0, 0, 0, 0.8)",
     padding: "30px",
-    fontSize: "30px",
     textAlign: "center",
   },
   gridItemColoredSpacer: {
@@ -162,14 +158,12 @@ const styles = {
     border: "1px solid rgba(0, 0, 0, 0.8)",
     padding: "30px",
     marginRight: "5px",
-    fontSize: "30px",
     textAlign: "center",
   },
   gridItemColoredNote: {
     backgroundColor: "rgba(125, 69, 145, 0.8)",
     border: "1px solid rgba(0, 0, 0, 0.8)",
     padding: "30px",
-    fontSize: "30px",
     textAlign: "center",
   },
   gridItemColoredNoteSpacer: {
@@ -177,7 +171,6 @@ const styles = {
     border: "1px solid rgba(0, 0, 0, 0.8)",
     padding: "30px",
     marginRight: "5px",
-    fontSize: "30px",
     textAlign: "center",
   },
   App: {

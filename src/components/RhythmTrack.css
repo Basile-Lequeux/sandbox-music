@@ -1,0 +1,70 @@
+:root {
+    --size-item-px: 21px;
+    --border-radius-item-px: 13px;
+    --border-item-px: 2px solid rgba(0, 0, 0, 0.8);
+    --margin-item-px: 1px 1px 3px 1px;
+    --margin-item-spacer: 10px;
+}
+
+.gridContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.gridItem {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: var(--border-item-px);
+    padding: var(--size-item-px);
+    margin: var(--margin-item-px);
+    border-radius: var(--border-radius-item-px);
+    text-align: center;
+
+}
+
+.gridItemSpacer {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: var(--border-item-px);
+    padding: var(--size-item-px);
+    border-radius: var(--border-radius-item-px);
+    margin: var(--margin-item-px);
+    margin-right: var(--margin-item-spacer);
+    text-align: center;
+}
+
+.gridItemColored {
+    background-color: rgba(217, 65, 57, 0.8);
+    border: var(--border-item-px);
+    padding: var(--size-item-px);
+    border-radius: var(--border-radius-item-px);
+    margin: var(--margin-item-px);
+    text-align: center;
+}
+
+.gridItemColoredSpacer {
+    background-color: rgba(217, 65, 57, 0.8);
+    border: var(--border-item-px);
+    padding: var(--size-item-px);
+    border-radius: var(--border-radius-item-px);
+    margin: var(--margin-item-px);
+    margin-right: var(--margin-item-spacer);
+    text-align: center;
+}
+
+.gridItemColoredNote {
+    background-color: rgba(125, 69, 145, 0.8);
+    border: var(--border-item-px);
+    padding: var(--size-item-px);
+    border-radius: var(--border-radius-item-px);
+    margin: var(--margin-item-px);
+    text-align: center;
+}
+
+.gridItemColoredNoteSpacer {
+    background-color: rgba(125, 69, 145, 0.8);
+    border: var(--border-item-px);
+    padding: var(--size-item-px);
+    border-radius: var(--border-radius-item-px);
+    margin: var(--margin-item-px);
+    margin-right: var(--margin-item-spacer);
+    text-align: center;
+}

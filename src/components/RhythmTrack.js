@@ -1,51 +1,53 @@
 import {usePlayerContext} from "../PlayerContext";
+import './RhythmTrack.css'
 
-export default function RhythmTrack({track, styles, handleSetTrack}) {
+export default function RhythmTrack({track, handleSetTrack}) {
 
     const {
         isPlaying,
         cursor,
     } = usePlayerContext();
+
     const getStyleRow = (index, note) => {
         if (isPlaying) {
             return cursor === index
-                ? styles.gridItemColoredSpacer
+                ? "gridItemColoredSpacer"
                 : note && note.isActive
-                    ? styles.gridItemColoredNoteSpacer
-                    : styles.gridItemSpacer
+                    ? "gridItemColoredNoteSpacer"
+                    : "gridItemSpacer"
         } else {
-            return note && note.isActive ? styles.gridItemColoredNoteSpacer : styles.gridItemSpacer
+            return note && note.isActive ? "gridItemColoredNoteSpacer" : "gridItemSpacer"
         }
     }
 
     const getStyleRow2 = (index, note) => {
         if (isPlaying) {
             return cursor === index
-                ? styles.gridItemColored
+                ? "gridItemColored"
                 : note && note.isActive
-                    ? styles.gridItemColoredNote
-                    : styles.gridItem
+                    ? "gridItemColoredNote"
+                    : "gridItem"
         } else {
             return note && note.isActive
-                ? styles.gridItemColoredNote
-                : styles.gridItem
+                ? "gridItemColoredNote"
+                : "gridItem"
         }
     }
     return (
-        <div style={styles.gridContainer}>
+        <div className="gridContainer">
             {track &&
                 track.beats.length !== 0 &&
                 track.beats.map((note, index) =>
                     (index + 1) % 4 === 0 ? (
                         <div
                             key={index}
-                            style={getStyleRow(index, note)}
+                            className={getStyleRow(index, note)}
                             onClick={() => handleSetTrack(track, index)}
                         />
                     ) : (
                         <div
                             key={index}
-                            style={getStyleRow2(index, note)}
+                            className={getStyleRow2(index, note)}
                             onClick={() => handleSetTrack(track, index)}
                         />
                     )
