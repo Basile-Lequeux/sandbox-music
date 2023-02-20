@@ -11,14 +11,13 @@ import {
   SliderTrack,
   SliderFilledTrack,
   SliderThumb,
-  SliderMark,
 } from "@chakra-ui/react";
 import { usePlayerContext } from "./PlayerContext";
 import { FaPlay, FaPause, FaFileUpload } from "react-icons/fa";
 import { FiMinus, FiPlus } from "react-icons/fi";
-import './App.css'
+import { MdGraphicEq } from "react-icons/md";
+import "./App.css";
 export const Header = () => {
-
   const {
     handleChangeBpmValue,
     isPlaying,
@@ -72,24 +71,28 @@ export const Header = () => {
             </button>
           )}
         </Box>
+        <Flex flexDir={"column"}>
+          <div className={"bpm_box"}>
+            <span className={"bpm_value"}>{bpmValue}</span>
+            BPM
+          </div>
+          <Box width={"300px"} display={"flex"}>
+            <Slider
+              defaultValue={bpmValue}
+              min={60}
+              max={300}
+              onChange={(val) => handleChangeBpmValue(val)}
+            >
+              <SliderTrack>
+                <SliderFilledTrack bg="#e74138" />
+              </SliderTrack>
+              <SliderThumb>
+                <Box color="#e74138" as={MdGraphicEq} />
+              </SliderThumb>
+            </Slider>
+          </Box>
+        </Flex>
       </Box>
-      <Flex flexDir={'column'}>
-        <div className={'bpm_box'}>
-          <span className={'bpm_value'}>
-            {bpmValue}
-          </span>
-          BPM
-        </div>
-        <Box padding="10px 0 8px 0" width={'300px'} display={"flex"}>
-          <Slider defaultValue={bpmValue} min={60} max={300} onChange={(val) => handleChangeBpmValue(val)}>
-            <SliderTrack>
-              <SliderFilledTrack/>
-            </SliderTrack>
-            <SliderThumb/>
-          </Slider>
-        </Box>
-
-      </Flex>
       <Box padding="10px 0 8px 0" display={"flex"}>
         <InputGroup>
           <InputLeftAddon>Measures</InputLeftAddon>
