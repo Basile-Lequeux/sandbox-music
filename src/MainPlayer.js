@@ -1,4 +1,5 @@
 import * as Tone from "tone";
+import {playRhythmSound} from "./PlaySound";
 
 export class MainPlayer {
     static instance = null;
@@ -24,11 +25,12 @@ export class MainPlayer {
         this.currentCursorStartingPoint = 0;
     }
 
-    toggle(data) {
+    toggle(data, drum) {
         this.playing = !this.playing;
         if (this.playing) {
             Tone.Transport.start();
             this.data = data;
+            this.drum = drum
         } else Tone.Transport.stop();
     }
 
@@ -36,8 +38,9 @@ export class MainPlayer {
         this.incr = func;
     }
 
-    setData(data) {
+    setData(data, drum) {
         this.data = data;
+        this.drum = drum
     }
 
     setBpm(newBpm) {
@@ -64,6 +67,10 @@ export class MainPlayer {
         Tone.Transport.bpm.value = 120;
         Tone.Transport.scheduleRepeat((time) => {
             this.repeat(time);
+            this.repeatDrum(time)
+            this.index++;
+            this.incr(this.step);
+            this.#incrementStep();
         }, "8n");
     }
 
@@ -80,6 +87,16 @@ export class MainPlayer {
         } else {
             this.step = this.index % this.numberOfBeats;
         }
+    }
+
+    repeatDrum(time) {
+        const beatsDrum = this.drum
+
+        beatsDrum.map((track) => {
+            if (track.beats[this.step] && track.beats[this.step].isActive) {
+                playRhythmSound(track.instrument, time);
+            }
+        });
     }
 
     repeat(time) {
@@ -104,8 +121,5 @@ export class MainPlayer {
             this.synth.triggerAttackRelease(halfNote, "3n", time);
             this.synth.triggerAttackRelease(note, "2n", time);
         }
-        this.index++;
-        this.incr(this.step);
-        this.#incrementStep();
     }
 }

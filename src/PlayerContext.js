@@ -31,21 +31,12 @@ const CreatePlayerContextProvider = (props) => {
     const play = (start) => {
         const mainPlayer = MainPlayer.getInstance();
         if (start) {
-            mainPlayer.toggle(melodicTrackArray);
+            mainPlayer.toggle(melodicTrackArray, rhythmTrackArray);
         } else {
             mainPlayer.toggle();
         }
     };
-
-
-    useEffect(() => {
-        rhythmTrackArray.map((track) => {
-            if (track.beats[cursor] && track.beats[cursor].isActive) {
-                playRhythmSound(track.instrument);
-            }
-        });
-    }, [cursor]);
-
+    
     useEffect(() => {
         const queryString = window.location.search;
         const searchParams = new URLSearchParams(queryString);
@@ -144,7 +135,7 @@ const CreatePlayerContextProvider = (props) => {
         });
         prevStateMelodicTrackArray.map((track) => {
             for (let i = 0; i < 4; i++) {
-                track.beats.push({isActive: false, notes: []});
+                track.beats.push({notes: []});
             }
         });
         setNbrOfBeat(nbrOfBeat + 4);
@@ -152,7 +143,7 @@ const CreatePlayerContextProvider = (props) => {
         setMelodicTrackArray(prevStateMelodicTrackArray);
         const mainPlayer = MainPlayer.getInstance();
         mainPlayer.setNumberOfBeat(nbrOfBeat + 4);
-        mainPlayer.setData(prevStateMelodicTrackArray);
+        mainPlayer.setData(prevStateMelodicTrackArray, prevStateTrackArray);
     };
 
     const deleteMeasure = () => {
@@ -171,7 +162,7 @@ const CreatePlayerContextProvider = (props) => {
             setMelodicTrackArray(prevStateMelodicTrackArray);
             const mainPlayer = MainPlayer.getInstance();
             mainPlayer.setNumberOfBeat(nbrOfBeat - 4);
-            mainPlayer.setData(prevStateMelodicTrackArray);
+            mainPlayer.setData(prevStateMelodicTrackArray, prevStateTrackArray);
         }
     };
 

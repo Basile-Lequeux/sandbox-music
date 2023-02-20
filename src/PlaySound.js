@@ -13,11 +13,11 @@ export const drumKitList = [
     {label: "snare", value: snare},
 ]
 
-export const playRhythmSound = (sound) => {
+export const playRhythmSound = (sound, time) => {
     const beat = drumKitList.find(e => e.label === sound).value
     const player = new Tone.Player(beat).toDestination()
     Tone.loaded().then(() => {
-        player.start();
+        player.start(time);
     });
 }
 
