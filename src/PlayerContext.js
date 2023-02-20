@@ -8,6 +8,7 @@ import React, {
 import {v4 as uuidv4} from "uuid";
 import {drumKitList, playMelodicSound, playRhythmSound} from "./PlaySound";
 import {MainPlayer} from "./MainPlayer";
+import axios from "axios";
 
 export const PlayerContext = createContext();
 
@@ -46,6 +47,20 @@ const CreatePlayerContextProvider = (props) => {
     }, [cursor]);
 
     useEffect(() => {
+        const queryString = window.location.search;
+        const searchParams = new URLSearchParams(queryString);
+        const value = searchParams.get("q");
+
+        if (value) {
+            handleRestoreMusic(value);
+        } else {
+            initAllTrackDefault()
+        }
+        const mainPlayer = MainPlayer.getInstance();
+        mainPlayer.setIncrementCursor(setCursor);
+    }, []);
+
+    const initAllTrackDefault = () => {
         const rhythmArray = [];
         const melodicArray = [];
         let beats = [];
@@ -76,9 +91,8 @@ const CreatePlayerContextProvider = (props) => {
         melodicArray.push(melodicTrack);
         setRhythmTrackArray(rhythmArray);
         setMelodicTrackArray(melodicArray);
-        const mainPlayer = MainPlayer.getInstance();
-        mainPlayer.setIncrementCursor(setCursor);
-    }, []);
+    }
+
     const start = () => {
         setIsPlaying(true);
         play(true);
@@ -263,6 +277,18 @@ const CreatePlayerContextProvider = (props) => {
     };
 
     const handleRestoreMusic = (id) => {
+        axios.get(`https://api-melodiv.onrender.com/${id}`)
+            .then(function (response) {
+                const data = response.data
+                setMelodicTrackArray(data.melodic)
+                setRhythmTrackArray(data.rythm)
+                setBpmValue(parseInt(data.bpm))
+                setNbrOfBeat(parseInt(data.measureNb))
+            })
+            .catch(function (error) {
+                initAllTrackDefault()
+                console.log(error);
+            });
         //API call & update instance
     };
 

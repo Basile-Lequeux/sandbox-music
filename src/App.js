@@ -11,15 +11,6 @@ import MelodicTrack from "./components/MelodicTrack";
 import PanelKeyboard from "./components/PanelKeyboard";
 
 const App = () => {
-  useEffect(() => {
-    const queryString = window.location.search;
-    const searchParams = new URLSearchParams(queryString);
-    const value = searchParams.get("q");
-
-    if (value) {
-      handleRestoreMusic(value);
-    }
-  }, []);
 
   const MAX_RHYTHM_TRACK = 8;
 
