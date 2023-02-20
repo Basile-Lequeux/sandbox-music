@@ -13,6 +13,13 @@
   color: white;
 }
 
+.bpm_box{
+  color: #dddddd;
+  text-align: left;
+}
+.bpm_value{
+  font-size: 33px;
+}
 .App-link {
   color: #61dafb;
 }
