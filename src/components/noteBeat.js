@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {usePlayerContext} from "../PlayerContext";
 
 function NoteBeat({
@@ -8,9 +8,11 @@ function NoteBeat({
 }) {
     const {
         handleSetMelodicTrack,
-        cursor
+        cursor,
+        selectNoteKeyBoard
     } = usePlayerContext();
 
+    const [onHover, setOnHover] = useState(false);
     const convertDurationIntoWidth = (duration) => {
         if (duration === -1) {
             return 0
@@ -23,6 +25,7 @@ function NoteBeat({
     const getStyleNote = (i) => {
         let style = ''
         if (track.beats[i].notes.find(t => t.tone === tone)) {
+        console.log("-> track.beats[i].notes.find(t => t.tone === tone)", track.beats[i].notes.find(t => t.tone === tone));
             style += 'row_note_beat_active'
         } else {
             style += 'row_note_beat'
@@ -37,6 +40,8 @@ function NoteBeat({
         const activeCurrentNote = track.beats[i].notes.find(t => t.tone === tone)
         if (activeCurrentNote) {
             return {width: convertDurationIntoWidth(activeCurrentNote.duration)}
+        } else if(onHover) {
+            // return {width: convertDurationIntoWidth(parseInt(selectNoteKeyBoard))}
         }
     }
 
@@ -48,7 +53,19 @@ function NoteBeat({
                     className={getStyleNote(i)}
                     style={getWidthNote(i)}
                     onClick={() => handleSetMelodicTrack(track, i, tone)}
+                    onMouseEnter={() => setOnHover(i)}
+                    onMouseLeave={() => setOnHover(-1)}
                 >
+                    {onHover === i &&
+                        <>
+                            {tone}
+                        </>
+                    }
+                    {onHover !== i && track.beats[i].notes.find(t => t.tone === tone) && track.beats[i].notes.find(t => t.tone === tone).duration > 0 &&
+                        <>
+                            {tone}
+                        </>
+                    }
                 </div>
             )
             }

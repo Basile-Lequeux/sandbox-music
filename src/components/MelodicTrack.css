@@ -123,13 +123,21 @@ body {
     width: 63px;
     height: 17px;
     border-right: 1px solid rgba(255, 255, 255, 0.14);
+    cursor: pointer;
+}
+
+.row_note_beat:hover {
+    background-color: rgba(203, 166, 95, 0.46)
 }
 
 .row_note_beat_active {
     width: 63px;
-    border: 1px solid rgb(0, 0, 0);
     height: 17px;
     background-color: yellow;
+    cursor: pointer;
+}
+.row_note_beat_active:hover {
+    background-color: rgba(255, 255, 0, 0.33);
 }
 
 .row_note_beat_cursor {

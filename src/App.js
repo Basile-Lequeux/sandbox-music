@@ -65,7 +65,7 @@ const App = () => {
                 key={track.id}
                 handleChangeInstrument={handleChangeInstrument}
                 trackId={track.id}
-                instrument={"piano"}
+                instrument={"synth"}
                 type={"melodic"}
                 index={index}
                 deleteOneTrack={deleteOneTrack}

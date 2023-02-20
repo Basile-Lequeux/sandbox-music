@@ -44,7 +44,7 @@ const SideBarSelect = ({
               {elem.label}
             </option>
           ))}
-        {type === "melodic" && <option value="piano">piano</option>}
+        {type === "melodic" && <option value="synth">synth</option>}
       </Select>
     </Flex>
   );
