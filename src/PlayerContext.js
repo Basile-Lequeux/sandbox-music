@@ -249,6 +249,10 @@ const CreatePlayerContextProvider = (props) => {
     setMelodicTrackArray(prevStateMelodicArray);
   };
 
+  const handleRestoreMusic = (id) => {
+    //API call & update instance
+  };
+
   return (
     <PlayerContext.Provider
       value={{
@@ -277,6 +281,7 @@ const CreatePlayerContextProvider = (props) => {
         handleCursorStart,
         changeDurationOfNote,
         setSelectNoteKeyBoard,
+        handleRestoreMusic,
       }}
     >
       {props.children}

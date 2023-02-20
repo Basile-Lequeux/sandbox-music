@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import RhythmTrack from "./components/RhythmTrack";
 import { usePlayerContext } from "./PlayerContext";
 import { Header } from "./Header";
@@ -11,6 +11,16 @@ import MelodicTrack from "./components/MelodicTrack";
 import PanelKeyboard from "./components/PanelKeyboard";
 
 const App = () => {
+  useEffect(() => {
+    const queryString = window.location.search;
+    const searchParams = new URLSearchParams(queryString);
+    const value = searchParams.get("q");
+
+    if (value) {
+      handleRestoreMusic(value);
+    }
+  }, []);
+
   const MAX_RHYTHM_TRACK = 8;
 
   const {
@@ -23,6 +33,7 @@ const App = () => {
     nbrOfTrack,
     melodicTrackArray,
     handleSetMelodicTrack,
+    handleRestoreMusic,
   } = usePlayerContext();
 
   const [showPanelKeyboard, setShowPanelKeyboard] = useState(false);
