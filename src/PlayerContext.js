@@ -233,24 +233,21 @@ const CreatePlayerContextProvider = (props) => {
         } else {
             const durationNote = parseInt(selectNoteKeyBoard)
             if (durationNote > 1) {
-                let j = 1;
-                while (j < durationNote) {
+                for (let j = 1; j < durationNote; j++)  {
                     const nextNotesArray = currentTrack.beats[i + j].notes
                     const indexSameTone = nextNotesArray.findIndex(t => t.tone === tone)
                     if (indexSameTone !== -1) {
-                        const duration = nextNotesArray[indexSameTone].duration
-                        for (let k = 1; k < duration; k++) {
+                        const durationNext = nextNotesArray[indexSameTone].duration
+                        nextNotesArray.splice(indexSameTone, 1)
+                        for (let k = 1; k < durationNext; k++) {
                             const nextNextNotesArray = currentTrack.beats[i + j + k].notes
-                            const indexSameTone = nextNotesArray.findIndex(t => t.tone === tone)
-                            nextNextNotesArray.splice(indexSameTone, 1)
+                            const nextIndexSameTone = nextNotesArray.findIndex(t => t.tone === tone)
+                            nextNextNotesArray.splice(nextIndexSameTone, 1)
                         }
-                        nextNotesArray[indexSameTone].duration = -1
-                        j = durationNote
-                    } else {
-                        nextNotesArray.push({tone: tone, duration: -1});
-                        currentTrack.beats[i + j] = {notes: nextNotesArray};
+
                     }
-                    j++;
+                    nextNotesArray.push({tone: tone, duration: -1});
+                    currentTrack.beats[i + j] = {notes: nextNotesArray};
                 }
 
             }
