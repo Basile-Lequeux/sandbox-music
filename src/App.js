@@ -34,80 +34,81 @@ const App = () => {
     <div className="App">
       <Flex flexDir="column">
         <Header />
-        <CursorStart styles={styles} />
-        <Flex bg={"#3D3D3D"}>
-          <Sidebar>
-            {rhythmTrackArray.map((track, index) => (
-              <SideBarSelect
-                key={track.id}
-                handleChangeInstrument={handleChangeInstrument}
-                trackId={track.id}
-                instrument={track.instrument}
-                index={index}
-                deleteOneTrack={deleteOneTrack}
-                length={rhythmTrackArray.length}
-              />
-            ))}
-            {nbrOfTrack < MAX_RHYTHM_TRACK && (
-              <Box
-                bg="rgba(255, 255, 255, 0.8)"
-                h="62px"
-                cursor={"pointer"}
-                onClick={() => addRhythmTrack()}
-              >
-                <Box m="10%" align="center">
-                  <FaPlus size="30px" />
+        <Box marginTop="81px">
+          <CursorStart styles={styles} />
+          <Flex>
+            <Sidebar>
+              {rhythmTrackArray.map((track, index) => (
+                <SideBarSelect
+                  key={track.id}
+                  handleChangeInstrument={handleChangeInstrument}
+                  trackId={track.id}
+                  instrument={track.instrument}
+                  index={index}
+                  deleteOneTrack={deleteOneTrack}
+                  length={rhythmTrackArray.length}
+                />
+              ))}
+              {nbrOfTrack < MAX_RHYTHM_TRACK && (
+                <Box
+                  h="62px"
+                  cursor={"pointer"}
+                  onClick={() => addRhythmTrack()}
+                >
+                  <Box m="10%" align="center">
+                    <FaPlus size="30px" />
+                  </Box>
                 </Box>
+              )}
+              {melodicTrackArray.map((track, index) => (
+                <SideBarSelect
+                  key={track.id}
+                  handleChangeInstrument={handleChangeInstrument}
+                  trackId={track.id}
+                  instrument={"synth"}
+                  type={"melodic"}
+                  index={index}
+                  deleteOneTrack={deleteOneTrack}
+                  length={melodicTrackArray.length}
+                />
+              ))}
+            </Sidebar>
+            <Flex flexDir="column">
+              <Box>
+                {rhythmTrackArray.length > 0 &&
+                  rhythmTrackArray.map((track) => (
+                    <RhythmTrack
+                      key={track.id}
+                      trackArray={rhythmTrackArray}
+                      handleSetTrack={handleSetTrack}
+                      track={track}
+                      handleChangeInstrument={handleChangeInstrument}
+                    />
+                  ))}
               </Box>
-            )}
-            {melodicTrackArray.map((track, index) => (
-              <SideBarSelect
-                key={track.id}
-                handleChangeInstrument={handleChangeInstrument}
-                trackId={track.id}
-                instrument={"synth"}
-                type={"melodic"}
-                index={index}
-                deleteOneTrack={deleteOneTrack}
-                length={melodicTrackArray.length}
-              />
-            ))}
-          </Sidebar>
-          <Flex flexDir="column">
-            <Box>
-              {rhythmTrackArray.length > 0 &&
-                rhythmTrackArray.map((track) => (
-                  <RhythmTrack
-                    key={track.id}
-                    trackArray={rhythmTrackArray}
-                    handleSetTrack={handleSetTrack}
-                    track={track}
-                    handleChangeInstrument={handleChangeInstrument}
-                  />
-                ))}
-            </Box>
-            <Box borderRight={"1px"} flex={1} bg={"#3D3D3D"} marginTop={"62px"}>
-              {melodicTrackArray &&
-                melodicTrackArray.map((track) => (
-                  <MelodicTrack
-                    key={track.id}
-                    styles={styles}
-                    cursor={cursor}
-                    handleSetMelodicTrack={handleSetMelodicTrack}
-                    track={track}
-                    showPanelKeyboard={showPanelKeyboard}
-                    setShowPanelKeyboard={setShowPanelKeyboard}
-                    setMelodicTrackSelected={setMelodicTrackSelected}
-                  />
-                ))}
-            </Box>
+              <Box borderRight={"1px"} flex={1} bg={"#3D3D3D"} marginTop={"62px"}>
+                {melodicTrackArray &&
+                  melodicTrackArray.map((track) => (
+                    <MelodicTrack
+                      key={track.id}
+                      styles={styles}
+                      cursor={cursor}
+                      handleSetMelodicTrack={handleSetMelodicTrack}
+                      track={track}
+                      showPanelKeyboard={showPanelKeyboard}
+                      setShowPanelKeyboard={setShowPanelKeyboard}
+                      setMelodicTrackSelected={setMelodicTrackSelected}
+                    />
+                  ))}
+              </Box>
+            </Flex>
           </Flex>
-        </Flex>
-        <PanelKeyboard
-          showPanelKeyboard={showPanelKeyboard}
-          setShowPanelKeyboard={setShowPanelKeyboard}
-          melodicTrackSelected={melodicTrackSelected}
-        />
+          <PanelKeyboard
+            showPanelKeyboard={showPanelKeyboard}
+            setShowPanelKeyboard={setShowPanelKeyboard}
+            melodicTrackSelected={melodicTrackSelected}
+          />
+        </Box>
       </Flex>
     </div>
   );

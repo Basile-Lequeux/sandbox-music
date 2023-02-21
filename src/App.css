@@ -22,36 +22,52 @@
     font-size: 33px;
 }
 
-.timeline_dot_spacer_active{
-    height: 8px;
-    width: 8px;
-    background-color: purple;
-    border-radius: 4px;
-    margin: 0 18px 0 22px;
+:root {
+    --margin-dot: 11px 15px 0 19px;
+    --margin-dot-spacer: 11px 23px 0 19px;
+    --color-dot: rgb(125, 69, 145);
+    --color-dot-active: #55ff00;
+    --height-dot: 14px;
+    --width-dot: 14px;
+    --border-radius-dot: 60px;
+    --border-line-dot: 1px solid rgb(0, 0, 0);
 }
 
-.timeline_dot_spacer{
-    height: 8px;
-    width: 8px;
-    background-color: purple;
-    border-radius: 4px;
-    margin: 0 18px 0 22px;
+.timeline_dot {
+    height: var(--height-dot);
+    width: var(--width-dot);
+    background-color: var(--color-dot);
+    border-radius: var(--border-radius-dot);
+    border: var(--border-line-dot);
+    margin: var(--margin-dot);
 }
 
-.timeline_dot_active{
-    height: 8px;
-    width: 8px;
-    background-color: purple;
-    border-radius: 4px;
-    margin: 0 18px 0 22px;
+.timeline_dot_spacer {
+    height: var(--height-dot);
+    width: var(--width-dot);
+    background-color: var(--color-dot);
+    border-radius: var(--border-radius-dot);
+    margin: var(--margin-dot-spacer);
+    border: var(--border-line-dot);
 }
 
-.timeline_dot{
-    height: 8px;
-    width: 8px;
-    background-color: purple;
-    border-radius: 4px;
-    margin: 0 18px 0 22px;
+.timeline_dot_spacer_active {
+    height: var(--height-dot);
+    width: var(--width-dot);
+    background-color: var(--color-dot-active);
+    border-radius: var(--border-radius-dot);
+    margin: var(--margin-dot-spacer);
+    border: var(--border-line-dot);
+}
+
+
+.timeline_dot_active {
+    height: var(--height-dot);
+    width: var(--width-dot);
+    background-color: var(--color-dot-active);
+    border-radius: var(--border-radius-dot);
+    margin: var(--margin-dot);
+    border: var(--border-line-dot);
 }
 
 .App-link {
