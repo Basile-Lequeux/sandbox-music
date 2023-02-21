@@ -36,7 +36,7 @@ const CreatePlayerContextProvider = (props) => {
             mainPlayer.toggle();
         }
     };
-    
+
     useEffect(() => {
         const queryString = window.location.search;
         const searchParams = new URLSearchParams(queryString);
@@ -272,6 +272,9 @@ const CreatePlayerContextProvider = (props) => {
                 setRhythmTrackArray(data.rythm)
                 setBpmValue(parseInt(data.bpm))
                 setNbrOfBeat(parseInt(data.measureNb))
+                const mainPlayer = MainPlayer.getInstance()
+                mainPlayer.setBpm(parseInt(data.bpm))
+                mainPlayer.setNumberOfBeat(parseInt(data.measureNb))
             })
             .catch(function (error) {
                 initAllTrackDefault()
