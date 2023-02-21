@@ -12,14 +12,13 @@ import {
   SliderFilledTrack,
   SliderThumb,
 } from "@chakra-ui/react";
-import axios from 'axios';
 import { usePlayerContext } from "./PlayerContext";
 import { FaPlay, FaPause, FaFileUpload } from "react-icons/fa";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import { MdGraphicEq } from "react-icons/md";
 import "./App.css";
 
-export const Header = () => {
+export const Header = ({ modalIsOpen, setModalIsOpen }) => {
   const {
     handleChangeBpmValue,
     isPlaying,
@@ -29,8 +28,6 @@ export const Header = () => {
     nbrOfBeat,
     addMeasure,
     deleteMeasure,
-    rhythmTrackArray,
-    melodicTrackArray,
   } = usePlayerContext();
 
   return (
@@ -119,20 +116,7 @@ export const Header = () => {
       <Box padding="10px 30px 8px 0" display={"flex"}>
         <button
           onClick={() => {
-                axios.post('https://api-melodiv.onrender.com/', {
-                    "melodic": melodicTrackArray,
-                    "rythm": rhythmTrackArray,
-                    "bpm": bpmValue,
-                    "measureNb": nbrOfBeat,
-                    
-                  },
-                  )
-                  .then(function (response) {
-                    console.log(response);
-                  })
-                  .catch(function (error) {
-                    console.log(error);
-                  });
+            setModalIsOpen(!modalIsOpen);
           }}
         >
           <FaFileUpload color="#e74138" size={"25"} />

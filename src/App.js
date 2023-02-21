@@ -8,10 +8,10 @@ import { Box, Flex } from "@chakra-ui/react";
 import SideBarSelect from "./components/SideBarSelect";
 import { FaPlus } from "react-icons/fa";
 import MelodicTrack from "./components/MelodicTrack";
+import ModalSave from "./components/ModalSave";
 import PanelKeyboard from "./components/PanelKeyboard";
 
 const App = () => {
-
   const MAX_RHYTHM_TRACK = 8;
 
   const {
@@ -28,12 +28,16 @@ const App = () => {
   } = usePlayerContext();
 
   const [showPanelKeyboard, setShowPanelKeyboard] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [melodicTrackSelected, setMelodicTrackSelected] = useState();
+  useEffect(() => {
+    console.log("modalIsOpen", modalIsOpen);
+  }, [modalIsOpen]);
 
   return (
     <div className="App">
       <Flex flexDir="column">
-        <Header />
+        <Header modalIsOpen={modalIsOpen} setModalIsOpen={(e) => setModalIsOpen(e)} />
         <Box marginTop="81px">
           <CursorStart styles={styles} />
           <Flex>
@@ -86,7 +90,12 @@ const App = () => {
                     />
                   ))}
               </Box>
-              <Box borderRight={"1px"} flex={1} bg={"#3D3D3D"} marginTop={"62px"}>
+              <Box
+                borderRight={"1px"}
+                flex={1}
+                bg={"#3D3D3D"}
+                marginTop={"62px"}
+              >
                 {melodicTrackArray &&
                   melodicTrackArray.map((track) => (
                     <MelodicTrack
@@ -110,6 +119,10 @@ const App = () => {
           />
         </Box>
       </Flex>
+      <ModalSave
+        modalIsOpen={modalIsOpen}
+        closeModal={() => setModalIsOpen(false)}
+      />
     </div>
   );
 };
