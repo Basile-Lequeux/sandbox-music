@@ -6,7 +6,7 @@ import React, {
     useRef,
 } from "react";
 import {v4 as uuidv4} from "uuid";
-import {drumKitList, playMelodicSound, playRhythmSound} from "./PlaySound";
+import {drumKitList, DrumPlayer, playMelodicSound, playRhythmSound} from "./PlaySound";
 import {MainPlayer} from "./MainPlayer";
 import axios from "axios";
 
@@ -49,6 +49,8 @@ const CreatePlayerContextProvider = (props) => {
         }
         const mainPlayer = MainPlayer.getInstance();
         mainPlayer.setIncrementCursor(setCursor);
+        const drumPlayer = DrumPlayer.getInstance()
+        drumPlayer.init()
     }, []);
 
     const initAllTrackDefault = () => {
