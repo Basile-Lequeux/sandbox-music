@@ -4,7 +4,7 @@ import { usePlayerContext } from "./PlayerContext";
 import { Header } from "./Header";
 import CursorStart from "./components/CursorStart";
 import { Sidebar } from "./Sidebar";
-import { Box, Flex } from "@chakra-ui/react";
+import {Box, Flex, Text} from "@chakra-ui/react";
 import SideBarSelect from "./components/SideBarSelect";
 import { FaPlus } from "react-icons/fa";
 import MelodicTrack from "./components/MelodicTrack";

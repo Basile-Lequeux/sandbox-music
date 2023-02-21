@@ -1,8 +1,10 @@
 import React from 'react';
 import './MelodicTrack.css';
 import NoteBeat from "./noteBeat";
-import {Box, Radio, RadioGroup, Stack} from "@chakra-ui/react";
+import {Box, Radio, RadioGroup, Stack, Flex} from "@chakra-ui/react";
 import {usePlayerContext} from "../PlayerContext";
+import {BsMusicNote} from "react-icons/bs"
+import CursorStartMelodic from "./CursorStartMelodic";
 
 export default function MelodicTrack({
     track,
@@ -92,17 +94,46 @@ export default function MelodicTrack({
                 className={'melodic_track_container'}
                 // onClick={() => selectMelodicTrack()}
             >
-                <Box>
-                    Change duration
-                    <RadioGroup onChange={setSelectNoteKeyBoard} value={selectNoteKeyBoard}>
-                        <Stack direction='row'>
-                            <Radio value={'1'}>Eight note</Radio>
-                            <Radio value={'2'}>Quarter note</Radio>
-                            <Radio value={'3'}>3 note</Radio>
-                            <Radio value={'4'}>4 note</Radio>
-                        </Stack>
-                    </RadioGroup>
+                <Box h='230px'>
+                    <Flex flexDir={'column'}>
+                        <Box>
+                            Choose the duration of the note you will picked
+                        </Box>
+                        <RadioGroup
+                            onChange={setSelectNoteKeyBoard}
+                            value={selectNoteKeyBoard}
+                            margin='auto'
+                        >
+                            <Stack direction='row'>
+                                <Radio value={'1'}>
+                                    <BsMusicNote/>
+                                </Radio>
+                                <Radio value={'2'}>
+                                    <Flex>
+                                        <BsMusicNote/>
+                                        <BsMusicNote/>
+                                    </Flex>
+                                </Radio>
+                                <Radio value={'3'}>
+                                    <Flex>
+                                        <BsMusicNote/>
+                                        <BsMusicNote/>
+                                        <BsMusicNote/>
+                                    </Flex>
+                                </Radio>
+                                <Radio value={'4'}>
+                                    <Flex>
+                                        <BsMusicNote/>
+                                        <BsMusicNote/>
+                                        <BsMusicNote/>
+                                        <BsMusicNote/>
+                                    </Flex>
+                                </Radio>
+                            </Stack>
+                        </RadioGroup>
+                    </Flex>
                 </Box>
+                <CursorStartMelodic />
                 <div className="scrollable">
                     <div className={'melodic_track_frame'}>
                         {octave.map((tone, i) => (

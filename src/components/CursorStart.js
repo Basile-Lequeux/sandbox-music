@@ -1,6 +1,7 @@
 import {Flex, Text, Box} from "@chakra-ui/react";
 import {usePlayerContext} from "../PlayerContext";
 import '../App.css'
+import React from "react";
 
 export default function CursorStart({styles}) {
     const {
@@ -29,13 +30,17 @@ export default function CursorStart({styles}) {
                             key={index}
                             className={cursor === index ? 'timeline_dot_spacer_active' : 'timeline_dot_spacer'}
                             onClick={() => handleCursorStart(index)}
-                        />
+                        >
+                            {index + 1}
+                        </div>
                     ) : (
                         <div
                             key={index}
                             className={cursor === index ? 'timeline_dot_active' : 'timeline_dot'}
                             onClick={() => handleCursorStart(index)}
-                        />
+                        >
+                            {index + 1}
+                        </div>
                     )
                 )}
             </Flex>

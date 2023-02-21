@@ -23,14 +23,18 @@
 }
 
 :root {
-    --margin-dot: 11px 15px 0 19px;
-    --margin-dot-spacer: 11px 23px 0 19px;
-    --color-dot: rgb(125, 69, 145);
+    --margin-dot: 9px 13px 0 14px;
+    --margin-dot-spacer: 9px 24px 0 17px;
+    --margin-dot-melodic: 0px 20px 12px 23px;
+    --color-dot: #AE8BAB;
     --color-dot-active: #55ff00;
-    --height-dot: 14px;
-    --width-dot: 14px;
+    --height-dot: 20px;
+    --width-dot: 20px;
     --border-radius-dot: 60px;
     --border-line-dot: 1px solid rgb(0, 0, 0);
+    --color-inside-dot: #000000;
+    --padding-dot: 1px;
+    --font-dot: small-caps bold 14px/1 sans-serif;
 }
 
 .timeline_dot {
@@ -40,6 +44,9 @@
     border-radius: var(--border-radius-dot);
     border: var(--border-line-dot);
     margin: var(--margin-dot);
+    color: var(--color-inside-dot);
+    font: var(--font-dot);
+    padding: var(--padding-dot);
 }
 
 .timeline_dot_spacer {
@@ -49,6 +56,9 @@
     border-radius: var(--border-radius-dot);
     margin: var(--margin-dot-spacer);
     border: var(--border-line-dot);
+    color: var(--color-inside-dot);
+    font: var(--font-dot);
+    padding: var(--padding-dot);
 }
 
 .timeline_dot_spacer_active {
@@ -58,8 +68,10 @@
     border-radius: var(--border-radius-dot);
     margin: var(--margin-dot-spacer);
     border: var(--border-line-dot);
+    color: var(--color-inside-dot);
+    font: var(--font-dot);
+    padding: var(--padding-dot);
 }
-
 
 .timeline_dot_active {
     height: var(--height-dot);
@@ -68,6 +80,33 @@
     border-radius: var(--border-radius-dot);
     margin: var(--margin-dot);
     border: var(--border-line-dot);
+    color: var(--color-inside-dot);
+    font: var(--font-dot);
+    padding: var(--padding-dot);
+}
+
+.timeline_dot_melodic_active {
+    height: var(--height-dot);
+    width: var(--width-dot);
+    background-color: var(--color-dot-active);
+    border-radius: var(--border-radius-dot);
+    margin: var(--margin-dot-melodic);
+    border: var(--border-line-dot);
+    color: var(--color-inside-dot);
+    font: var(--font-dot);
+    padding: var(--padding-dot);
+}
+
+.timeline_dot_melodic {
+    height: var(--height-dot);
+    width: var(--width-dot);
+    background-color: var(--color-dot);
+    border-radius: var(--border-radius-dot);
+    border: var(--border-line-dot);
+    margin: var(--margin-dot-melodic);
+    color: var(--color-inside-dot);
+    font: var(--font-dot);
+    padding: var(--padding-dot);
 }
 
 .App-link {

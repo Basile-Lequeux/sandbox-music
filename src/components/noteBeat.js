@@ -12,7 +12,7 @@ function NoteBeat({
         selectNoteKeyBoard
     } = usePlayerContext();
 
-    const [onHover, setOnHover] = useState(false);
+    const [onHover, setOnHover] = useState(-1);
     const convertDurationIntoWidth = (duration) => {
         if (duration === -1) {
             return 0
@@ -39,7 +39,7 @@ function NoteBeat({
         const activeCurrentNote = track.beats[i].notes.find(t => t.tone === tone)
         if (activeCurrentNote) {
             return {width: convertDurationIntoWidth(activeCurrentNote.duration)}
-        } else if(onHover) {
+        } else if (onHover) {
             // return {width: convertDurationIntoWidth(parseInt(selectNoteKeyBoard))}
         }
     }
@@ -47,25 +47,31 @@ function NoteBeat({
     return (
         <div className={isEven ? "row_note_even" : "row_note_odd"}>
             {track.beats.map((x, i) =>
-                <div
-                    key={i}
-                    className={getStyleNote(i)}
-                    style={getWidthNote(i)}
-                    onClick={() => handleSetMelodicTrack(track, i, tone)}
-                    onMouseEnter={() => setOnHover(i)}
-                    onMouseLeave={() => setOnHover(-1)}
-                >
-                    {onHover === i &&
-                        <>
-                            {tone}
-                        </>
-                    }
-                    {onHover !== i && track.beats[i].notes.find(t => t.tone === tone) && track.beats[i].notes.find(t => t.tone === tone).duration > 0 &&
-                        <>
-                            {tone}
-                        </>
-                    }
-                </div>
+                <>
+                    <div
+                        key={i}
+                        className={getStyleNote(i)}
+                        style={getWidthNote(i)}
+                        onClick={() => handleSetMelodicTrack(track, i, tone)}
+                        onMouseEnter={() => setOnHover(i)}
+                        onMouseLeave={() => setOnHover(-1)}
+                    >
+                        {onHover === i &&
+                            <>
+                                {tone}
+                            </>
+                        }
+                        {onHover !== i && track.beats[i].notes.find(t => t.tone === tone) && track.beats[i].notes.find(t => t.tone === tone).duration > 0 &&
+                            <>
+                                {tone}
+                            </>
+                        }
+                    </div>
+                    {/*{(i + 1) % 4 === 0 &&*/}
+                    {/*    */}
+                    {/*}*/}
+                </>
+
             )
             }
         </div>
