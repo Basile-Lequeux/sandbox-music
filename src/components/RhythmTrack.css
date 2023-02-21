@@ -17,8 +17,6 @@
     padding: var(--size-item-px);
     margin: var(--margin-item-px);
     border-radius: var(--border-radius-item-px);
-    text-align: center;
-
 }
 
 .gridItemSpacer {
@@ -32,7 +30,7 @@
 }
 
 .gridItemColored {
-    background-color: rgba(217, 65, 57, 0.8);
+    background-color: rgba(255, 255, 255, 0.8);
     border: var(--border-item-px);
     padding: var(--size-item-px);
     border-radius: var(--border-radius-item-px);
@@ -41,7 +39,7 @@
 }
 
 .gridItemColoredSpacer {
-    background-color: rgba(217, 65, 57, 0.8);
+    background-color: rgba(255, 255, 255, 0.8);
     border: var(--border-item-px);
     padding: var(--size-item-px);
     border-radius: var(--border-radius-item-px);
@@ -68,3 +66,43 @@
     margin-right: var(--margin-item-spacer);
     text-align: center;
 }
+
+.grid_item_active {
+    background-color: rgba(125, 69, 145, 0.8);
+    border: var(--border-item-px);
+    padding: var(--size-item-px);
+    margin: var(--margin-item-px);
+    border-radius: var(--border-radius-item-px);
+    transition-property: transform;
+    -webkit-transition-property: transform;
+    transition-duration: 0.5ms;
+    transition-timing-function: ease-out;
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+}
+
+.grid_item_active_spacer {
+    background-color: rgba(125, 69, 145, 0.8);
+    border: var(--border-item-px);
+    padding: var(--size-item-px);
+    margin: var(--margin-item-px);
+    margin-right: var(--margin-item-spacer);
+    border-radius: var(--border-radius-item-px);
+    transition-property: transform;
+    -webkit-transition-property: transform;
+    transition-duration: 0.5ms;
+    transition-timing-function: ease-out;
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+}
+
+.gridItem:hover,
+.gridItemSpacer:hover,
+.gridItemColored:hover,
+.gridItemColoredSpacer:hover,
+.gridItemColoredNote:hover,
+.gridItemColoredNoteSpacer:hover {
+    background-color: rgb(151, 96, 143);
+    cursor: pointer;
+}
+

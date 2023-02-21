@@ -10,11 +10,11 @@ export default function RhythmTrack({track, handleSetTrack}) {
 
     const getStyleRow = (index, note) => {
         if (isPlaying) {
-            return cursor === index
-                ? "gridItemColoredSpacer"
-                : note && note.isActive
-                    ? "gridItemColoredNoteSpacer"
-                    : "gridItemSpacer"
+            if (cursor === index) {
+                return note.isActive ? "grid_item_active_spacer" : "gridItemSpacer"
+            } else {
+                return note.isActive ? "gridItemColoredNoteSpacer" : "gridItemSpacer"
+            }
         } else {
             return note && note.isActive ? "gridItemColoredNoteSpacer" : "gridItemSpacer"
         }
@@ -22,12 +22,13 @@ export default function RhythmTrack({track, handleSetTrack}) {
 
     const getStyleRow2 = (index, note) => {
         if (isPlaying) {
-            return cursor === index
-                ? "gridItemColored"
-                : note && note.isActive
-                    ? "gridItemColoredNote"
-                    : "gridItem"
-        } else {
+            if (cursor === index) {
+                return note.isActive ? "grid_item_active" : "gridItem"
+            } else {
+                return note.isActive ? "gridItemColoredNote" : "gridItem"
+            }
+        }
+        else {
             return note && note.isActive
                 ? "gridItemColoredNote"
                 : "gridItem"
