@@ -23,8 +23,8 @@
 }
 
 :root {
-    --margin-dot: 9px 13px 0 14px;
-    --margin-dot-spacer: 9px 24px 0 17px;
+    --margin-dot: 9px 14px 0 14px;
+    --margin-dot-spacer: 9px 22px 0 15px;
     --margin-dot-melodic: 0px 20px 12px 23px;
     --color-dot: #AE8BAB;
     --color-dot-active: #55ff00;
