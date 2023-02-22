@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { drumKitList } from "../PlaySound";
 import { Box, Flex, Select } from "@chakra-ui/react";
-import { FaMinus, FaPlus, FaTrash } from "react-icons/fa";
+import { FaMinus, FaPlus } from "react-icons/fa";
 import "../App.css";
 import { usePlayerContext } from "../PlayerContext";
 
@@ -14,6 +14,16 @@ const SideBarSelect = ({
 }) => {
   const { handleChangeInstrument, addRhythmTrack, deleteOneTrack, nbrOfTrack } =
     usePlayerContext();
+
+  const [canAddTrack, setCanAddTrack] = useState(true);
+
+  useEffect(() => {
+    if (nbrOfTrack > 7) {
+      setCanAddTrack(false);
+    } else {
+      setCanAddTrack(true);
+    }
+  }, [nbrOfTrack]);
 
   return (
     <Flex
@@ -50,7 +60,7 @@ const SideBarSelect = ({
       ) : (
         <div style={{ paddingRight: "25px" }} />
       )}
-      {index === length - 1 && nbrOfTrack < 7 && type !== "melodic" ? (
+      {index === length - 1 && canAddTrack && type !== "melodic" ? (
         <button
           className="button_add_track"
           onClick={() => addRhythmTrack()}

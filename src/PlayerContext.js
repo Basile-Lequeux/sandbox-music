@@ -193,6 +193,7 @@ const CreatePlayerContextProvider = (props) => {
             let prevStateTrackArray = [...rhythmTrackArray];
             prevStateTrackArray.splice(index, 1);
             setRhythmTrackArray(prevStateTrackArray);
+            setNbrOfTrack(prevStateTrackArray.length)
         }
     };
 
