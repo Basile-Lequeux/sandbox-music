@@ -1,14 +1,19 @@
 import { useState, useEffect } from "react";
-import { Flex } from "@chakra-ui/react";
+import { Flex, useClipboard, Input, Button  } from "@chakra-ui/react";
 import { usePlayerContext } from "../PlayerContext";
 import { FaRegWindowClose, FaFileUpload } from "react-icons/fa";
+import { GiMusicalNotes } from "react-icons/gi";
 import Modal from "react-modal";
 import axios from "axios";
 import "./Modal.css";
+
 function ModalSave({ modalIsOpen, closeModal }) {
   const [data, setData] = useState(null);
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const placeholder = "text to be copied...";
+  const { onCopy, hasCopied } = useClipboard("");
 
   useEffect(() => {
     if (data) {
@@ -34,9 +39,12 @@ function ModalSave({ modalIsOpen, closeModal }) {
           marginTop: "20px",
           color: "white",
           fontSize: 20,
+          display: 'flex',
+          justifyContent: 'center',
+          
         }}
       >
-        Sauvegardez votre musique
+        Save your music  <GiMusicalNotes color="tomato"/>
       </h2>
       <div
         style={{
@@ -49,8 +57,7 @@ function ModalSave({ modalIsOpen, closeModal }) {
         }}
       >
         <p style={{ textAlign: "center" }}>
-          Il est possible de sauvegarder votre musique pour pouvoir la partager ou
-          la modifier plus tard
+          You can save your music and share it, or modify it later.
         </p>
         {!data && !loading ? (
           <div
@@ -87,7 +94,7 @@ function ModalSave({ modalIsOpen, closeModal }) {
                   size={"25"}
                   style={{ margin: "5 5 0 0" }}
                 />
-                Sauvegarder
+                Save
               </Flex>
             </button>
             <button onClick={closeModal}>
@@ -97,7 +104,7 @@ function ModalSave({ modalIsOpen, closeModal }) {
                   size={"25"}
                   style={{ margin: "5 5 0 0" }}
                 />
-                Fermer
+                Close
               </Flex>
             </button>
           </div>
@@ -124,11 +131,18 @@ function ModalSave({ modalIsOpen, closeModal }) {
             }}
           >
             <p style={{ color: "white" }}>
-              Retrouver votre musique grâce à ce lien
+              Share your music with this link !
             </p>
-            <a style={{ color: "#e74138", textDecoration: "none" }} href={url}>
-              https://melodiv.netlify.app/?q={data}
-            </a>
+            <Flex mb={2}>
+        <Input
+          value={url}
+          onChange={(e) => {
+            setUrl(url);
+          }}
+          mr={2}
+        />
+        <Button onClick={onCopy}>{hasCopied ? "Copied!" : "Copy"}</Button>
+      </Flex>
           </div>
         ) : null}
       </div>
