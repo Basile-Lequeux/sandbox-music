@@ -23,6 +23,7 @@ export class MainPlayer {
         this.inc = null;
         this.step = 0;
         this.currentCursorStartingPoint = 0;
+        this.currentCursorEndingPoint = 12;
     }
 
     toggle(data, drum) {
@@ -80,8 +81,12 @@ export class MainPlayer {
         this.currentCursorStartingPoint = value;
     }
 
+    setEndingPoint(value) {
+        this.currentCursorEndingPoint = value
+    }
+
     #incrementStep() {
-        if (this.index % this.numberOfBeats === 0) {
+        if (this.index % this.currentCursorEndingPoint === 0) {
             this.step = this.currentCursorStartingPoint;
             this.index = this.currentCursorStartingPoint;
         } else {

@@ -109,6 +109,23 @@
     padding: var(--padding-dot);
 }
 
+/*.timeline_dot_start_point {*/
+/*    height: var(--height-dot);*/
+/*    width: var(--width-dot);*/
+/*    border: 1px solid #61dafb;*/
+/*    color: #61dafb;*/
+/*}*/
+.timeline_dot:hover,
+.timeline_dot_active:hover,
+.timeline_dot_melodic:hover,
+.timeline_dot_spacer:hover,
+.timeline_dot_spacer_active:hover {
+    cursor: pointer;
+    color: #61dafb;
+    border: 1px solid #61dafb;
+}
+
+
 .App-link {
     color: #61dafb;
 }

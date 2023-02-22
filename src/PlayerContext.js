@@ -20,6 +20,8 @@ const CreatePlayerContextProvider = (props) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [cursor, setCursor] = useState(-1);
     const [cursorStartingPoint, setCursorStartingPoint] = useState(0);
+    const [cursorEndingPoint, setCursorEndingPoint] = useState(12);
+    const [isSelectStartPoint, setIsSelectStartPoint] = useState(true);
     const [bpmValue, setBpmValue] = useState(120);
     const [nbrOfBeat, setNbrOfBeat] = useState(12);
     const [nbrOfTrack, setNbrOfTrack] = useState(4);
@@ -96,11 +98,33 @@ const CreatePlayerContextProvider = (props) => {
         play(false);
     };
 
+
     const handleCursorStart = (value) => {
-        setCursorStartingPoint(value);
         const mainPlayer = MainPlayer.getInstance();
-        mainPlayer.setStep(value);
+        if (isSelectStartPoint) {
+            if (value > cursorEndingPoint) {
+                setCursorEndingPoint(nbrOfBeat)
+                mainPlayer.setEndingPoint(nbrOfBeat)
+                setCursorStartingPoint(value)
+                mainPlayer.setStep(value)
+            } else {
+                setCursorStartingPoint(value);
+                mainPlayer.setStep(value);
+            }
+        }
+        if (!isSelectStartPoint) {
+            if (value < cursorStartingPoint) {
+                setCursorStartingPoint(0)
+                mainPlayer.setStep(0)
+                setCursorEndingPoint(value + 1)
+                mainPlayer.setEndingPoint(value + 1)
+            } else {
+                setCursorEndingPoint(value + 1);
+                mainPlayer.setEndingPoint(value + 1)
+            }
+        }
     };
+
     const handleSetTrack = (track, i) => {
         let prevStateTrackArray = [...rhythmTrackArray];
         const currentTrack = prevStateTrackArray.find(
@@ -227,7 +251,7 @@ const CreatePlayerContextProvider = (props) => {
         } else {
             const durationNote = parseInt(selectNoteKeyBoard)
             if (durationNote > 1) {
-                for (let j = 1; j < durationNote; j++)  {
+                for (let j = 1; j < durationNote; j++) {
                     const nextNotesArray = currentTrack.beats[i + j].notes
                     const indexSameTone = nextNotesArray.findIndex(t => t.tone === tone)
                     if (indexSameTone !== -1) {
@@ -298,6 +322,7 @@ const CreatePlayerContextProvider = (props) => {
                 nbrOfTrack,
                 melodicTrackArray,
                 selectNoteKeyBoard,
+                isSelectStartPoint,
 
                 start,
                 stop,
@@ -315,6 +340,8 @@ const CreatePlayerContextProvider = (props) => {
                 changeDurationOfNote,
                 setSelectNoteKeyBoard,
                 handleRestoreMusic,
+                setIsSelectStartPoint,
+                cursorEndingPoint
             }}
         >
             {props.children}
