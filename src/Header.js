@@ -11,6 +11,7 @@ import {
   SliderTrack,
   SliderFilledTrack,
   SliderThumb,
+  Link,
 } from "@chakra-ui/react";
 import { usePlayerContext } from "./PlayerContext";
 import { FaPlay, FaPause, FaFileUpload } from "react-icons/fa";
@@ -41,14 +42,15 @@ export const Header = ({ modalIsOpen, setModalIsOpen }) => {
       zIndex={100}
     >
       <Box padding="10px 0 8px 30px" display={"flex"}>
-        <Text
+        <Link
           bgGradient="linear(to-r, #434445, #e74138)"
           bgClip="text"
           fontSize="4xl"
           fontWeight="extrabold"
+          href="https://melodiv.netlify.app/"
         >
           Melodiv
-        </Text>
+        </Link>
       </Box>
       <Box padding="10px 0 8px 0" display={"flex"}>
         <Box paddingRight="10px" display={"flex"}>
