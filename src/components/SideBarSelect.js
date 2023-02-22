@@ -61,7 +61,7 @@ const SideBarSelect = ({
             onClick={() => deleteOneTrack(index, type)}
             style={{ marginLeft: "5px" }}
           >
-            <FaMinus size={"20"} />
+            <FaMinus size={"15"} />
           </button>
         ) : (
           <div style={{ paddingRight: "25px" }} />
@@ -72,7 +72,7 @@ const SideBarSelect = ({
             onClick={() => addRhythmTrack()}
             style={{ marginLeft: "7px" }}
           >
-            <FaPlus size={"20"} />
+            <FaPlus size={"15"} />
           </button>
         ) : (
           <div style={{ paddingRight: "25px" }} />
