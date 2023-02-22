@@ -138,7 +138,7 @@ export class MainPlayer {
                 this.piano.triggerAttackRelease(halfNote, "3n", time);
                 this.piano.triggerAttackRelease(note, "2n", time);
             }
-            if (this.data[0].instrument === 'synth') {
+            if (this.data[0].instrument === 'synth' || this.data[0].instrument === '') {
                 this.synth.triggerAttackRelease(eightNote, "8n", time);
                 this.synth.triggerAttackRelease(quarterNote, "4n", time);
                 this.synth.triggerAttackRelease(halfNote, "3n", time);
