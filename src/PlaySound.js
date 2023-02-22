@@ -81,6 +81,9 @@ export class DrumPlayer {
         if (beat === 'hihat') {
             this.hihat.start(time)
         }
+        if (beat === 'openhat') {
+            this.openhat.start(time)
+        }
         if (beat === 'boom') {
             this.boom.start(time)
         }
