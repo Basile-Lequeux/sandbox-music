@@ -36,7 +36,7 @@ const SideBarSelect = ({
         <Select
           bg={"white"}
           h={"30px"}
-          onChange={(e) => handleChangeInstrument(trackId, e.target.value)}
+          onChange={(e) => handleChangeInstrument(type, trackId, e.target.value)}
           value={instrument}
           size={"xs"}
         >
@@ -46,7 +46,12 @@ const SideBarSelect = ({
                 {elem.label}
               </option>
             ))}
-          {type === "melodic" && <option value="synth">synth</option>}
+          {type === "melodic" &&
+            instrumentKit.map((elem, i) => (
+              <option key={i} value={elem.value}>
+                {elem.label}
+              </option>
+            ))}
         </Select>
       </Box>
       <Flex w={"50px"} justifyContent={"center"}>
