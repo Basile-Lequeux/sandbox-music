@@ -309,6 +309,8 @@ const CreatePlayerContextProvider = (props) => {
                 const mainPlayer = MainPlayer.getInstance()
                 mainPlayer.setBpm(parseInt(data.bpm))
                 mainPlayer.setNumberOfBeat(parseInt(data.measureNb))
+                setCursorEndingPoint(parseInt(data.measureNb))
+                mainPlayer.setEndingPoint(parseInt(data.measureNb))
             })
             .catch(function (error) {
                 initAllTrackDefault()

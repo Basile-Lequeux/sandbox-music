@@ -9,6 +9,7 @@ import tom from './sounds/tom.wav'
 import tink from './sounds/tink.wav'
 
 import * as Tone from 'tone'
+import {MainPlayer} from "./MainPlayer";
 
 export const drumKitList = [
     {label: "clap", value: clap},
@@ -28,6 +29,10 @@ export const playRhythmSound = (sound, time) => {
 }
 
 export const playMelodicSound = (notes) => {
+    const mainPlayer = MainPlayer.getInstance()
+
+
+
     const synth = new Tone.PolySynth(Tone.Synth).toDestination();
     const now = Tone.now()
     synth.triggerAttackRelease(notes, '8n', now)
