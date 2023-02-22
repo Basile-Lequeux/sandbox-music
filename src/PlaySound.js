@@ -3,6 +3,11 @@ import hihat from './sounds/hihat.wav'
 import kick from './sounds/kick.wav'
 import openhat from './sounds/openhat.wav'
 import snare from './sounds/snare.wav'
+import boom from './sounds/boom.wav'
+import ride from './sounds/ride.wav'
+import tom from './sounds/tom.wav'
+import tink from './sounds/tink.wav'
+
 import * as Tone from 'tone'
 
 export const drumKitList = [
@@ -10,6 +15,10 @@ export const drumKitList = [
     {label: "hihat", value: hihat},
     {label: "openhat", value: openhat},
     {label: "kick", value: kick},
+    {label: "boom", value: snare},
+    {label: "ride", value: snare},
+    {label: "tom", value: snare},
+    {label: "tink", value: snare},
     {label: "snare", value: snare},
 ]
 
@@ -40,14 +49,23 @@ export class DrumPlayer {
         this.hihat = new Tone.Player(hihat).toDestination()
         this.clap = new Tone.Player(clap).toDestination()
         this.openhat = new Tone.Player(openhat).toDestination()
+        this.boom = new Tone.Player(boom).toDestination()
+        this.tom = new Tone.Player(tom).toDestination()
+        this.tink = new Tone.Player(tink).toDestination()
+        this.ride = new Tone.Player(ride).toDestination()
     }
 
     init() {
         this.kick.load(kick)
         this.snare.load(snare)
+        this.snare.volume.value = 10
         this.hihat.load(hihat)
         this.clap.load(clap)
         this.openhat.load(openhat)
+        this.boom.load(boom)
+        this.tom.load(tom)
+        this.tink.load(tink)
+        this.ride.load(ride)
     }
 
     play(beat, time) {
@@ -63,8 +81,17 @@ export class DrumPlayer {
         if (beat === 'hihat') {
             this.hihat.start(time)
         }
-        if (beat === 'openhat') {
-            this.openhat.start(time)
+        if (beat === 'boom') {
+            this.boom.start(time)
+        }
+        if (beat === 'tom') {
+            this.tom.start(time)
+        }
+        if (beat === 'tink') {
+            this.tink.start(time)
+        }
+        if (beat === 'ride') {
+            this.ride.start(time)
         }
     }
 }
