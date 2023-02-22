@@ -189,6 +189,12 @@ const CreatePlayerContextProvider = (props) => {
             const mainPlayer = MainPlayer.getInstance();
             mainPlayer.setNumberOfBeat(nbrOfBeat - 4);
             mainPlayer.setData(prevStateMelodicTrackArray, prevStateTrackArray);
+            setCursorEndingPoint(nbrOfBeat - 4)
+            mainPlayer.setEndingPoint(nbrOfBeat - 4)
+            if (cursorStartingPoint >= nbrOfBeat - 4) {
+                setCursorStartingPoint(0)
+                mainPlayer.setStep(0)
+            }
         }
     };
 
