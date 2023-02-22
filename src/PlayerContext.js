@@ -227,13 +227,23 @@ const CreatePlayerContextProvider = (props) => {
         }
     };
 
-    const handleChangeInstrument = (trackId, value) => {
-        let prevState = [...rhythmTrackArray];
-        const index = prevState.findIndex((t) => t.id === trackId);
+    const handleChangeInstrument = (type, trackId, value) => {
+        if (type === 'rhythm') {
+            let prevState = [...rhythmTrackArray];
+            const index = prevState.findIndex((t) => t.id === trackId);
 
-        if (value !== prevState[index].instrument) {
-            prevState[index].instrument = value;
-            setRhythmTrackArray(prevState);
+            if (value !== prevState[index].instrument) {
+                prevState[index].instrument = value;
+                setRhythmTrackArray(prevState);
+            }
+        }
+        if (type === 'melodic') {
+            let prevState = [...melodicTrackArray];
+            const index = prevState.findIndex((t) => t.id === trackId);
+            if (value !== prevState[index].instrument) {
+                prevState[index].instrument = value;
+                setMelodicTrackArray(prevState);
+            }
         }
     };
 

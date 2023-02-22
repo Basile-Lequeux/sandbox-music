@@ -23,6 +23,11 @@ export const drumKitList = [
     {label: "snare", value: snare},
 ]
 
+export const instrumentKit = [
+    {label: "synth", value: "synth"},
+    {label: "piano", value: "piano"},
+]
+
 export const playRhythmSound = (sound, time) => {
     const drumPlayer = DrumPlayer.getInstance()
     drumPlayer.play(sound, time)

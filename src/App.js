@@ -42,7 +42,6 @@ const App = () => {
                             {rhythmTrackArray.map((track, index) => (
                                 <SideBarSelect
                                     key={track.id}
-                                    handleChangeInstrument={handleChangeInstrument}
                                     trackId={track.id}
                                     instrument={track.instrument}
                                     index={index}
@@ -55,18 +54,17 @@ const App = () => {
                                 cursor={"pointer"}
                                 onClick={() => addRhythmTrack()}
                             />
-                            {/*{melodicTrackArray.map((track, index) => (*/}
-                            {/*    <SideBarSelect*/}
-                            {/*        key={track.id}*/}
-                            {/*        handleChangeInstrument={handleChangeInstrument}*/}
-                            {/*        trackId={track.id}*/}
-                            {/*        instrument={"synth"}*/}
-                            {/*        type={"melodic"}*/}
-                            {/*        index={index}*/}
-                            {/*        deleteOneTrack={deleteOneTrack}*/}
-                            {/*        length={melodicTrackArray.length}*/}
-                            {/*    />*/}
-                            {/*))}*/}
+                            {melodicTrackArray.map((track, index) => (
+                                <SideBarSelect
+                                    key={track.id}
+                                    trackId={track.id}
+                                    instrument={track.instrument === '' ? 'synth' : track.instrument}
+                                    type={"melodic"}
+                                    index={index}
+                                    deleteOneTrack={deleteOneTrack}
+                                    length={melodicTrackArray.length}
+                                />
+                            ))}
                         </Sidebar>
                         <Flex flexDir="column">
                             <Box>
