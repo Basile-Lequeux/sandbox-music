@@ -9,11 +9,8 @@ import "./Modal.css";
 
 function ModalSave({ modalIsOpen, closeModal }) {
   const [data, setData] = useState(null);
-  const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const placeholder = "text to be copied...";
-  const { onCopy, hasCopied } = useClipboard("");
+  const { onCopy, value: url, setValue: setUrl, hasCopied } = useClipboard("");
 
   useEffect(() => {
     if (data) {
