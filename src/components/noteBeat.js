@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {Fragment, useState} from 'react';
 import {usePlayerContext} from "../PlayerContext";
 
 function NoteBeat({
@@ -47,7 +47,7 @@ function NoteBeat({
     return (
         <div className={isEven ? "row_note_even" : "row_note_odd"}>
             {track.beats.map((x, i) =>
-                <>
+                <Fragment key={i}>
                     <div
                         key={i}
                         className={getStyleNote(i)}
@@ -57,20 +57,20 @@ function NoteBeat({
                         onMouseLeave={() => setOnHover(-1)}
                     >
                         {onHover === i &&
-                            <>
+                            <Fragment key={i}>
                                 {tone}
-                            </>
+                            </Fragment>
                         }
                         {onHover !== i && track.beats[i].notes.find(t => t.tone === tone) && track.beats[i].notes.find(t => t.tone === tone).duration > 0 &&
-                            <>
+                            <Fragment key={i}>
                                 {tone}
-                            </>
+                            </Fragment>
                         }
                     </div>
                     {/*{(i + 1) % 4 === 0 &&*/}
                     {/*    */}
                     {/*}*/}
-                </>
+                </Fragment>
 
             )
             }
