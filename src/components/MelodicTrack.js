@@ -26,7 +26,7 @@ export default function MelodicTrack({
 
     const notesPanel = () => {
         const arr = []
-        const limit = track.instrument === 'bass' ? 6 : 7
+        const limit = track.instrument === 'bass' ? 4 : 7
         const octave = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
         for (let i = 1; i < limit; i++) {
             octave.map(o => arr.push(o + i))
