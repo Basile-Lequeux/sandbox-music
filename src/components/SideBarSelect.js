@@ -48,7 +48,7 @@ const SideBarSelect = ({
                         ))}
                     {type === "melodic" &&
                         instrumentKit.map((elem, i) => (
-                            <option key={i} value={elem.label}>
+                            <option key={i} value={elem.value}>
                                 {elem.label}
                             </option>
                         ))}

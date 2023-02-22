@@ -16,16 +16,17 @@ export const drumKitList = [
     {label: "hihat", value: hihat},
     {label: "openhat", value: openhat},
     {label: "kick", value: kick},
-    {label: "boom", value: snare},
-    {label: "ride", value: snare},
-    {label: "tom", value: snare},
-    {label: "tink", value: snare},
+    {label: "boom", value: boom},
+    {label: "ride", value: ride},
+    {label: "tom", value: tom},
+    {label: "tink", value: tink},
     {label: "snare", value: snare},
 ]
 
 export const instrumentKit = [
     {label: "synth", value: "synth"},
     {label: "piano", value: "piano"},
+    {label: "808bass", value: "bass"},
 ]
 
 export const playRhythmSound = (sound, time) => {

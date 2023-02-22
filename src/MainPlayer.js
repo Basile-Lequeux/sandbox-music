@@ -1,5 +1,9 @@
 import * as Tone from "tone";
 import {playRhythmSound} from "./PlaySound";
+import SS808C from './sounds/SS80810-C.wav'
+import SS808D from './sounds/SS80810-D.wav'
+import SS808G from './sounds/SS80810-G.wav'
+import SS808CO from './sounds/SS80810COctave.wav'
 
 export class MainPlayer {
     static instance = null;
@@ -13,7 +17,7 @@ export class MainPlayer {
 
     constructor() {
         this.synth = new Tone.PolySynth(Tone.Synth).toDestination();
-         this.piano = new Tone.Sampler({
+        this.piano = new Tone.Sampler({
             urls: {
                 "C4": "C4.mp3",
                 "D#4": "Ds4.mp3",
@@ -22,6 +26,14 @@ export class MainPlayer {
             },
             release: 1,
             baseUrl: "https://tonejs.github.io/audio/salamander/",
+        }).toDestination();
+        this.bass = new Tone.Sampler({
+            urls: {
+                "C2": SS808C,
+                "D2": SS808D,
+                "G2": SS808G,
+                "C3": SS808CO,
+            }
         }).toDestination();
         this.gain = new Tone.Gain(0.7);
         this.tick = 0;
@@ -138,6 +150,12 @@ export class MainPlayer {
                 this.piano.triggerAttackRelease(halfNote, "3n", time);
                 this.piano.triggerAttackRelease(note, "2n", time);
             }
+            if (this.data[0].instrument === 'bass') {
+                this.bass.triggerAttackRelease(eightNote, "8n", time);
+                this.bass.triggerAttackRelease(quarterNote, "4n", time);
+                this.bass.triggerAttackRelease(halfNote, "3n", time);
+                this.bass.triggerAttackRelease(note, "2n", time);
+            }
             if (this.data[0].instrument === 'synth' || this.data[0].instrument === '') {
                 this.synth.triggerAttackRelease(eightNote, "8n", time);
                 this.synth.triggerAttackRelease(quarterNote, "4n", time);
@@ -153,6 +171,9 @@ export class MainPlayer {
 
         if (instrument === 'piano') {
             this.piano.triggerAttackRelease(note, '8n', now)
+        }
+        if (instrument === 'bass') {
+            this.bass.triggerAttackRelease(note, '8n', now)
         }
         if (instrument === 'synth' || instrument === '') {
             this.synth.triggerAttackRelease(note, '8n', now)
