@@ -280,7 +280,8 @@ const CreatePlayerContextProvider = (props) => {
         currentTrack.beats[i] = {notes: notesArray};
 
         if (!isActiveTone) {
-            playMelodicSound(tone);
+            const mainPlayer = MainPlayer.getInstance()
+            mainPlayer.playNote(parseInt(selectNoteKeyBoard), tone)
         }
 
         setMelodicTrackArray(prevStateMelodicArray);

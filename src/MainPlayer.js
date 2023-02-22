@@ -127,4 +127,9 @@ export class MainPlayer {
             this.synth.triggerAttackRelease(note, "2n", time);
         }
     }
+
+    playNote(duration, note) {
+        const now = Tone.now()
+        this.synth.triggerAttackRelease(note, '8n', now)
+    }
 }
