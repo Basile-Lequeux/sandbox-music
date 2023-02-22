@@ -291,7 +291,7 @@ const CreatePlayerContextProvider = (props) => {
 
         if (!isActiveTone) {
             const mainPlayer = MainPlayer.getInstance()
-            mainPlayer.playNote(parseInt(selectNoteKeyBoard), tone)
+            mainPlayer.playNote(parseInt(selectNoteKeyBoard), tone, track.instrument)
         }
 
         setMelodicTrackArray(prevStateMelodicArray);

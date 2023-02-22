@@ -13,6 +13,16 @@ export class MainPlayer {
 
     constructor() {
         this.synth = new Tone.PolySynth(Tone.Synth).toDestination();
+         this.piano = new Tone.Sampler({
+            urls: {
+                "C4": "C4.mp3",
+                "D#4": "Ds4.mp3",
+                "F#4": "Fs4.mp3",
+                "A4": "A4.mp3",
+            },
+            release: 1,
+            baseUrl: "https://tonejs.github.io/audio/salamander/",
+        }).toDestination();
         this.gain = new Tone.Gain(0.7);
         this.tick = 0;
         this.initializeTransport();
@@ -25,6 +35,7 @@ export class MainPlayer {
         this.currentCursorStartingPoint = 0;
         this.currentCursorEndingPoint = 12;
     }
+
 
     toggle(data, drum) {
         this.playing = !this.playing;
@@ -121,15 +132,30 @@ export class MainPlayer {
                 .filter((note) => note.duration === 4)
                 .map((note) => note.tone);
 
-            this.synth.triggerAttackRelease(eightNote, "8n", time);
-            this.synth.triggerAttackRelease(quarterNote, "4n", time);
-            this.synth.triggerAttackRelease(halfNote, "3n", time);
-            this.synth.triggerAttackRelease(note, "2n", time);
+            if (this.data[0].instrument === 'piano') {
+                this.piano.triggerAttackRelease(eightNote, "8n", time);
+                this.piano.triggerAttackRelease(quarterNote, "4n", time);
+                this.piano.triggerAttackRelease(halfNote, "3n", time);
+                this.piano.triggerAttackRelease(note, "2n", time);
+            }
+            if (this.data[0].instrument === 'synth') {
+                this.synth.triggerAttackRelease(eightNote, "8n", time);
+                this.synth.triggerAttackRelease(quarterNote, "4n", time);
+                this.synth.triggerAttackRelease(halfNote, "3n", time);
+                this.synth.triggerAttackRelease(note, "2n", time);
+            }
+
         }
     }
 
-    playNote(duration, note) {
+    playNote(duration, note, instrument) {
         const now = Tone.now()
-        this.synth.triggerAttackRelease(note, '8n', now)
+
+        if (instrument === 'piano') {
+            this.piano.triggerAttackRelease(note, '8n', now)
+        }
+        if (instrument === 'synth' || instrument === '') {
+            this.synth.triggerAttackRelease(note, '8n', now)
+        }
     }
 }
