@@ -113,6 +113,19 @@
     color: #61dafb;
 }
 
+.button_delete_track {
+    color: #e74138;
+}
+
+.button_add_track {
+    color: #61dafb;;
+}
+.button_delete_track:hover,
+.button_add_track:hover {
+    cursor: pointer;
+    color: #dddddd;
+}
+
 @keyframes App-logo-spin {
     from {
         transform: rotate(0deg);

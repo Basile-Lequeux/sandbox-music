@@ -4,7 +4,7 @@ import {
 
 export const Sidebar = ({children}) => {
     return (
-        <Flex borderRight={"px"} bg={"#242424"} w="150px" flexDir={'column'}>
+        <Flex bg={"#242424"} w="180px" flexDir={'column'}>
             {children}
         </Flex>
     );

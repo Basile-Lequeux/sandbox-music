@@ -13,7 +13,7 @@ export default function CursorStart({styles}) {
 
     return (
         <Flex>
-            <Flex bg="#242424" alignItems={"center"} h={"30px"}>
+            <Flex bg="#242424" alignItems={"center"} h={"30px"} w='180px'>
                 <Text
                     color={"white"}
                     h={"15px"}

@@ -1,51 +1,71 @@
 import React from "react";
 import {drumKitList} from "../PlaySound";
-import {Flex, Select} from "@chakra-ui/react";
-import {FaTrash} from "react-icons/fa";
+import {Box, Flex, Select} from "@chakra-ui/react";
+import {FaMinus, FaPlus, FaTrash} from "react-icons/fa";
+import '../App.css'
+import {usePlayerContext} from "../PlayerContext";
 
 const SideBarSelect = ({
     trackId,
     instrument,
-    handleChangeInstrument,
-    deleteOneTrack,
     type = "rhythm",
     index,
     length,
 }) => {
+
+    const {
+        handleChangeInstrument,
+        addRhythmTrack,
+        deleteOneTrack,
+        nbrOfTrack,
+    } = usePlayerContext();
+
     return (
         <Flex
-            justify={"center"}
-            alignItems={"center"}
             h={"50px"}
-            style={{marginLeft: "30px", marginRight: "20px"}}
+            justify={'center'}
+            alignItems={'center'}
+            style={{marginRight: "20px", marginLeft: '23px'}}
         >
+            <Box>
+                <Select
+                    bg={"white"}
+                    h={"30px"}
+                    onChange={(e) => handleChangeInstrument(trackId, e.target.value)}
+                    value={instrument}
+                    size={'xs'}
+                >
+                    {type === "rhythm" &&
+                        drumKitList.map((elem, i) => (
+                            <option key={i} value={elem.label}>
+                                {elem.label}
+                            </option>
+                        ))}
+                    {type === "melodic" && <option value="synth">synth</option>}
+                </Select>
+            </Box>
             {length >= 2 ? (
                 <button
+                    className='button_delete_track'
                     onClick={() => deleteOneTrack(index, type)}
-                    style={{paddingRight: "5px"}}
+                    style={{marginLeft: "5px"}}
                 >
-                    <FaTrash color="#e74138" size={"20"}/>
+                    <FaMinus size={"20"}/>
                 </button>
             ) : (
                 <div style={{paddingRight: "25px"}}/>
             )}
-            <Select
-                bg={"white"}
-                h={"30px"}
-                onChange={(e) => handleChangeInstrument(trackId, e.target.value)}
-                value={instrument}
-                placeholder="Select instrument"
-                style={{width: "100px"}}
-                size="sm"
-            >
-                {type === "rhythm" &&
-                    drumKitList.map((elem, i) => (
-                        <option key={i} value={elem.label}>
-                            {elem.label}
-                        </option>
-                    ))}
-                {type === "melodic" && <option value="synth">synth</option>}
-            </Select>
+            {index === (length - 1) && nbrOfTrack < 7 ? (
+                <button
+                    className='button_add_track'
+                    onClick={() => addRhythmTrack()}
+                    style={{marginLeft: "7px"}}
+                >
+                    <FaPlus size={"20"}/>
+                </button>
+            ) : (
+                <div style={{paddingRight: "25px"}}/>
+            )}
         </Flex>
     );
 };
