@@ -6,7 +6,7 @@ import CursorStart from "./components/CursorStart";
 import { Sidebar } from "./components/Sidebar";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import SideBarSelect from "./components/SideBarSelect";
-import { FaPlus } from "react-icons/fa";
+import { FaRedo } from "react-icons/fa";
 import MelodicTrack from "./components/MelodicTrack";
 import ModalSave from "./components/ModalSave";
 import PanelKeyboard from "./components/PanelKeyboard";
@@ -24,7 +24,8 @@ const App = () => {
     nbrOfTrack,
     melodicTrackArray,
     handleSetMelodicTrack,
-    handleRestoreMusic,
+    initRhythmTrackDefault,
+    initMelodicTrackDefault,
   } = usePlayerContext();
 
   const [showPanelKeyboard, setShowPanelKeyboard] = useState(false);
@@ -52,6 +53,14 @@ const App = () => {
                   length={rhythmTrackArray.length}
                 />
               ))}
+              <button
+                style={{ marginLeft: "25px" }}
+                onClick={() => {
+                  initRhythmTrackDefault();
+                }}
+              >
+                <FaRedo color="#e74138" size={"20"} />
+              </button>
               <Box
                 h="62px"
                 cursor={"pointer"}
@@ -70,6 +79,14 @@ const App = () => {
                   length={melodicTrackArray.length}
                 />
               ))}
+              <button
+                style={{ marginLeft: "25px" }}
+                onClick={() => {
+                  initMelodicTrackDefault();
+                }}
+              >
+                <FaRedo color="#e74138" size={"20"} />
+              </button>
             </Sidebar>
             <Flex flexDir="column">
               <Box>

@@ -56,37 +56,45 @@ const CreatePlayerContextProvider = (props) => {
     }, []);
 
     const initAllTrackDefault = () => {
+        initRhythmTrackDefault();
+        initMelodicTrackDefault();
+      };
+    
+      const initRhythmTrackDefault = () => {
         const rhythmArray = [];
-        const melodicArray = [];
         let beats = [];
         for (let h = 0; h < nbrOfTrack; h++) {
-            beats = [];
-            for (let i = 0; i < nbrOfBeat; i++) {
-                beats.push({isActive: false});
-            }
-            const rhythmTrack = {
-                id: uuidv4(),
-                beats: beats,
-                instrument: drumKitList[h].label,
-            };
-            rhythmArray.push(rhythmTrack);
+          beats = [];
+          for (let i = 0; i < nbrOfBeat; i++) {
+            beats.push({ isActive: false });
+          }
+          const rhythmTrack = {
+            id: uuidv4(),
+            beats: beats,
+            instrument: drumKitList[h].label,
+          };
+          rhythmArray.push(rhythmTrack);
         }
+        setRhythmTrackArray(rhythmArray);
+      };
+    
+      const initMelodicTrackDefault = () => {
+        const melodicArray = [];
         const initBeatsArray = () => {
-            const beatArray = [];
-            for (let i = 0; i < nbrOfBeat; i++) {
-                beatArray.push({notes: []});
-            }
-            return beatArray;
+          const beatArray = [];
+          for (let i = 0; i < nbrOfBeat; i++) {
+            beatArray.push({ notes: [] });
+          }
+          return beatArray;
         };
         const melodicTrack = {
-            id: uuidv4(),
-            beats: initBeatsArray(),
-            instrument: "",
+          id: uuidv4(),
+          beats: initBeatsArray(),
+          instrument: "",
         };
         melodicArray.push(melodicTrack);
-        setRhythmTrackArray(rhythmArray);
         setMelodicTrackArray(melodicArray);
-    }
+      };
 
     const start = () => {
         setIsPlaying(true);
@@ -362,7 +370,9 @@ const CreatePlayerContextProvider = (props) => {
                 setSelectNoteKeyBoard,
                 handleRestoreMusic,
                 setIsSelectStartPoint,
-                cursorEndingPoint
+                cursorEndingPoint,
+                initRhythmTrackDefault,
+                initMelodicTrackDefault,
             }}
         >
             {props.children}
