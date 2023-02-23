@@ -13,6 +13,7 @@ import PanelKeyboard from "./components/PanelKeyboard";
 
 const App = () => {
   const {
+    stop,
     cursor,
     handleSetTrack,
     handleChangeInstrument,
@@ -53,6 +54,7 @@ const App = () => {
               <button
                 style={{ marginLeft: "25px" }}
                 onClick={() => {
+                  stop();
                   initRhythmTrackDefault();
                 }}
               >
@@ -79,6 +81,7 @@ const App = () => {
               <button
                 style={{ marginLeft: "25px" }}
                 onClick={() => {
+                  stop();
                   initMelodicTrackDefault();
                 }}
               >
