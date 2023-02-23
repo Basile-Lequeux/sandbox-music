@@ -157,26 +157,28 @@ const CreatePlayerContextProvider = (props) => {
   };
 
   const addMeasure = () => {
-    let prevStateTrackArray = [...rhythmTrackArray];
-    let prevStateMelodicTrackArray = [...melodicTrackArray];
-    prevStateTrackArray.map((track) => {
-      for (let i = 0; i < 4; i++) {
-        track.beats.push({ isActive: false });
-      }
-    });
-    prevStateMelodicTrackArray.map((track) => {
-      for (let i = 0; i < 4; i++) {
-        track.beats.push({ notes: [] });
-      }
-    });
-    setNbrOfBeat(nbrOfBeat + 4);
-    setRhythmTrackArray(prevStateTrackArray);
-    setMelodicTrackArray(prevStateMelodicTrackArray);
-    const mainPlayer = MainPlayer.getInstance();
-    mainPlayer.setNumberOfBeat(nbrOfBeat + 4);
-    mainPlayer.setData(prevStateMelodicTrackArray, prevStateTrackArray);
-    setCursorEndingPoint(nbrOfBeat + 4);
-    mainPlayer.setEndingPoint(nbrOfBeat + 4);
+    if (nbrOfBeat < 96) {
+      let prevStateTrackArray = [...rhythmTrackArray];
+      let prevStateMelodicTrackArray = [...melodicTrackArray];
+      prevStateTrackArray.map((track) => {
+        for (let i = 0; i < 4; i++) {
+          track.beats.push({ isActive: false });
+        }
+      });
+      prevStateMelodicTrackArray.map((track) => {
+        for (let i = 0; i < 4; i++) {
+          track.beats.push({ notes: [] });
+        }
+      });
+      setNbrOfBeat(nbrOfBeat + 4);
+      setRhythmTrackArray(prevStateTrackArray);
+      setMelodicTrackArray(prevStateMelodicTrackArray);
+      const mainPlayer = MainPlayer.getInstance();
+      mainPlayer.setNumberOfBeat(nbrOfBeat + 4);
+      mainPlayer.setData(prevStateMelodicTrackArray, prevStateTrackArray);
+      setCursorEndingPoint(nbrOfBeat + 4);
+      mainPlayer.setEndingPoint(nbrOfBeat + 4);
+    }
   };
 
   const deleteMeasure = () => {

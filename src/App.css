@@ -138,6 +138,10 @@
     color: #dddddd;
 }
 
+.elem-hover:hover {
+    cursor: pointer;
+    background-color: rgba(221, 221, 221, 0.43);
+}
 @keyframes App-logo-spin {
     from {
         transform: rotate(0deg);

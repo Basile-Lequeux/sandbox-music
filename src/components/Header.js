@@ -98,20 +98,20 @@ export const Header = ({ modalIsOpen, setModalIsOpen }) => {
       </Box>
       <Box padding="10px 0 8px 0" display={"flex"}>
         <InputGroup>
-          <InputLeftAddon>Measures</InputLeftAddon>
-          <InputLeftElement left={"100px"}>
-            <FiMinus onClick={deleteMeasure}></FiMinus>
+          <InputLeftAddon w={'69px'}>Beats</InputLeftAddon>
+          <InputLeftElement left={"68px"} className={'elem-hover'} onClick={deleteMeasure}>
+            <FiMinus></FiMinus>
           </InputLeftElement>
-          <Input
-            id="countCell"
-            type="number"
-            bg={"white"}
-            w={"100px"}
-            value={nbrOfBeat}
-            disabled={true}
-          />
-          <InputRightElement>
-            <FiPlus onClick={addMeasure}></FiPlus>
+          <Box
+              w={'105px'}
+              bg={'white'}
+              p={'8px 0 0 0'}
+              style={{fontSize:'17px'}}
+          >
+            {nbrOfBeat}
+          </Box>
+          <InputRightElement className={'elem-hover'} onClick={addMeasure}>
+            <FiPlus></FiPlus>
           </InputRightElement>
         </InputGroup>
       </Box>
