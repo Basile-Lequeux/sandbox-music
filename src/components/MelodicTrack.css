@@ -120,7 +120,7 @@ body {
 }
 
 .row_note_beat {
-    width: 63px;
+    width: 48px;
     height: 17px;
     border-right: 1px solid rgba(255, 255, 255, 0.14);
     cursor: pointer;
@@ -131,7 +131,7 @@ body {
 }
 
 .row_note_beat_active {
-    width: 63px;
+    width: 48px;
     height: 17px;
     background-color: yellow;
     cursor: pointer;
@@ -140,17 +140,52 @@ body {
     background-color: rgba(255, 255, 0, 0.33);
 }
 
+.row_note_beat_spacer {
+    width: 58px;
+    height: 17px;
+    border-right: 1px solid rgba(255, 255, 255, 0.14);
+    cursor: pointer;
+}
+
+.row_note_beat_spacer:hover {
+    background-color: rgba(203, 166, 95, 0.46)
+}
+
+.row_note_beat_spacer_active {
+    width: 58px;
+    height: 17px;
+    background-color: yellow;
+    cursor: pointer;
+}
+.row_note_beat_spacer_active:hover {
+    background-color: rgba(255, 255, 0, 0.33);
+}
+
 .row_note_beat_cursor {
-    width: 63px;
+    width: 48px;
     height: 17px;
     border-right: 1px solid rgba(255, 255, 255, 0.14);
     background-color: rgba(217, 65, 57, 0.8);
 }
 
 .row_note_beat_active_cursor {
-    width: 63px;
-    border: 1px solid rgb(0, 0, 0);
+    width: 48px;
     height: 17px;
+    border-right: 1px solid rgb(0, 0, 0);
+    background-color: rgba(217, 65, 57, 0.8);
+}
+
+.row_note_beat_spacer_cursor {
+    width: 58px;
+    height: 17px;
+    border-right: 1px solid rgba(255, 255, 255, 0.14);
+    background-color: rgba(217, 65, 57, 0.8);
+}
+
+.row_note_beat_spacer_active_cursor {
+    width: 58px;
+    height: 17px;
+    border-right: 1px solid rgb(0, 0, 0);
     background-color: rgba(217, 65, 57, 0.8);
 }
 
