@@ -13,11 +13,11 @@ import {
   SliderThumb,
   Link,
 } from "@chakra-ui/react";
-import { usePlayerContext } from "./PlayerContext";
+import { usePlayerContext } from "../PlayerContext";
 import { FaPlay, FaPause, FaFileUpload } from "react-icons/fa";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import { MdGraphicEq } from "react-icons/md";
-import "./App.css";
+import "../App.css";
 
 export const Header = ({ modalIsOpen, setModalIsOpen }) => {
   const {
