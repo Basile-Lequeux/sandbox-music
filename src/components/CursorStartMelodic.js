@@ -7,7 +7,7 @@ export default function CursorStartMelodic(props) {
 
     const isStartingPoint = (index) => {
         if (cursorStartingPoint === index || cursorEndingPoint === (index + 1)) {
-            return {color: '#61dafb', border: '1px solid #61dafb'}
+            return {color: 'white', border: '1px solid black'}
         }
     }
 
