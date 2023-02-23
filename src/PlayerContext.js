@@ -170,6 +170,8 @@ const CreatePlayerContextProvider = (props) => {
         const mainPlayer = MainPlayer.getInstance();
         mainPlayer.setNumberOfBeat(nbrOfBeat + 4);
         mainPlayer.setData(prevStateMelodicTrackArray, prevStateTrackArray);
+        setCursorEndingPoint(nbrOfBeat + 4)
+        mainPlayer.setEndingPoint(nbrOfBeat + 4)
     };
 
     const deleteMeasure = () => {
