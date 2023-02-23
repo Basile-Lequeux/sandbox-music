@@ -41,6 +41,7 @@ export default function CursorStart() {
           h={"14px"}
           w={"50px"}
           onClick={() => setIsSelectStartPoint(!isSelectStartPoint)}
+          className={'elem-hover-cursor'}
         >
           {isSelectStartPoint ? "START" : "END"}
         </Text>
