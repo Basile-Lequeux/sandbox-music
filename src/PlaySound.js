@@ -1,10 +1,10 @@
-import clap from './sounds/clap.wav'
-import hihat from './sounds/hihat.wav'
-import kick from './sounds/kick.wav'
-import openhat from './sounds/openhat.wav'
-import snare from './sounds/snare.wav'
+import clap from './sounds/CP-1-Isley.wav'
+import hihat from './sounds/CH2Isley.wav'
+import kick from './sounds/K-1-Isley.wav'
+import openhat from './sounds/CH6Openish.wav'
+import snare from './sounds/S-1-Isley.wav'
 import boom from './sounds/boom.wav'
-import ride from './sounds/ride.wav'
+import ride from './sounds/OH1Isley.wav'
 import tom from './sounds/tom.wav'
 import tink from './sounds/tink.wav'
 
@@ -69,7 +69,7 @@ export class DrumPlayer {
     init() {
         this.kick.load(kick)
         this.snare.load(snare)
-        this.snare.volume.value = 10
+        // this.snare.volume.value = 10
         this.hihat.load(hihat)
         this.clap.load(clap)
         this.openhat.load(openhat)
