@@ -1,6 +1,6 @@
 import clap from './sounds/CP-1-Isley.wav'
 import hihat from './sounds/CH2Isley.wav'
-import kick from './sounds/K-1-Isley.wav'
+import kick from './sounds/kick.wav'
 import openhat from './sounds/CH6Openish.wav'
 import snare from './sounds/S-1-Isley.wav'
 import boom from './sounds/boom.wav'

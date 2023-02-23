@@ -54,7 +54,7 @@ export class MainPlayer {
         if (this.playing) {
             Tone.Transport.start();
             this.data = data;
-            this.drum = drum
+            this.drum = drum;
         } else Tone.Transport.stop();
     }
 
