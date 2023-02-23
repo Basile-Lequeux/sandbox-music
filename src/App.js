@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import RhythmTrack from "./components/RhythmTrack";
 import { usePlayerContext } from "./PlayerContext";
 import { Header } from "./components/Header";
 import CursorStart from "./components/CursorStart";
 import { Sidebar } from "./components/Sidebar";
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import SideBarSelect from "./components/SideBarSelect";
 import { FaRedo } from "react-icons/fa";
 import MelodicTrack from "./components/MelodicTrack";
@@ -12,8 +12,6 @@ import ModalSave from "./components/ModalSave";
 import PanelKeyboard from "./components/PanelKeyboard";
 
 const App = () => {
-  const MAX_RHYTHM_TRACK = 8;
-
   const {
     cursor,
     handleSetTrack,
@@ -21,7 +19,6 @@ const App = () => {
     rhythmTrackArray,
     addRhythmTrack,
     deleteOneTrack,
-    nbrOfTrack,
     melodicTrackArray,
     handleSetMelodicTrack,
     initRhythmTrackDefault,
