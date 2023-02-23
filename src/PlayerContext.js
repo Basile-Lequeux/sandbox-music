@@ -132,8 +132,12 @@ const CreatePlayerContextProvider = (props) => {
       (elem) => elem.id === track.id
     );
     const isActive = currentTrack.beats[i].isActive;
-
     currentTrack.beats[i] = { isActive: !isActive };
+
+    if (!isActive && !isPlaying) {
+      const drumPlayer = DrumPlayer.getInstance()
+      drumPlayer.play(track.instrument, 'now')
+    }
 
     setRhythmTrackArray(prevStateTrackArray);
   };

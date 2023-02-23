@@ -80,6 +80,9 @@ export class DrumPlayer {
     }
 
     play(beat, time) {
+        if (time === 'now') {
+            time = Tone.now()
+        }
         if (beat === 'kick') {
             this.kick.start(time)
         }
