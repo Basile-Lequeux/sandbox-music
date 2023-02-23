@@ -24,12 +24,24 @@ const App = () => {
     handleSetMelodicTrack,
     initRhythmTrackDefault,
     initMelodicTrackDefault,
+    isPlaying,
   } = usePlayerContext();
 
   const [showPanelKeyboard, setShowPanelKeyboard] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [melodicTrackSelected, setMelodicTrackSelected] = useState();
 
+  const resetTrack = (type) => {
+    if (isPlaying) {
+      stop()
+    }
+    if (type === 'rhythm') {
+      initRhythmTrackDefault();
+    }
+    if (type === 'melodic') {
+      initMelodicTrackDefault()
+    }
+  }
   return (
     <div className="App">
       <Flex flexDir="column">
@@ -53,10 +65,7 @@ const App = () => {
               ))}
               <button
                 style={{ marginLeft: "25px" }}
-                onClick={() => {
-                  stop();
-                  initRhythmTrackDefault();
-                }}
+                onClick={() => resetTrack('rhythm')}
               >
                 <FaRedo color="#e74138" size={"20"} />
               </button>
@@ -80,10 +89,7 @@ const App = () => {
               ))}
               <button
                 style={{ marginLeft: "25px" }}
-                onClick={() => {
-                  stop();
-                  initMelodicTrackDefault();
-                }}
+                onClick={() => resetTrack('melodic')}
               >
                 <FaRedo color="#e74138" size={"20"} />
               </button>

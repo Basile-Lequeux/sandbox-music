@@ -23,6 +23,7 @@ const CreatePlayerContextProvider = (props) => {
 
   const [rhythmTrackArray, setRhythmTrackArray] = useState([]);
   const [melodicTrackArray, setMelodicTrackArray] = useState([]);
+  console.log("-> melodicTrackArray", melodicTrackArray);
 
   const play = (start) => {
     const mainPlayer = MainPlayer.getInstance();
