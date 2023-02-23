@@ -81,7 +81,7 @@ export const Header = ({ modalIsOpen, setModalIsOpen }) => {
           </div>
           <Box width={"300px"} display={"flex"}>
             <Slider
-              defaultValue={bpmValue}
+              value={bpmValue}
               min={60}
               max={300}
               onChange={(val) => handleChangeBpmValue(val)}
