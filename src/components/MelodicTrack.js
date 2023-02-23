@@ -1,7 +1,7 @@
 import React from 'react';
 import './MelodicTrack.css';
 import NoteBeat from "./noteBeat";
-import {Box, Radio, RadioGroup, Stack, Flex} from "@chakra-ui/react";
+import {Box, Radio, RadioGroup, Stack, Flex, Card, CardBody} from "@chakra-ui/react";
 import {usePlayerContext} from "../PlayerContext";
 import {BsMusicNote} from "react-icons/bs"
 import CursorStartMelodic from "./CursorStartMelodic";
@@ -41,9 +41,15 @@ export default function MelodicTrack({
                 // onClick={() => selectMelodicTrack()}
             >
                 <Box h='230px'>
-                    <Flex flexDir={'column'}>
+                    <Flex
+                        flexDir={'column'}
+                        w={'345px'}
+                        p={'12px'}
+                    >
+                        <Card bg={'rgba(255, 255, 255, 0.02)'}>
+                            <CardBody>
                         <Box>
-                            Choose the duration of the note you will picked
+                            Choose the duration of the note you will pick
                         </Box>
                         <RadioGroup
                             onChange={setSelectNoteKeyBoard}
@@ -77,6 +83,9 @@ export default function MelodicTrack({
                                 </Radio>
                             </Stack>
                         </RadioGroup>
+
+                            </CardBody>
+                        </Card>
                     </Flex>
                 </Box>
                 <CursorStartMelodic />
